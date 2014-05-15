@@ -21,4 +21,11 @@
         for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
         />
 
+    <genericsetup:importStep
+        name="ftw.labels.custom"
+        title="ftw.labels custom import handlers"
+        description="Custom import steps for ftw.labels"
+        handler="ftw.labels.setuphandler.import_various"
+        />
+
 </configure>

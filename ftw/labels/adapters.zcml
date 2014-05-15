@@ -11,4 +11,6 @@
     <adapter factory=".jar.jar_discovery" />
     <adapter factory=".jar.jar_discovery_app_reached" />
 
+    <adapter factory=".indexer.labels" name="labels" />
+
 </configure>
