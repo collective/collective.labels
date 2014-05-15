@@ -3,16 +3,14 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="ftw.labels">
 
-  <include package="plone.app.portlets" />
+    <include package="plone.app.portlets" />
 
-  <plone:portlet
-      name="ftw.labels.labeljar"
-      interface=".labeljar.ILabelJarPortlet"
-      assignment=".labeljar.Assignment"
-      view_permission="zope2.View"
-      renderer=".labeljar.Renderer"
-      addview=".labeljar.AddForm"
-      editview=".labeljar.EditForm"
-      />
+    <plone:portlet
+        name="ftw.labels.labeljar"
+        interface=".interfaces.ILabelJarPortlet"
+        assignment=".assignments.Assignment"
+        renderer=".labeljar.Renderer"
+        addview="plone.app.portlets.portlets.base.NullAddForm"
+        />
 
 </configure>
