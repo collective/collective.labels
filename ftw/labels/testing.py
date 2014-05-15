@@ -5,6 +5,7 @@ from ftw.testing.layer import ComponentRegistryLayer
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import applyProfile
 from zope.configuration import xmlconfig
 
 
@@ -30,6 +31,9 @@ class LabelsLayer(PloneSandboxLayer):
         xmlconfig.file('configure.zcml',
                        ftw.labels,
                        context=configurationContext)
+
+    def setUpPloneSite(self, portal):
+        applyProfile(portal, 'ftw.labels:default')
 
 
 LABELS_FIXTURE = LabelsLayer()
