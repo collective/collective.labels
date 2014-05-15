@@ -79,7 +79,7 @@ class ILabeling(Interface):
     def activate(**label_ids):
         """Activates all labels in ``label_ids`` on the current object.
         If there is no ``label_id`` in the label jar of the current ecosystem,
-        a ``KeyError`` is raised.
+        a ``LookupError`` is raised.
         """
 
     def deactivate(**label_ids):
