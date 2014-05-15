@@ -1,10 +1,16 @@
+from Acquisition import aq_inner
+from Acquisition import aq_parent
+from OFS.interfaces import IApplication
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
 from persistent.mapping import PersistentMapping
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from zope.annotation.interfaces import IAnnotations
+from zope.component import adapter
 from zope.component import adapts
 from zope.component import getUtility
+from zope.interface import Interface
+from zope.interface import implementer
 from zope.interface import implements
 
 
@@ -69,3 +75,24 @@ class LabelJar(object):
             label_id = '{0}-{1}'.format(base_id, counter)
 
         return label_id
+
+
+@implementer(ILabelJar)
+@adapter(Interface)
+def jar_discovery(context):
+    """An ILabelJar adapter for non-ILabelRoot objects, walking
+    up the acquisition chain for finding the ILabelJar.
+    This allows to adapt any object, which is within an ILabelRoot,
+    to ILabelJar without the need to find the root.
+    """
+    return ILabelJar(aq_parent(aq_inner(context)))
+
+
+@implementer(ILabelJar)
+@adapter(IApplication)
+def jar_discovery_app_reached(context):
+    """Exits the ILabelJar discovery loop when the Zope app is reached.
+    See the jar_discovery docstring for more details.
+    """
+    raise LookupError('Could not find ILabelJar on any parents.'
+                      ' No parent seems to provide ILabelRoot.')
