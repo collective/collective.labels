@@ -107,7 +107,8 @@ class TestLabelJar(TestCase):
             jar.list())
 
     def test_data_is_stored_persistently(self):
-        jar = LabelJar(object())
+        context = object()
+        jar = LabelJar(context)
 
         label_id = jar.add('Question', '#FF0000')
         self.assertEqual(
@@ -116,7 +117,7 @@ class TestLabelJar(TestCase):
               'color': '#FF0000'}],
             jar.list())
 
-        jar = LabelJar(object())
+        jar = LabelJar(context)
         self.assertEqual(
             [{'label_id': label_id,
               'title': 'Question',
