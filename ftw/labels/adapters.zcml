@@ -7,6 +7,7 @@
     <include package="plone.i18n.normalizer" />
 
     <adapter factory=".jar.LabelJar" />
+    <adapter factory=".labeling.Labeling" />
     <adapter factory=".jar.jar_discovery" />
     <adapter factory=".jar.jar_discovery_app_reached" />
 
