@@ -9,11 +9,12 @@ from z3c.form import field
 from z3c.form import form
 from zope import schema
 from zope.interface import implements
+from ftw.labels.interfaces import ILabelJar
 
 
 class ILabelJarPortlet(IPortletDataProvider):
 
-    title = schema.TextLine(
+    portlet_title = schema.TextLine(
         title=_(u'Title'),
         description=u'',
         required=True,
@@ -26,10 +27,6 @@ class Assignment(base.Assignment):
     def __init__(self, portlet_title=""):
         self.portlet_title = portlet_title
 
-    @property
-    def title(self):
-        return u'ftw.labels: label jar portlet'
-
 
 class Renderer(base.Renderer):
     render = ViewPageTemplateFile('labeljar.pt')
@@ -38,6 +35,10 @@ class Renderer(base.Renderer):
     def available(self):
         return ILabelRoot.providedBy(self.context)
 
+    @property
+    def labels(self):
+        return ILabelJar(self.context).list()
+
 
 class AddForm(form.AddForm):
     implements(IPortletAddForm)
@@ -45,7 +46,7 @@ class AddForm(form.AddForm):
     fields = field.Fields(ILabelJarPortlet)
 
     def create(self, data):
-        return Assignment(title=data.get('title', ''))
+        return Assignment(portlet_title=data.get('portlet_title', ''))
 
 
 class EditForm(form.EditForm):
