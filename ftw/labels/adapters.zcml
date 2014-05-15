@@ -4,5 +4,8 @@
     i18n_domain="ftw.labels">
 
     <include package="zope.annotation" />
+    <include package="plone.i18n.normalizer" />
+
+    <adapter factory=".jar.LabelJar" />
 
 </configure>

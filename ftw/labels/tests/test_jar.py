@@ -2,14 +2,20 @@ from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
 from ftw.labels.jar import LabelJar
 from ftw.labels.testing import ADAPTERS_ZCML_LAYER
-from unittest2 import TestCase
+from zope.annotation import IAttributeAnnotatable
 from zope.component import queryAdapter
-from zope.interface import alsoProvides
+from plone.mocktestcase.dummy import Dummy
 from zope.interface.verify import verifyClass
+from unittest2 import TestCase
+from zope.interface import alsoProvides
 
 
 class TestLabelJar(TestCase):
     layer = ADAPTERS_ZCML_LAYER
+
+    def setUp(self):
+        self.root = Dummy()
+        alsoProvides(self.root, ILabelRoot, IAttributeAnnotatable)
 
     def test_label_jar_implements_interface(self):
         self.assertTrue(ILabelJar.implementedBy(LabelJar),
@@ -17,13 +23,12 @@ class TestLabelJar(TestCase):
         verifyClass(ILabelJar, LabelJar)
 
     def test_adapter_is_registered_for_label_root(self):
-        context = object()
-        alsoProvides(context, ILabelRoot)
-        self.assertTrue(queryAdapter(context, ILabelJar),
-                        'The LabelJar adapter is not registered for ILabelRoot')
+        self.assertTrue(
+            queryAdapter(self.root, ILabelJar),
+            'The LabelJar adapter is not registered for ILabelRoot')
 
     def test_adding_new_label(self):
-        jar = LabelJar(object())
+        jar = LabelJar(self.root)
         label_id = jar.add('Question', '#FF0000')
 
         self.assertDictEqual({'label_id': label_id,
@@ -32,7 +37,7 @@ class TestLabelJar(TestCase):
                              jar.get(label_id))
 
     def test_label_ids_are_unique(self):
-        jar = LabelJar(object())
+        jar = LabelJar(self.root)
 
         first_label_id = jar.add('Question', '#FF0000')
         second_label_id = jar.add('Question', '#FF0000')
@@ -41,7 +46,7 @@ class TestLabelJar(TestCase):
                              'Labels ID should be unique.')
 
     def test_listing_labels(self):
-        jar = LabelJar(object())
+        jar = LabelJar(self.root)
 
         first_label_id = jar.add('First', '#FF0000')
         second_label_id = jar.add('Second', '#0000FF')
@@ -56,7 +61,7 @@ class TestLabelJar(TestCase):
             jar.list())
 
     def test_updating_labels(self):
-        jar = LabelJar(object())
+        jar = LabelJar(self.root)
 
         label_id = jar.add('Question', '#FF0000')
         self.assertDictEqual({'label_id': label_id,
@@ -71,7 +76,7 @@ class TestLabelJar(TestCase):
                              jar.get(label_id))
 
     def test_remove_labels(self):
-        jar = LabelJar(object())
+        jar = LabelJar(self.root)
 
         label_id = jar.add('Question', '#FF0000')
         self.assertEqual(
@@ -81,14 +86,10 @@ class TestLabelJar(TestCase):
             jar.list())
 
         jar.remove(label_id)
-        self.assertEqual(
-            [{'label_id': label_id,
-              'title': 'Question',
-              'color': '#FF0000'}],
-            jar.list())
+        self.assertEqual([], jar.list())
 
     def test_label_dict_mutations_are_not_stored(self):
-        jar = LabelJar(object())
+        jar = LabelJar(self.root)
         label_id = jar.add('Question', '#FF0000')
 
         label = jar.get(label_id)
@@ -100,7 +101,7 @@ class TestLabelJar(TestCase):
                              jar.get(label_id))
 
     def test_list_mutations_are_not_stored(self):
-        jar = LabelJar(object())
+        jar = LabelJar(self.root)
         label_id = jar.add('Question', '#FF0000')
 
         labels = jar.list()
@@ -118,8 +119,7 @@ class TestLabelJar(TestCase):
             jar.list())
 
     def test_data_is_stored_persistently(self):
-        context = object()
-        jar = LabelJar(context)
+        jar = LabelJar(self.root)
 
         label_id = jar.add('Question', '#FF0000')
         self.assertEqual(
@@ -128,7 +128,7 @@ class TestLabelJar(TestCase):
               'color': '#FF0000'}],
             jar.list())
 
-        jar = LabelJar(context)
+        jar = LabelJar(self.root)
         self.assertEqual(
             [{'label_id': label_id,
               'title': 'Question',

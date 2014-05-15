@@ -13,7 +13,7 @@ class AdaptersZCMLLayer(ComponentRegistryLayer):
     """
 
     def setUp(self):
-        super(ZCMLLayer, self).setUp()
+        super(AdaptersZCMLLayer, self).setUp()
         import ftw.labels
         self.load_zcml_file('adapters.zcml', ftw.labels)
 
