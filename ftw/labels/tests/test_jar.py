@@ -1,15 +1,26 @@
 from ftw.labels.interfaces import ILabelJar
+from ftw.labels.interfaces import ILabelRoot
 from ftw.labels.jar import LabelJar
+from ftw.labels.testing import ADAPTERS_ZCML_LAYER
 from unittest2 import TestCase
+from zope.component import queryAdapter
+from zope.interface import alsoProvides
 from zope.interface.verify import verifyClass
 
 
 class TestLabelJar(TestCase):
+    layer = ADAPTERS_ZCML_LAYER
 
     def test_label_jar_implements_interface(self):
         self.assertTrue(ILabelJar.implementedBy(LabelJar),
                         'LabelJar should implement ILabelJar')
         verifyClass(ILabelJar, LabelJar)
+
+    def test_adapter_is_registered_for_label_root(self):
+        context = object()
+        alsoProvides(context, ILabelRoot)
+        self.assertTrue(queryAdapter(context, ILabelJar),
+                        'The LabelJar adapter is not registered for ILabelRoot')
 
     def test_adding_new_label(self):
         jar = LabelJar(object())
