@@ -76,16 +76,15 @@ class ILabeling(Interface):
         """Adapts any object with ``ILabelSupport``.
         """
 
-    def activate(**label_ids):
+    def activate(*label_ids):
         """Activates all labels in ``label_ids`` on the current object.
         If there is no ``label_id`` in the label jar of the current ecosystem,
         a ``LookupError`` is raised.
         """
 
-    def deactivate(**label_ids):
+    def deactivate(*label_ids):
         """Deactivates all labels in ``label_ids`` on the current object.
-        If there is no such label active, ``False`` is returned.
-        If the label was successfully deactivated, ``True`` is returned.
+        If there is no such label active, The label will be skipped.
         """
 
     def active_labels():
