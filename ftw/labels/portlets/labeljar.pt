@@ -1,0 +1,13 @@
+<div class="labelJarPortlet"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="ftw.labels">
+
+    <h2 tal:content="view/data/portlet_title" tal:condition="view/data/portlet_title" />
+    <ul class="labelJarPortletListing">
+        <li class="labelJarPortletListingItem" tal:repeat="label view/labels"
+            tal:attributes="style string:background-color=${label/color}">
+            <span class="labelJarPortletListingItemTitle" tal:content="label/title" />
+        </li>
+    </ul>
+</div>
