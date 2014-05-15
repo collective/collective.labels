@@ -5,6 +5,7 @@
     i18n_domain="ftw.labels">
 
     <five:registerPackage package="." initialize=".initialize" />
+    <i18n:registerTranslations directory="locales" />
 
     <include file="adapters.zcml" />
     <include file="profiles.zcml" />

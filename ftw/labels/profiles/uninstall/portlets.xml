@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<portlets>
+    <assignment
+        name="ftw-labels-labeljar"
+        category="context"
+        key="/"
+        manager="plone.leftcolumn"
+        type="ftw.labels.labeljar">
+        <property name="title">Labeling</property>
+    </assignment>
+</portlets>
