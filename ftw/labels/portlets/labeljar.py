@@ -18,7 +18,11 @@ class Renderer(Renderer):
 
     @property
     def available(self):
-        return ILabelRoot.providedBy(self.context)
+        if 'portal_factory' in self.context.absolute_url():
+            return False
+        if not ILabelRoot.providedBy(self.context):
+            return False
+        return True
 
     @property
     def labels(self):
