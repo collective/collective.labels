@@ -38,12 +38,12 @@
                         <div class="colorSet">
                             <div tal:attributes="class string:colorBox; data-color color/normal">
                                 <div tal:attributes="class string:color labelcolor-${color/normal}">
-                                    &nbsp
+                                    &nbsp;
                                 </div>
                             </div>
                             <div tal:attributes="class string:colorBox; data-color color/light">
                                 <div tal:attributes="class string:color labelcolor-${color/light}">
-                                    &nbsp
+                                    &nbsp;
                                 </div>
                             </div>
                             <div class="visualClear"><!-- --></div>
