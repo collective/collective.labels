@@ -5,10 +5,11 @@
 
     <h2 i18n:translate="labeljar_portlet_heading">Labels</h2>
 
-    <ul class="labelJarPortletListing">
-        <li class="labelJarPortletListingItem" tal:repeat="label view/labels"
-            tal:attributes="style string:background-color:${label/color}">
-            <span class="labelJarPortletListingItemTitle" tal:content="label/title" />
+    <ul class="labelListing">
+        <li  tal:attributes="class string:labelItem labelcolor-${label/color}"
+             tal:repeat="label view/labels">
+            <span class="labelColor" />
+            <span class="labelTitle" tal:content="label/title" />
         </li>
     </ul>
 

@@ -1,0 +1,56 @@
+.labelcolor-red {
+  background-color: #e11d21;
+}
+.labelcolor-red-light {
+  background-color: #e11d21;
+  opacity: 0.3;
+}
+.labelcolor-orange {
+  background-color: #eb6420;
+}
+.labelcolor-orange-light {
+  background-color: #eb6420;
+  opacity: 0.3;
+}
+.labelcolor-yellow {
+  background-color: #fbca04;
+}
+.labelcolor-yellow-light {
+  background-color: #fbca04;
+  opacity: 0.3;
+}
+.labelcolor-green {
+  background-color: #009800;
+}
+.labelcolor-green-light {
+  background-color: #009800;
+  opacity: 0.3;
+}
+.labelcolor-cadetblue {
+  background-color: #006b75;
+}
+.labelcolor-cadetblue-light {
+  background-color: #006b75;
+  opacity: 0.3;
+}
+.labelcolor-cornflowerblue {
+  background-color: #207de5;
+}
+.labelcolor-cornflowerblue-light {
+  background-color: #207de5;
+  opacity: 0.3;
+}
+.labelcolor-blue {
+  background-color: #0052cc;
+}
+.labelcolor-blue-light {
+  background-color: #0052cc;
+  opacity: 0.3;
+}
+.labelcolor-purple {
+  background-color: #5319e7;
+}
+.labelcolor-purple-light {
+  background-color: #5319e7;
+  opacity: 0.3;
+}
