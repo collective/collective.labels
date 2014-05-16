@@ -12,6 +12,7 @@
     <include file="lawgiver.zcml" zcml:condition="installed ftw.lawgiver" />
     <include file="permissions.zcml" />
     <include file="profiles.zcml" />
+    <include package=".browser" />
     <include package=".portlets" />
 
 </configure>

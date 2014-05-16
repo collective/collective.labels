@@ -1,7 +1,6 @@
 from Products.CMFCore.utils import getToolByName
 from ftw.builder import Builder
 from ftw.builder import create
-from ftw.labels.interfaces import ILabelSupport
 from ftw.labels.interfaces import ILabeling
 from ftw.labels.testing import LABELS_FUNCTIONAL_TESTING
 from plone.app.testing import TEST_USER_ID
