@@ -131,3 +131,50 @@ class TestLabelsJar(TestCase):
 
         self.assertEquals('The "label_id" request argument is required.',
                           str(cm.exception))
+
+    @browsing
+    def test_edit_label_form_change_title(self, browser):
+        root = create(Builder('label root')
+                      .with_labels(('Feature', 'blue')))
+
+        browser.login().open(root,
+                             view='labels-jar/edit_label',
+                             data={'label_id': 'feature'})
+
+        browser.fill({'title': 'Features and inquiries'}).submit()
+
+        self.assertEqual(
+            [{'label_id': 'feature',
+              'title': 'Features and inquiries',
+              'color': 'blue'}],
+            ILabelJar(root).list())
+
+    @browsing
+    def test_edit_label_form_change_color(self, browser):
+        root = create(Builder('label root')
+                      .with_labels(('Feature', 'blue')))
+
+        browser.login().open(root,
+                             view='labels-jar/edit_label',
+                             data={'label_id': 'feature'})
+
+        browser.fill({'color': 'green'}).submit()
+
+        self.assertEqual(
+            [{'label_id': 'feature',
+              'title': 'Feature',
+              'color': 'green'}],
+            ILabelJar(root).list())
+
+    @browsing
+    def test_edit_label_form_delete_label(self, browser):
+        root = create(Builder('label root')
+                      .with_labels(('Feature', 'blue')))
+
+        browser.login().open(root,
+                             view='labels-jar/edit_label',
+                             data={'label_id': 'feature'})
+
+        browser.find('Delete label').click()
+
+        self.assertEqual([], ILabelJar(root).list())

@@ -8,11 +8,18 @@
     <div class="labelListing">
         <div class="labelItem" tal:repeat="label view/labels">
             <div tal:attributes="
-                class string:labelColor labelcolor-${label/color};
-                data-color label/color">
+                                 class string:labelColor labelcolor-${label/color};
+                                 data-color label/color">
                 &nbsp
             </div>
             <span class="labelTitle" tal:content="label/title" />
+            <a class="edit-label-link"
+               tal:attributes="href string:${here/absolute_url}/labels-jar/edit_label?label_id=${label/label_id}">
+                <img tal:attributes="src string:${here/portal_url}/++resource++ftw.labels/settings.png"
+                     title="Change label" alt="Change label"
+                     class="edit-label-icon"
+                     i18n:attributes="title; alt" />
+            </a>
             <div class="visualClear"><!-- --></div>
         </div>
     </div>
