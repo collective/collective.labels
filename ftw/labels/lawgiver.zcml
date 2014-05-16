@@ -9,6 +9,7 @@
         action_group="edit"
         permissions="
                      ftw.labels: Manage Labels Jar,
+                     ftw.labels: Change Labels,
                      "
         />
 

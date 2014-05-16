@@ -54,7 +54,7 @@ class LabelJar(object):
         return dict(self.storage[label_id])
 
     def list(self):
-        return self.storage.values()
+        return map(dict, self.storage.values())
 
     @property
     def storage(self):

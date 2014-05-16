@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ftw.labels"
+      tal:omit-tag="python: True">
+
+
+    <div class="labeling-portlet">
+
+        <ul class="active-labels">
+            <tal:LABEL tal:repeat="label view/active_labels">
+                <li class="label" tal:content="label/title" />
+            </tal:LABEL>
+        </ul>
+
+        <form class="update-labeling" method="POST"
+              tal:attributes="action string:${here/absolute_url}/labeling/update">
+
+            <tal:LABEL tal:repeat="label view/available_labels">
+                <div class="label">
+                    <input type="checkbox"
+                           tal:attributes="name label/label_id;
+                                           id string:label-${label/label_id};
+                                           checked label/active" />
+                    <label tal:attributes="for string:label-${label/label_id}"
+                           tal:content="label/title" />
+                </div>
+            </tal:LABEL>
+
+            <input type="submit" value="Update"
+                   i18n:attributes="value button_labeling_update" />
+        </form>
+
+    </div>
+
+</html>

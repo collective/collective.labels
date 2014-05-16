@@ -17,7 +17,7 @@ class LabelsJar(BrowserView):
 
         jar = ILabelJar(self.context)
         jar.get(jar.add(title, color))
-        return self.request.RESPONSE.redirect(self.context.absolute_url())
+        return self._redirect()
 
     def update(self):
         """Update a label.
@@ -39,7 +39,7 @@ class LabelsJar(BrowserView):
             label['color'] = color
 
         jar.update(**label)
-        return self.request.RESPONSE.redirect(self.context.absolute_url())
+        return self._redirect()
 
     def remove(self):
         """Remove a label.
@@ -50,4 +50,12 @@ class LabelsJar(BrowserView):
             raise BadRequest('The "label_id" request argument is required.')
 
         ILabelJar(self.context).remove(label_id)
-        return self.request.RESPONSE.redirect(self.context.absolute_url())
+        return self._redirect()
+
+    def _redirect(self):
+        response = self.request.RESPONSE
+        referer = self.request.get('HTTP_REFERER')
+        if referer and referer is not 'localhost':
+            response.redirect(referer)
+        else:
+            response.redirect(self.context.absolute_url())
