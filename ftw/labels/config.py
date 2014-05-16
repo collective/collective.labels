@@ -1,5 +1,5 @@
 COLORS = [
-    'red'
+    'red',
     'orange',
     'yellow',
     'green',

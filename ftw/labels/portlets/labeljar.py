@@ -1,3 +1,4 @@
+from ftw.labels.config import COLORS
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
@@ -14,3 +15,15 @@ class Renderer(Renderer):
     @property
     def labels(self):
         return ILabelJar(self.context).list()
+
+    @property
+    def colors(self):
+        return [dict(
+            normal=color,
+            light='{0}-light'.format(color)
+            ) for color in COLORS]
+
+        # return dict(
+        #     normal=COLORS,
+        #     light=['{0}-light'.format(color) for color in COLORS]
+        #     )
