@@ -23,4 +23,12 @@ class Labeling(BrowserView):
 
         labeling.deactivate(*deactivate)
         labeling.activate(*activate)
-        return self.request.RESPONSE.redirect(self.context.absolute_url())
+        return self._redirect()
+
+    def _redirect(self):
+        response = self.request.RESPONSE
+        referer = self.request.get('HTTP_REFERER')
+        if referer and referer is not 'localhost':
+            response.redirect(referer)
+        else:
+            response.redirect(self.context.absolute_url())
