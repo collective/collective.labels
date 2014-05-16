@@ -13,4 +13,12 @@
         addview="plone.app.portlets.portlets.base.NullAddForm"
         />
 
+    <plone:portlet
+        name="ftw.labels.labeling"
+        interface=".interfaces.ILabelingPortlet"
+        assignment=".assignments.LabelingAssignment"
+        renderer=".labeling.Renderer"
+        addview="plone.app.portlets.portlets.base.NullAddForm"
+        />
+
 </configure>
