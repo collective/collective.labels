@@ -23,6 +23,7 @@ class Labeling(BrowserView):
 
         labeling.deactivate(*deactivate)
         labeling.activate(*activate)
+        self.context.reindexObject(idxs=['labels'])
         return self._redirect()
 
     def _redirect(self):

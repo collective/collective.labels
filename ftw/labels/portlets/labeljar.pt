@@ -6,7 +6,8 @@
     <h2 i18n:translate="labeljar_portlet_heading">Labels</h2>
 
     <div class="labelListing">
-        <div class="labelItem" tal:repeat="label view/labels">
+        <div class="labelItem" tal:repeat="label view/labels"
+             tal:attributes="data-label-id label/label_id">
             <div tal:attributes="
                                  class string:labelColor labelcolor-${label/color};
                                  data-color label/color">

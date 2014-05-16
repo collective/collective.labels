@@ -35,7 +35,7 @@ class TestCatalogIndex(TestCase):
         page.reindexObject(idxs=['labels'])
 
         self.assertItemsEqual(
-            ['Bugs', 'Question'],
+            ['bugs', 'question'],
             self.index_data_for(page).get('labels'))
 
     def index_data_for(self, obj):

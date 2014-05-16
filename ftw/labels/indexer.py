@@ -7,4 +7,4 @@ from plone.indexer.decorator import indexer
 @indexer(ILabelSupport)
 def labels(obj):
     labeling = ILabeling(obj)
-    return map(itemgetter('title'), labeling.active_labels())
+    return map(itemgetter('label_id'), labeling.active_labels())
