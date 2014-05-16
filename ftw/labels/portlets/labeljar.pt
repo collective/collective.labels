@@ -7,7 +7,7 @@
 
     <ul class="labelJarPortletListing">
         <li class="labelJarPortletListingItem" tal:repeat="label view/labels"
-            tal:attributes="style string:background-color=${label/color}">
+            tal:attributes="style string:background-color:${label/color}">
             <span class="labelJarPortletListingItemTitle" tal:content="label/title" />
         </li>
     </ul>

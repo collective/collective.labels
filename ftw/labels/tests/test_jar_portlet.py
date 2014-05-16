@@ -49,6 +49,6 @@ class LabelJarPortletFunctionalTest(TestCase):
         browser.visit(folder)
 
         self.assertEqual(
-            ['background-color=red'],
+            ['background-color:red'],
             [browser.css('.labelJarPortletListingItem')
                 .first.attrib.get('style')])
