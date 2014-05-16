@@ -3,7 +3,7 @@ from plone.app.portlets.portlets.base import Assignment
 from zope.interface import implements
 
 
-class Assignment(Assignment):
+class LabelJarAssignment(Assignment):
     implements(ILabelJarPortlet)
 
     @property

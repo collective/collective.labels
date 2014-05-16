@@ -8,7 +8,7 @@
     <plone:portlet
         name="ftw.labels.labeljar"
         interface=".interfaces.ILabelJarPortlet"
-        assignment=".assignments.Assignment"
+        assignment=".assignments.LabelJarAssignment"
         renderer=".labeljar.Renderer"
         addview="plone.app.portlets.portlets.base.NullAddForm"
         />
