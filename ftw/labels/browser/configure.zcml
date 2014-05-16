@@ -12,4 +12,12 @@
         allowed_attributes="create update remove"
         />
 
+    <browser:page
+        for="ftw.labels.interfaces.ILabelSupport"
+        name="labeling"
+        class=".labeling.Labeling"
+        permission="ftw.labels.ChangeLabels"
+        allowed_attributes="update"
+        />
+
 </configure>
