@@ -14,3 +14,7 @@ class Renderer(Renderer):
     @property
     def active_labels(self):
         return ILabeling(self.context).active_labels()
+
+    @property
+    def available_labels(self):
+        return ILabeling(self.context).available_labels()

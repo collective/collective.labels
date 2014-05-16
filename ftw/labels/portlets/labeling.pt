@@ -14,6 +14,24 @@
             </tal:LABEL>
         </ul>
 
+        <form class="update-labeling" method="POST"
+              tal:attributes="action string:${here/absolute_url}/labeling/update">
+
+            <tal:LABEL tal:repeat="label view/available_labels">
+                <div class="label">
+                    <input type="checkbox"
+                           tal:attributes="name label/label_id;
+                                           id string:label-${label/label_id};
+                                           checked label/active" />
+                    <label tal:attributes="for string:label-${label/label_id}"
+                           tal:content="label/title" />
+                </div>
+            </tal:LABEL>
+
+            <input type="submit" value="Update"
+                   i18n:attributes="value button_labeling_update" />
+        </form>
+
     </div>
 
 </html>
