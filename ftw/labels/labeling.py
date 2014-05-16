@@ -41,7 +41,12 @@ class Labeling(object):
             self.storage.remove(label_id)
 
     def active_labels(self):
-        labels = map(self.jar.get, self.storage)
+        labels = []
+        for label_id in self.storage:
+            try:
+                labels.append(self.jar.get(label_id))
+            except KeyError:
+                pass
         return sorted(labels, key=lambda cls: make_sortable(cls['title']))
 
     def available_labels(self):

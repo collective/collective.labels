@@ -134,3 +134,18 @@ class TestLabeling(MockTestCase):
         self.assertEqual(
             ['alpha-0', '\xc3\x84lpha-1', 'Alpha-2', 'Zeta-0', 'zeta-1'],
             [label.get('title') for label in labeling.active_labels()])
+
+    def test_active_labels_filters_deleted_labels(self):
+        self.jar.add('Question', 'blue')
+        self.jar.add('Bug', 'red')
+
+        labeling = ILabeling(self.document)
+        labeling.activate('question', 'bug')
+
+        self.jar.remove('bug')
+
+        self.assertEqual(
+            [{'label_id': 'question',
+             'title': 'Question',
+             'color': 'blue'}],
+            list(labeling.active_labels()))
