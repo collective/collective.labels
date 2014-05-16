@@ -1,3 +1,4 @@
+from Products.CMFCore.utils import getToolByName
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.labels.interfaces import ILabeling
@@ -13,8 +14,8 @@ class TestLabelingView(TestCase):
     layer = LABELS_FUNCTIONAL_TESTING
 
     def setUp(self):
-        portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Contributor'])
+        self.portal = self.layer['portal']
+        setRoles(self.portal, TEST_USER_ID, ['Contributor'])
 
     @browsing
     def test_activate_labels(self, browser):
@@ -23,6 +24,7 @@ class TestLabelingView(TestCase):
                                    ('Bug', 'red'),
                                    ('Feature', 'blue')))
         page = create(Builder('labelled page').within(root))
+        self.assertFalse(self.indexed_labels_for(page))
 
         browser.login().open(page,
                              view='labeling/update',
@@ -37,6 +39,8 @@ class TestLabelingView(TestCase):
               'title': 'Bug',
               'color': 'red'}],
             ILabeling(page).active_labels())
+
+        self.assertItemsEqual(['question', 'bug'], self.indexed_labels_for(page))
 
     @browsing
     def test_deactivate_labels(self, browser):
@@ -91,3 +95,8 @@ class TestLabelingView(TestCase):
                          view='labeling/update',
                          data={'question': 'yes',
                                'feature': 'yes'})
+
+    def indexed_labels_for(self, obj):
+        catalog = getToolByName(self.portal, 'portal_catalog')
+        rid = catalog.getrid('/'.join(obj.getPhysicalPath()))
+        return catalog.getIndexDataForRID(rid).get('labels')
