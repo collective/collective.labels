@@ -20,7 +20,7 @@ tests_require = [
 
 setup(name='ftw.labels',
       version=version,
-      description='',
+      description='A Plone addon for labels.',
 
       long_description=open('README.rst').read() + '\n' + \
           open(os.path.join('docs', 'HISTORY.txt')).read(),
