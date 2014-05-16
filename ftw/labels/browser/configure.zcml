@@ -9,7 +9,7 @@
         name="labels-jar"
         class=".labelsjar.LabelsJar"
         permission="ftw.labels.ManageLabelsJar"
-        allowed_attributes="create update remove"
+        allowed_attributes="create update remove edit_label"
         />
 
     <browser:page

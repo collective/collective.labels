@@ -1,9 +1,12 @@
 from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ftw.labels.interfaces import ILabelJar
 from zExceptions import BadRequest
 
 
 class LabelsJar(BrowserView):
+
+    edit_label_template = ViewPageTemplateFile('templates/edit_label.pt')
 
     def create(self):
         """Create a new label.
@@ -51,6 +54,17 @@ class LabelsJar(BrowserView):
 
         ILabelJar(self.context).remove(label_id)
         return self._redirect()
+
+    def edit_label(self):
+        """Form for editing a label.
+        """
+        return self.edit_label_template()
+
+    def get_label(self):
+        label_id = self.request.form.get('label_id', None)
+        if not label_id:
+            raise BadRequest('The "label_id" request argument is required.')
+        return ILabelJar(self.context).get(label_id)
 
     def _redirect(self):
         response = self.request.RESPONSE
