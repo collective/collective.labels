@@ -8,5 +8,11 @@
             <role name="Owner" />
         </permission>
 
+        <permission name="ftw.labels: Change Labels" acquire="False">
+            <role name="Manager" />
+            <role name="Editor" />
+            <role name="Owner" />
+        </permission>
+
     </permissions>
 </rolemap>

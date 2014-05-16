@@ -5,5 +5,8 @@
         <permission name="ftw.labels: Manage Labels Jar" acquire="True">
         </permission>
 
+        <permission name="ftw.labels: Change Labels" acquire="True">
+        </permission>
+
     </permissions>
 </rolemap>

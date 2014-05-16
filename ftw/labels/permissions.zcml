@@ -7,4 +7,9 @@
         title="ftw.labels: Manage Labels Jar"
         />
 
+    <permission
+        id="ftw.labels.ChangeLabels"
+        title="ftw.labels: Change Labels"
+        />
+
 </configure>
