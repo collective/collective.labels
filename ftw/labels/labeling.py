@@ -25,8 +25,11 @@ class Labeling(object):
             if label_id not in available_labels:
                 raise LookupError(
                     'Cannot activate label: '
-                    'the label "{0}" is not in the label jar.'.format(
-                        label_id))
+                    'the label "{0}" is not in the label jar. '
+                    'Following labels ids are available: {1}'.format(
+                        label_id,
+                        [label.get(
+                            'label_id') for label in self.available_labels()]))
 
             if label_id not in self.storage:
                 self.storage.append(label_id)

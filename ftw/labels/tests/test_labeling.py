@@ -112,3 +112,31 @@ class TestLabeling(MockTestCase):
               'title': 'Bug',
               'color': ''}],
             labeling.active_labels())
+
+    def test_active_labels_is_sorted(self):
+        self.jar.add('Zeta', '')
+        self.jar.add('alpha', '')
+        self.jar.add('\xc3\x84lpha', '')
+        self.jar.add('Alpha', '')
+        self.jar.add('\xc3\xa4lpha', '')
+
+        labeling = ILabeling(self.document)
+        labeling.activate(
+            'zeta',
+            'zeta-1',
+            'alpha',
+            'alpha-1',
+            'alpha-2',
+            'a-lpha',
+            )
+
+        self.assertEqual(
+            [
+                'alpha',
+                '\xc3\xa4lpha',
+                'Alpha',
+                '\xc3\x84lpha',
+                'zeta',
+                'Zeta'
+            ],
+            [label.get('title') for label in labeling.active_labels()])

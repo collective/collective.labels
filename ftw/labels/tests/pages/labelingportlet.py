@@ -3,17 +3,17 @@ from ftw.testbrowser import browser
 
 
 def portlet():
-    return browser.css('.labeling-portlet').first_or_none
+    return browser.css('.labelingPortlet').first_or_none
 
 
 def active_labels():
     assert_true(portlet(), 'labeling portlet is not visible')
-    return portlet().css('.active-labels .label').text
+    return portlet().css('.activeLabels .labelItem').text
 
 
 def form():
-    node = portlet().css('.update-labeling').first_or_none
-    assert_true(node, 'The update-labeling form is missing.')
+    node = portlet().css('.updateLabeling').first_or_none
+    assert_true(node, 'The updateLabeling form is missing.')
     return node
 
 

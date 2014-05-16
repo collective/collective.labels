@@ -60,6 +60,27 @@ class TestLabelJar(TestCase):
               'color': '#0000FF'}],
             jar.list())
 
+    def test_listing_labels_is_sorted(self):
+        jar = LabelJar(self.root)
+
+        jar.add('Zeta', '')
+        jar.add('zeta', '')
+        jar.add('alpha', '')
+        jar.add('\xc3\x84lpha', '')
+        jar.add('Alpha', '')
+        jar.add('\xc3\xa4lpha', '')
+
+        self.assertEqual(
+            [
+                'alpha',
+                '\xc3\xa4lpha',
+                'Alpha',
+                '\xc3\x84lpha',
+                'zeta',
+                'Zeta',
+            ],
+            [label.get('title') for label in jar.list()])
+
     def test_updating_labels(self):
         jar = LabelJar(self.root)
 
