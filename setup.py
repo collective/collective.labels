@@ -6,6 +6,7 @@ version = '1.0.0.dev0'
 
 
 tests_require = [
+    'asserts',
     'ftw.builder',
     'ftw.testbrowser',
     'ftw.testing',
