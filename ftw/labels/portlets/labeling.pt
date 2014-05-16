@@ -6,31 +6,35 @@
       tal:omit-tag="python: True">
 
 
-    <div class="labeling-portlet">
+    <div class="labelingPortlet">
 
-        <ul class="active-labels">
-            <tal:LABEL tal:repeat="label view/active_labels">
-                <li class="label" tal:content="label/title" />
-            </tal:LABEL>
-        </ul>
+        <div class="activeLabels">
+            <div class="labelItem" tal:repeat="label view/active_labels">
+                <div tal:attributes="class string:labelColor labelcolor-${label/color}">
+                  &nbsp
+                </div>
+                <li class="labelTitle" tal:content="label/title" />
+            </div>
+        </div>
 
-        <form class="update-labeling" method="POST"
+        <form class="updateLabeling" method="POST"
               tal:attributes="action string:${here/absolute_url}/labeling/update">
 
-            <tal:LABEL tal:repeat="label view/available_labels">
-                <div class="label">
-                    <input type="checkbox"
-                           tal:attributes="name label/label_id;
-                                           id string:label-${label/label_id};
-                                           checked label/active" />
-                    <label tal:attributes="for string:label-${label/label_id}"
-                           tal:content="label/title" />
-                </div>
-            </tal:LABEL>
-
+              <div class="labelItem" tal:repeat="label view/available_labels">
+                  <div tal:attributes="class string:labelColor labelcolor-${label/color}">
+                    &nbsp
+                  </div>
+                  <input type="checkbox"
+                         tal:attributes="name label/label_id;
+                                         id string:label-${label/label_id};
+                                         checked label/active" />
+                  <label tal:attributes="for string:label-${label/label_id}"
+                         tal:content="label/title" />
+              </div>
             <input type="submit" value="Update"
                    i18n:attributes="value button_labeling_update" />
         </form>
+        <div i18n:translate="labeling_manage_labels" class="toggleManageLabeling">manage labels</div>
 
     </div>
 

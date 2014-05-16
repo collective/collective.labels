@@ -9,7 +9,8 @@ class Renderer(Renderer):
 
     @property
     def available(self):
-        return ILabelSupport.providedBy(self.context)
+        return ILabelSupport.providedBy(self.context) and \
+            tuple(self.available_labels)
 
     @property
     def active_labels(self):

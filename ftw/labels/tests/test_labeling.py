@@ -69,13 +69,15 @@ class TestLabeling(MockTestCase):
 
     def test_activate_raises_LookupError_when_label_not_in_jar(self):
         self.assertEqual(0, len(self.jar.list()))
+        self.jar.add('Question', '')
         labeling = ILabeling(self.document)
         with self.assertRaises(LookupError) as cm:
             labeling.activate('something')
 
         self.assertEqual(
             'Cannot activate label: the label'
-            ' "something" is not in the label jar.',
+            ' "something" is not in the label jar. '
+            'Following labels ids are available: question',
             str(cm.exception))
 
     def test_deactivate_label(self):
@@ -112,3 +114,23 @@ class TestLabeling(MockTestCase):
               'title': 'Bug',
               'color': ''}],
             labeling.active_labels())
+
+    def test_active_labels_is_sorted(self):
+        self.jar.add('Zeta-0', '')
+        self.jar.add('zeta-1', '')
+        self.jar.add('alpha-0', '')
+        self.jar.add('\xc3\x84lpha-1', '')
+        self.jar.add('Alpha-2', '')
+
+        labeling = ILabeling(self.document)
+        labeling.activate(
+            'zeta-0',
+            'zeta-1',
+            'alpha-0',
+            'alpha-1',
+            'alpha-2',
+            )
+
+        self.assertEqual(
+            ['alpha-0', '\xc3\x84lpha-1', 'Alpha-2', 'Zeta-0', 'zeta-1'],
+            [label.get('title') for label in labeling.active_labels()])

@@ -1,17 +1,18 @@
 from Acquisition import aq_inner
 from Acquisition import aq_parent
-from OFS.interfaces import IApplication
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
+from ftw.labels.utils import make_sortable
+from OFS.interfaces import IApplication
 from persistent.mapping import PersistentMapping
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from zope.annotation.interfaces import IAnnotations
 from zope.component import adapter
 from zope.component import adapts
 from zope.component import getUtility
-from zope.interface import Interface
 from zope.interface import implementer
 from zope.interface import implements
+from zope.interface import Interface
 
 
 ANNOTATION_KEY = 'ftw.labels:jar'
@@ -54,7 +55,8 @@ class LabelJar(object):
         return dict(self.storage[label_id])
 
     def list(self):
-        return map(dict, self.storage.values())
+        labels = map(dict, self.storage.values())
+        return sorted(labels, key=lambda cls: make_sortable(cls['title']))
 
     @property
     def storage(self):
