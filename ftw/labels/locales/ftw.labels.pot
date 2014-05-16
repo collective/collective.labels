@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-05-16 13:38+0000\n"
+"POT-Creation-Date: 2014-05-16 14:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgid "button_create_label"
 msgstr ""
 
 #. Default: "Delete label"
-#: ./ftw/labels/browser/templates/edit_label.pt:32
+#: ./ftw/labels/browser/templates/edit_label.pt:63
 msgid "button_delete_label"
 msgstr ""
 
@@ -34,17 +34,17 @@ msgid "button_labeling_update"
 msgstr ""
 
 #. Default: "Update"
-#: ./ftw/labels/browser/templates/edit_label.pt:25
+#: ./ftw/labels/browser/templates/edit_label.pt:56
 msgid "button_update_label"
 msgstr ""
 
 #. Default: "Edit label «${label}»"
-#: ./ftw/labels/browser/templates/edit_label.pt:12
+#: ./ftw/labels/browser/templates/edit_label.pt:26
 msgid "edit_label_heading"
 msgstr ""
 
 #. Default: "Label Title"
-#: ./ftw/labels/browser/templates/edit_label.pt:17
+#: ./ftw/labels/browser/templates/edit_label.pt:31
 msgid "label_label_title"
 msgstr ""
 

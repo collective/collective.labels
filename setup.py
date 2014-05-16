@@ -11,7 +11,10 @@ tests_require = [
     'ftw.testbrowser',
     'ftw.testing',
     'plone.app.testing',
+    'plone.mocktestcase',
+    'transaction',
     'unittest2',
+    'zope.configuration'
     ]
 
 
@@ -41,7 +44,21 @@ setup(name='ftw.labels',
       zip_safe=False,
 
       install_requires=[
-        'setuptools'
+        'Acquisition',
+        'Products.CMFCore',
+        'Products.GenericSetup',
+        'ZODB3',
+        'Zope2',
+        'plone.app.portlets',
+        'plone.i18n',
+        'plone.indexer',
+        'plone.portlets',
+        'setuptools',
+        'zExceptions',
+        'zope.annotation',
+        'zope.component',
+        'zope.i18nmessageid',
+        'zope.interface',
         ],
 
       tests_require=tests_require,

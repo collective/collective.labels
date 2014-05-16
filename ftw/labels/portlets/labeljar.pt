@@ -11,7 +11,7 @@
             <div tal:attributes="
                                  class string:labelColor labelcolor-${label/color};
                                  data-color label/color">
-                &nbsp
+                &nbsp;
             </div>
             <span class="labelTitle" tal:content="label/title" />
             <a class="edit-label-link"
@@ -37,12 +37,12 @@
                     <div class="colorSet">
                         <div tal:attributes="class string:colorBox; data-color color/normal">
                             <div tal:attributes="class string:color labelcolor-${color/normal}">
-                                &nbsp
+                                &nbsp;
                             </div>
                         </div>
                         <div tal:attributes="class string:colorBox; data-color color/light">
                             <div tal:attributes="class string:color labelcolor-${color/light}">
-                                &nbsp
+                                &nbsp;
                             </div>
                         </div>
                         <div class="visualClear"><!-- --></div>

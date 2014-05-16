@@ -11,7 +11,7 @@
         <div class="activeLabels">
             <div class="labelItem" tal:repeat="label view/active_labels">
                 <div tal:attributes="class string:labelColor labelcolor-${label/color}">
-                  &nbsp
+                  &nbsp;
                 </div>
                 <li class="labelTitle" tal:content="label/title" />
             </div>
@@ -22,7 +22,7 @@
 
               <div class="labelItem" tal:repeat="label view/available_labels">
                   <div tal:attributes="class string:labelColor labelcolor-${label/color}">
-                    &nbsp
+                    &nbsp;
                   </div>
                   <input type="checkbox"
                          tal:attributes="name label/label_id;
