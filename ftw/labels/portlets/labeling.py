@@ -10,7 +10,7 @@ class Renderer(Renderer):
     @property
     def available(self):
         return ILabelSupport.providedBy(self.context) and \
-            [label for label in self.available_labels]
+            tuple(self.available_labels)
 
     @property
     def active_labels(self):
