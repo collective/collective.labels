@@ -1,6 +1,7 @@
+from ftw.labels.interfaces import ILabeling
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelSupport
-from ftw.labels.interfaces import ILabeling
+from ftw.labels.utils import make_sortable
 from persistent.list import PersistentList
 from zope.annotation.interfaces import IAnnotations
 from zope.component import adapts
@@ -27,9 +28,7 @@ class Labeling(object):
                     'Cannot activate label: '
                     'the label "{0}" is not in the label jar. '
                     'Following labels ids are available: {1}'.format(
-                        label_id,
-                        [label.get(
-                            'label_id') for label in self.available_labels()]))
+                        label_id, ', '.join(available_labels)))
 
             if label_id not in self.storage:
                 self.storage.append(label_id)
@@ -42,7 +41,8 @@ class Labeling(object):
             self.storage.remove(label_id)
 
     def active_labels(self):
-        return map(self.jar.get, self.storage)
+        labels = map(self.jar.get, self.storage)
+        return sorted(labels, key=lambda cls: make_sortable(cls['title']))
 
     def available_labels(self):
         for label in self.jar.list():

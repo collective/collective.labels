@@ -21,8 +21,8 @@ $(document).ready(function(){
     });
 
     $('.toggleManageLabeling').click(function() {
-        $('.updateLabeling').slideToggle()
-        $('.activeLabels').slideToggle()
+        $('.updateLabeling').slideToggle();
+        $('.activeLabels').slideToggle();
      });
 
 });

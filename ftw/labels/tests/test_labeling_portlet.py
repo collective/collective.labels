@@ -25,8 +25,15 @@ class TestLabelingPortlet(TestCase):
 
     @browsing
     def test_labeling_portlet_not_visible_other_objects(self, browser):
-        root = create(Builder('label root'))
+        root = create(Builder('folder'))
         browser.login().open(root)
+        self.assertFalse(labelingportlet.portlet(), 'Portlet should be visible.')
+
+    @browsing
+    def test_labeling_portlet_is_visible_if_no_labels_are_available(self, browser):
+        root = create(Builder('label root'))
+        page = create(Builder('labelled page').within(root))
+        browser.login().open(page)
         self.assertFalse(labelingportlet.portlet(), 'Portlet should be visible.')
 
     @browsing

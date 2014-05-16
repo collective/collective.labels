@@ -63,22 +63,14 @@ class TestLabelJar(TestCase):
     def test_listing_labels_is_sorted(self):
         jar = LabelJar(self.root)
 
-        jar.add('Zeta', '')
-        jar.add('zeta', '')
-        jar.add('alpha', '')
-        jar.add('\xc3\x84lpha', '')
-        jar.add('Alpha', '')
-        jar.add('\xc3\xa4lpha', '')
+        jar.add('Zeta-0', '')
+        jar.add('zeta-1', '')
+        jar.add('alpha-0', '')
+        jar.add('\xc3\x84lpha-1', '')
+        jar.add('Alpha-2', '')
 
         self.assertEqual(
-            [
-                'alpha',
-                '\xc3\xa4lpha',
-                'Alpha',
-                '\xc3\x84lpha',
-                'zeta',
-                'Zeta',
-            ],
+            ['alpha-0', '\xc3\x84lpha-1', 'Alpha-2', 'Zeta-0', 'zeta-1'],
             [label.get('title') for label in jar.list()])
 
     def test_updating_labels(self):
