@@ -14,4 +14,11 @@ $(document).ready(function(){
 
      });
 
+    $('.labelListing .edit-label-link').prepOverlay({
+        subtype: 'ajax',
+        width: '500px',
+        noform: function(el) {return $.plonepopups.noformerrorshow(el, 'close');}
+    });
+
+
 });
