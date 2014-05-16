@@ -3,6 +3,7 @@ from ftw.labels.interfaces import ILabelJar
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zExceptions import BadRequest
+import random
 
 
 class LabelsJar(BrowserView):
@@ -14,10 +15,13 @@ class LabelsJar(BrowserView):
         """
 
         title = self.request.form.get('title', None)
-        color = self.request.form.get('color', None)
-        if not title or not color:
+        if not title:
             raise BadRequest(
-                '"title" and "color" request arguments are required.')
+                '"title" request argument is required.')
+
+        color = self.request.form.get('color', None)
+        if not color:
+            color = self._get_random_color()
 
         jar = ILabelJar(self.context)
         jar.get(jar.add(title, color))
@@ -81,3 +85,18 @@ class LabelsJar(BrowserView):
             response.redirect(referer)
         else:
             response.redirect(self.context.absolute_url())
+
+    def _get_random_color(self):
+        all_colors = list(COLORS)
+        all_colors.extend(
+            ['{0}-light'.format(color) for color in COLORS])
+
+        used_colors = [
+            label.get('color') for label in ILabelJar(self.context).list()]
+
+        available_colors = tuple(set(all_colors) - set(used_colors))
+
+        if not available_colors:
+            available_colors = all_colors
+
+        return random.choice(available_colors)
