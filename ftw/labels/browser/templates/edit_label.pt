@@ -6,27 +6,58 @@
       tal:omit-tag="python: True">
 
 
-    <div class="edit-label" tal:define="label view/get_label">
+      <script type="text/javascript">
+        $('.editLabel .colorBox').click(function() {
+            // reset all selected
+            $(this).closest('form').find('.colorBox').removeClass('selected');
+            $(this).toggleClass('selected');
+            $(this).closest('form').find('input[name=color]').val($(this).attr("data-color"));
+         });
+
+        <!-- preselect color -->
+        $form = $('form.editLabelForm');
+        var color = $form.find('input[name=color]').val();
+        $form.find('div[data-color="' + color + '"]').addClass('selected');
+
+      </script>
+    <div class="editLabel" tal:define="label view/get_label">
 
         <h2 i18n:translate="edit_label_heading">
             Edit label «<span i18n:name="label" tal:content="label/title"/>»
         </h2>
 
-        <form class="edit-label-form" method="POST"
+        <form class="editLabelForm" method="POST"
               tal:attributes="action string:${here/absolute_url}/labels-jar/update">
             <label id="label-title" i18n:translate="label_label_title">
                 Label Title
             </label>
             <input type="text" name="title" tal:attributes="value label/title" />
 
-            <input type="text" name="color" tal:attributes="value label/color" />
+            <div class="colorChooser">
+                    <tal:colors repeat="color view/colors">
+                        <div class="colorSet">
+                            <div tal:attributes="class string:colorBox; data-color color/normal">
+                                <div tal:attributes="class string:color labelcolor-${color/normal}">
+                                    &nbsp
+                                </div>
+                            </div>
+                            <div tal:attributes="class string:colorBox; data-color color/light">
+                                <div tal:attributes="class string:color labelcolor-${color/light}">
+                                    &nbsp
+                                </div>
+                            </div>
+                            <div class="visualClear"><!-- --></div>
+                        </div>
+                    </tal:colors>
+            </div>
+            <input type="hidden" name="color" tal:attributes="value label/color" />
 
             <input type="hidden" name="label_id" tal:attributes="value label/label_id" />
             <input type="submit" value="Update" class="button standalone"
                    i18n:attributes="value button_update_label" />
         </form>
 
-        <form class="remove-label-form" method="POST"
+        <form class="removeLabelForm" method="POST"
               tal:attributes="action string:${here/absolute_url}/labels-jar/remove">
             <input type="hidden" name="label_id" tal:attributes="value label/label_id" />
             <input type="submit" value="Delete label" class="button destructive"

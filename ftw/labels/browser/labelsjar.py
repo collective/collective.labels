@@ -1,6 +1,7 @@
+from ftw.labels.config import COLORS
+from ftw.labels.interfaces import ILabelJar
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from ftw.labels.interfaces import ILabelJar
 from zExceptions import BadRequest
 
 
@@ -65,6 +66,13 @@ class LabelsJar(BrowserView):
         if not label_id:
             raise BadRequest('The "label_id" request argument is required.')
         return ILabelJar(self.context).get(label_id)
+
+    @property
+    def colors(self):
+        return [dict(
+            normal=color,
+            light='{0}-light'.format(color)
+            ) for color in COLORS]
 
     def _redirect(self):
         response = self.request.RESPONSE
