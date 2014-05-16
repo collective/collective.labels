@@ -9,11 +9,8 @@ def portlet():
 def labels():
     assert_true(portlet())
     return dict((label.text, label_color(label))
-                for label in portlet().css('.labelJarPortletListingItem'))
+                for label in portlet().css('.labelItem'))
 
 
 def label_color(label_li):
-    span = label_li.css('.labelJarPortletListingItem').first
-    style = span.attrib.get('style', '')
-    color = style.split(':')[1]
-    return color
+    return label_li.css('.labelColor').first.attrib.get('data-color')

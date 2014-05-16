@@ -20,4 +20,9 @@
         allowed_attributes="update"
         />
 
+    <browser:resourceDirectory
+        name="ftw.labels"
+        directory="resources"
+        />
+
 </configure>
