@@ -1,7 +1,8 @@
 <div class="labelJarPortlet"
      xmlns:tal="http://xml.zope.org/namespaces/tal"
      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-     i18n:domain="ftw.labels">
+     i18n:domain="ftw.labels"
+     tal:define="can_edit view/can_edit">
 
     <h2 i18n:translate="labeljar_portlet_heading">Labels</h2>
 
@@ -20,7 +21,7 @@
                      title="Change label" alt="Change label"
                      class="editLabelIcon"
                      i18n:attributes="title; alt"
-                     tal:condition="view/can_edit" />
+                     tal:condition="can_edit" />
             </a>
             <div class="visualClear"><!-- --></div>
         </div>
@@ -28,7 +29,7 @@
 
     <form id="create-label" method="POST"
           tal:attributes="action string:${here/absolute_url}/labels-jar/create"
-          tal:condition="view/can_edit">
+          tal:condition="can_edit">
         <div class="new-label-label" i18n:translate="new-label-label">
             New Label
         </div>
