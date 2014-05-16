@@ -1,9 +1,10 @@
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from ftw.labels.interfaces import ILabelSupport
 from ftw.labels.interfaces import ILabeling
+from ftw.labels.interfaces import ILabelSupport
 from ftw.labels.portlets.assignments import LabelingAssignment
 from plone.app.portlets.portlets.base import NullAddForm
 from plone.app.portlets.portlets.base import Renderer
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class AddForm(NullAddForm):
@@ -32,3 +33,8 @@ class Renderer(Renderer):
     @property
     def available_labels(self):
         return ILabeling(self.context).available_labels()
+
+    @property
+    def can_edit(self):
+        mtool = getToolByName(self.context, 'portal_membership')
+        return mtool.checkPermission('ftw.labels.ChangeLabels', self.context)

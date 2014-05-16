@@ -95,12 +95,12 @@ height: 2em;
 .labelItem:hover {
   background-color: #eee;
 }
-.edit-label-icon {
+.editLabelIcon {
   padding-top: 0.1em;
   float: right;
   opacity: 0.1;
 }
-.labelItem:hover .edit-label-icon {
+.labelItem:hover .editLabelIcon {
   opacity: 0.8;
 }
 
