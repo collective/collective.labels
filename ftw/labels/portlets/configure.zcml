@@ -10,7 +10,7 @@
         interface=".interfaces.ILabelJarPortlet"
         assignment=".assignments.LabelJarAssignment"
         renderer=".labeljar.Renderer"
-        addview="plone.app.portlets.portlets.base.NullAddForm"
+        addview=".labeljar.AddForm"
         />
 
     <plone:portlet
@@ -18,7 +18,7 @@
         interface=".interfaces.ILabelingPortlet"
         assignment=".assignments.LabelingAssignment"
         renderer=".labeling.Renderer"
-        addview="plone.app.portlets.portlets.base.NullAddForm"
+        addview=".labeling.AddForm"
         />
 
 </configure>

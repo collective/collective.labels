@@ -1,8 +1,16 @@
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ftw.labels.config import COLORS
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
+from ftw.labels.portlets.assignments import LabelJarAssignment
+from plone.app.portlets.portlets.base import NullAddForm
 from plone.app.portlets.portlets.base import Renderer
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+
+class AddForm(NullAddForm):
+
+    def create(self):
+        return LabelJarAssignment()
 
 
 class Renderer(Renderer):

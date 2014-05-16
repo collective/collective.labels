@@ -1,7 +1,15 @@
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ftw.labels.interfaces import ILabelSupport
 from ftw.labels.interfaces import ILabeling
+from ftw.labels.portlets.assignments import LabelingAssignment
+from plone.app.portlets.portlets.base import NullAddForm
 from plone.app.portlets.portlets.base import Renderer
+
+
+class AddForm(NullAddForm):
+
+    def create(self):
+        return LabelingAssignment()
 
 
 class Renderer(Renderer):
