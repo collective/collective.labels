@@ -44,3 +44,15 @@ class LabelJarPortletFunctionalTest(TestCase):
         folder = create(Builder('label root').with_labels(('James', 'red')))
         browser.visit(folder)
         self.assertEquals({'James': 'red'}, jarportlet.labels())
+
+    @browsing
+    def test_create_label(self, browser):
+        folder = create(Builder('label root'))
+        browser.login().visit(folder)
+        self.assertEquals({}, jarportlet.labels())
+
+        browser.forms['create-label'].fill({
+                'title': 'Question',
+                'color': 'purple'}).submit()
+
+        self.assertEquals({'Question': 'purple'}, jarportlet.labels())

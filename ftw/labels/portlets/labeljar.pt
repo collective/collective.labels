@@ -11,4 +11,16 @@
             <span class="labelJarPortletListingItemTitle" tal:content="label/title" />
         </li>
     </ul>
+
+    <form id="create-label" method="POST"
+          tal:attributes="action string:${here/absolute_url}/labels-jar/create">
+        <div class="new-label-label" i18n:translate="new-label-label">
+            New Label
+        </div>
+        <input type="text" name="title" placeholder="Title"
+               i18n:attributes="placeholder new_label_title_placeholder"/>
+        <input type="text" name="color" placeholder="Color" />
+        <input type="submit" value="Create label"
+               i18n:attributes="value button_create_label" />
+    </form>
 </div>
