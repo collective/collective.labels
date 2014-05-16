@@ -7,7 +7,11 @@
 
     <div class="labelListing">
         <div class="labelItem" tal:repeat="label view/labels">
-            <div tal:attributes="class string:labelColor labelcolor-${label/color}">&nbsp</div>
+            <div tal:attributes="
+                class string:labelColor labelcolor-${label/color};
+                data-color label/color">
+                &nbsp
+            </div>
             <span class="labelTitle" tal:content="label/title" />
             <div class="visualClear"><!-- --></div>
         </div>
@@ -18,15 +22,17 @@
         <div class="new-label-label" i18n:translate="new-label-label">
             New Label
         </div>
+        <input type="text" name="title" placeholder="Title"
+               i18n:attributes="placeholder new_label_title_placeholder"/>
         <div class="colorChooser">
                 <tal:colors repeat="color view/colors">
                     <div class="colorSet">
-                        <div tal:attributes="class string:colorBox; color-picker color/normal">
+                        <div tal:attributes="class string:colorBox; data-color color/normal">
                             <div tal:attributes="class string:color labelcolor-${color/normal}">
                                 &nbsp
                             </div>
                         </div>
-                        <div tal:attributes="class string:colorBox; color-picker color/light">
+                        <div tal:attributes="class string:colorBox; data-color color/light">
                             <div tal:attributes="class string:color labelcolor-${color/light}">
                                 &nbsp
                             </div>
@@ -37,8 +43,6 @@
 
         </div>
         <input type="hidden" name="color" placeholder="Color" />
-        <input type="text" name="title" placeholder="Title"
-               i18n:attributes="placeholder new_label_title_placeholder"/>
         <input type="submit" value="Create label"
                i18n:attributes="value button_create_label" />
     </form>

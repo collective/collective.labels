@@ -13,6 +13,4 @@ def labels():
 
 
 def label_color(label_li):
-    css_class = filter(
-        lambda cls: cls.startswith('labelcolor-'), label_li.classes)[0]
-    return css_class.replace('labelcolor-', '')
+    return label_li.css('.labelColor').first.attrib.get('data-color')

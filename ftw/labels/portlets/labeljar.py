@@ -1,8 +1,8 @@
 from ftw.labels.config import COLORS
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
 from plone.app.portlets.portlets.base import Renderer
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class Renderer(Renderer):
@@ -22,8 +22,3 @@ class Renderer(Renderer):
             normal=color,
             light='{0}-light'.format(color)
             ) for color in COLORS]
-
-        # return dict(
-        #     normal=COLORS,
-        #     light=['{0}-light'.format(color) for color in COLORS]
-        #     )

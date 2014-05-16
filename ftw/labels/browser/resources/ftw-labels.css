@@ -1,5 +1,7 @@
-input {
-  margin-top: 1em;
+.labelJarPortlet input[type="text"] {
+margin-bottom: 1em;
+width: 90%;
+height: 2em;
 }
 .labelListing {
   margin-bottom: 2em;
@@ -21,6 +23,10 @@ input {
   width: 100%;
   height: 100%;
   border-radius: 3px;
+}
+div.colorChooser {
+  overflow: hidden;
+  margin-bottom: 1em;
 }
 .labelItem {
   margin-bottom: 0.2em;
