@@ -28,3 +28,14 @@ class TestLabelingPortlet(TestCase):
         root = create(Builder('label root'))
         browser.login().open(root)
         self.assertFalse(labelingportlet.portlet(), 'Portlet should be visible.')
+
+    @browsing
+    def test_labeling_portlet_lists_active_labels(self, browser):
+        root = create(Builder('label root')
+                      .with_labels(('Question', 'purple'),
+                                   ('Bug', 'red')))
+        page = create(Builder('labelled page').within(root)
+                      .with_labels('question'))
+        browser.login().visit(page)
+
+        self.assertEquals(['Question'], labelingportlet.active_labels())

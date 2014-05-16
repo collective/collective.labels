@@ -7,6 +7,13 @@
 
 
     <div class="labeling-portlet">
+
+        <ul class="active-labels">
+            <tal:LABEL tal:repeat="label view/active_labels">
+                <li class="label" tal:content="label/title" />
+            </tal:LABEL>
+        </ul>
+
     </div>
 
 </html>
