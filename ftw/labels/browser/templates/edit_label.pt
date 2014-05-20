@@ -37,18 +37,14 @@
         <tal:colors repeat="color view/colors">
           <div class="colorSet">
             <div tal:attributes="class string:colorBox; data-color color/normal">
-              <div tal:attributes="class string:color labelcolor-${color/normal}">
-                &nbsp;
-              </div>
-            </div>
-            <div tal:attributes="class string:colorBox; data-color color/light">
-              <div tal:attributes="class string:color labelcolor-${color/light}">
+              <div tal:attributes="class string:labelColor labelcolor-${color/normal}">
                 &nbsp;
               </div>
             </div>
             <div class="visualClear"><!-- --></div>
           </div>
         </tal:colors>
+        <div class="visualClear"><!-- --></div>
       </div>
       <input type="hidden" name="color" tal:attributes="value label/color" />
 

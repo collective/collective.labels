@@ -53,9 +53,4 @@ $(document).ready(function(){
     noform: function(el) {return $.plonepopups.noformerrorshow(el, 'close');}
   });
 
-  $('.toggleManageLabeling').click(function() {
-    $('.updateLabeling').slideToggle();
-    $('.activeLabels').slideToggle();
-  });
-
 });

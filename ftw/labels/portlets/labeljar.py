@@ -31,10 +31,7 @@ class Renderer(Renderer):
 
     @property
     def colors(self):
-        return [dict(
-            normal=color,
-            light='{0}-light'.format(color)
-        ) for color in COLORS]
+        return COLORS
 
     @property
     def can_edit(self):

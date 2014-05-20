@@ -1,171 +1,246 @@
-/* Labeling portlet */
-.updateLabeling {
-  display: none;
-}
-.updateLabeling label{
-  cursor: pointer;
-}
-.toggleManageLabeling {
-  cursor: pointer;
-  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-  -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-  box-shadow:inset 0px 1px 0px 0px #ffffff;
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-  background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-  background-color:#ededed;
-  -webkit-border-top-left-radius:6px;
-  -moz-border-radius-topleft:6px;
-  border-top-left-radius:6px;
-  -webkit-border-top-right-radius:6px;
-  -moz-border-radius-topright:6px;
-  border-top-right-radius:6px;
-  -webkit-border-bottom-right-radius:6px;
-  -moz-border-radius-bottomright:6px;
-  border-bottom-right-radius:6px;
-  -webkit-border-bottom-left-radius:6px;
-  -moz-border-radius-bottomleft:6px;
-  border-bottom-left-radius:6px;
-  text-indent:0;
-  border:1px solid #dcdcdc;
-  display:inline-block;
-  color:#777777;;
-  font-weight:bold;
-  font-style:normal;
-  height:2em;
-  line-height:2em;
-  width:100%;
-  text-decoration:none;
-  text-align:center;
-  text-shadow:1px 1px 0px #ffffff;
-}
-.toggleManageLabeling:hover {
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-  background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-  background-color:#dfdfdf;
+/* @group colorset */
 
-}.toggleManageLabeling:active {
-  position:relative;
-  top:1px;
-}
-
-/* Labeljar portlet */
-.labelJarPortlet input[type="text"] {
-margin-bottom: 1em;
-width: 90%;
-height: 2em;
-}
-
-.labelListing {
-  margin-bottom: 2em;
+.colorChooser {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  margin: 0.5em 0;
 }
 .colorSet {
   float: left;
 }
-.colorBox {
+.colorSet div.labelColor {
+  height: 2em;
   width: 2em;
-  height: 1.6em;
-  cursor: pointer;
-  border: 2px solid white;
-  border-radius: 5px;
-}
-.colorBox.selected {
- border: 2px solid black;
-}
-.colorBox .color{
-  width: 100%;
-  height: 100%;
-  border-radius: 3px;
-}
-.colorChooser {
-  overflow: hidden;
-  margin-bottom: 1em;
-  margin-top: 1em;
-}
-
-.labelItem {
-  margin-bottom: 0.2em;
-  padding-bottom: 0.2em;
-  padding-top: 0.2em;
-  padding-right: 0.5em;
-  border-radius: 3px;
-  cursor: pointer;
-}
-.labelItem:hover {
-  background-color: #eee;
-}
-.editLabelIcon {
-  padding-top: 0.1em;
-  float: right;
-  opacity: 0.1;
-}
-.labelItem:hover .editLabelIcon {
-  opacity: 0.8;
-}
-
-.labelColor {
-  float: left;
-  width: 0.7em;
-  margin-right: 1em;
   display: block;
-  height: 1.2em;
-  border-radius: 3px;
-  border: 1px solid #fff;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  margin: 1px;
+  cursor: pointer;
 }
-.labelcolor-red {
-  background-color: #e11d21;
+.colorSet .selected div.labelColor {
+  border: 1px solid #000;
+  margin: 0;
 }
-.labelcolor-red-light {
-  background-color: #e11d21;
-  opacity: 0.3;
+
+/* @end */
+
+/* @group labelJarPortlet */
+
+.labelListing .labelColor {
+  border: 1px solid;
+  padding: 0.25em;
+  margin: 0 0.25em;
+  margin-bottom: 0.25em;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
 }
-.labelcolor-orange {
-  background-color: #eb6420;
+.edit-label-link {
+  float: right;
 }
-.labelcolor-orange-light {
-  background-color: #eb6420;
-  opacity: 0.3;
+.labelListing .labelItem .labelColor:hover,
+.labelListing .labelItem.selected  .labelColor {
+  cursor: pointer;
+  border-color: #000;
+  box-shadow: 0 0 0.25em #aaa;
+  -webkit-box-shadow: 0 0 0.25em #aaa;
+  -moz-box-shadow: 0 0 0.25em #aaa;
 }
-.labelcolor-yellow {
-  background-color: #fbca04;
+
+/* @end */
+
+/* @group labeling viewlet */
+
+#content #labeling-viewlet ul li #toggle-label-form {
+  text-indent: -4000em;
+  background: url(edit_labels.png) no-repeat center center;
+  width: 24px;
+  height: 18px;
+  padding: 0 0.25em;
+  opacity: 0.5;
+  border: none;
 }
-.labelcolor-yellow-light {
-  background-color: #fbca04;
-  opacity: 0.3;
+#content #labeling-viewlet ul li #toggle-label-form:hover {
+  opacity: 1;
 }
-.labelcolor-green {
-  background-color: #009800;
+#labeling-viewlet form {
+  display: none;
+  margin-bottom: 0.5em;
 }
-.labelcolor-green-light {
-  background-color: #009800;
-  opacity: 0.3;
+#content #labeling-viewlet ul {
+  list-style: none;
+  margin-left: 0;
 }
-.labelcolor-cadetblue {
-  background-color: #006b75;
+#content #labeling-viewlet > ul > li {
+  margin: 0;
 }
-.labelcolor-cadetblue-light {
-  background-color: #006b75;
-  opacity: 0.3;
+#content #labeling-viewlet > ul > li > a {
+  display: block;
+  float: left;
+  padding: 0.25em;
+  font-size: 11px;
+  line-height: 1em;
+  white-space: nowrap;
+  margin: 0 0.25em 0.25em 0;
 }
-.labelcolor-cornflowerblue {
-  background-color: #207de5;
+#content #labeling-viewlet ul li a.labelItem {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
 }
-.labelcolor-cornflowerblue-light {
-  background-color: #207de5;
-  opacity: 0.3;
+#content #labeling-viewlet ul li a.labelItem:hover {
+  border-color: #000;
+  box-shadow: 0 0 0.25em #000;
+  -webkit-box-shadow: 0 0 0.25em #000;
+  -moz-box-shadow: 0 0 0.25em #000;
 }
-.labelcolor-blue {
-  background-color: #0052cc;
+
+/* @end */
+
+/* @group label colors */
+
+.labelColor.labelItem {
+  border: 1px solid #eee;
+  color: #000;
 }
-.labelcolor-blue-light {
-  background-color: #0052cc;
-  opacity: 0.3;
+
+/* generated with SCSS:
+
+$lighter: 43%;
+$border-darker: 10%;
+
+@mixin label($name, $color) {
+  .labelColor.labelcolor-#{$name} {
+    background: $color;
+    border-color: darken($color, $border-darker);
+    @if ($name!=yellow) {
+    color: #FFF;
+    }
+  }
+  $light: lighten($color, $lighter);
+  .labelColor.labelcolor-#{$name}-light {
+    background: $light;
+    border-color: darken($light, $border-darker);
+  }
 }
-.labelcolor-purple {
-  background-color: #5319e7;
+
+@include label(red,#e11d21);
+@include label(orange,#eb6420);
+@include label(yellow,#fbca04);
+@include label(green,#009800);
+@include label(cadetblue,#006b75);
+@include label(cornflowerblue,#207de5);
+@include label(blue,#0052cc);
+@include label(purple,#5319e7);
+
+*/
+
+
+.labelColor.labelcolor-red {
+  background: #e11d21;
+  border-color: #b4171a;
+  color: #FFF;
 }
-.labelcolor-purple-light {
-  background-color: #5319e7;
-  opacity: 0.3;
+
+.labelColor.labelcolor-red-light {
+  background: #fbdedf;
+  border-color: #f5b1b3;
 }
+
+.labelColor.labelcolor-orange {
+  background: #eb6420;
+  border-color: #c64e12;
+  color: #FFF;
+}
+
+.labelColor.labelcolor-orange-light {
+  background: #fdf0e9;
+  border-color: #f9cfba;
+}
+
+.labelColor.labelcolor-yellow {
+  background: #fbca04;
+  border-color: #c9a203;
+}
+
+.labelColor.labelcolor-yellow-light {
+  background: #fef8dc;
+  border-color: #feedaa;
+}
+
+.labelColor.labelcolor-green {
+  background: #009800;
+  border-color: #006500;
+  color: #FFF;
+}
+
+.labelColor.labelcolor-green-light {
+  background: #74ff74;
+  border-color: #41ff41;
+}
+
+.labelColor.labelcolor-cadetblue {
+  background: #006b75;
+  border-color: #003c42;
+  color: #FFF;
+}
+
+.labelColor.labelcolor-cadetblue-light {
+  background: #51f0ff;
+  border-color: #1eecff;
+}
+
+.labelColor.labelcolor-cornflowerblue {
+  background: #207de5;
+  border-color: #1664bc;
+  color: #FFF;
+}
+
+.labelColor.labelcolor-cornflowerblue-light {
+  background: #e4effc;
+  border-color: #b7d5f7;
+}
+
+.labelColor.labelcolor-blue {
+  background: #0052cc;
+  border-color: #003d99;
+  color: #FFF;
+}
+
+.labelColor.labelcolor-blue-light {
+  background: #a8cbff;
+  border-color: #75adff;
+}
+
+.labelColor.labelcolor-purple {
+  background: #5319e7;
+  border-color: #4213ba;
+  color: #FFF;
+}
+
+.labelColor.labelcolor-purple-light {
+  background: #e8e0fc;
+  border-color: #c5b1f7;
+}
+
+/* @end */
+
+/* @group select2 adjustments */
+
+#s2id_activate_labels {
+  width: 100%;
+  margin-bottom: 0.25em;
+}
+#content #s2id_activate_labels ul {
+  margin-bottom: 0;
+}
+#content #s2id_activate_labels li {
+  line-height: 1em;
+  font-size: 11px;
+}
+.select2-container-multi .select2-search-choice-close {
+  top: 2px;
+}
+
+/* @end */
