@@ -9,7 +9,7 @@ def portlet():
 def labels():
     assert_true(portlet())
     return dict((label.text, label_color(label))
-                for label in portlet().css('.labelItem'))
+                for label in portlet().css('.labelListing .labelColor'))
 
 
 def label_color(label_li):
