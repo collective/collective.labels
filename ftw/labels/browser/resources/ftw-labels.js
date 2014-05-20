@@ -1,5 +1,18 @@
 $(document).ready(function(){
 
+
+  $('#activate_labels').select2();
+
+  $('#toggle-label-form').click(function(e){
+    e.preventDefault();
+    $('#labeling-viewlet ul.activeLabels, #labeling-viewlet form').toggle();
+  });
+  $('#labeling-viewlet form input.closeForm').click(function(e){
+    e.preventDefault();
+    $('#labeling-viewlet ul.activeLabels').show();
+    $('#labeling-viewlet form').hide();
+  });
+
   $('.colorBox').click(function() {
     // reset all selected
     $(this).closest('form').find('.colorBox').removeClass('selected');

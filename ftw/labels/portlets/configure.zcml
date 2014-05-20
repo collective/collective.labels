@@ -13,12 +13,4 @@
         addview=".labeljar.AddForm"
         />
 
-    <plone:portlet
-        name="ftw.labels.labeling"
-        interface=".interfaces.ILabelingPortlet"
-        assignment=".assignments.LabelingAssignment"
-        renderer=".labeling.Renderer"
-        addview=".labeling.AddForm"
-        />
-
 </configure>

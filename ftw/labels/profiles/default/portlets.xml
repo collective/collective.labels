@@ -14,18 +14,4 @@
         type="ftw.labels.labeljar">
     </assignment>
 
-
-    <portlet
-        addview="ftw.labels.labeling"
-        title="ftw.labels: Labeling Portlet"
-        />
-
-    <assignment
-        name="ftw-labels-labeling"
-        category="context"
-        key="/"
-        manager="plone.rightcolumn"
-        type="ftw.labels.labeling">
-    </assignment>
-
 </portlets>

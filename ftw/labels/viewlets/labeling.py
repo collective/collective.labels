@@ -1,23 +1,18 @@
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.app.layout.viewlets.common import ViewletBase
 from ftw.labels.interfaces import ILabeling
 from ftw.labels.interfaces import ILabelSupport
-from ftw.labels.portlets.assignments import LabelingAssignment
-from plone.app.portlets.portlets.base import NullAddForm
-from plone.app.portlets.portlets.base import Renderer
 from Products.CMFCore.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
-class AddForm(NullAddForm):
+class LabelingViewlet(ViewletBase):
 
-    def create(self):
-        return LabelingAssignment()
-
-
-class Renderer(Renderer):
-    render = ViewPageTemplateFile('labeling.pt')
+    index = ViewPageTemplateFile('labeling.pt')
 
     @property
     def available(self):
+        if not self.available_labels:
+            return False
         if 'portal_factory' in self.context.absolute_url():
             return False
         if not ILabelSupport.providedBy(self.context):
@@ -38,3 +33,7 @@ class Renderer(Renderer):
     def can_edit(self):
         mtool = getToolByName(self.context, 'portal_membership')
         return mtool.checkPermission('ftw.labels.ChangeLabels', self.context)
+
+    # def update(self):
+        # super(LabelingViewlet, self).update()
+        # self.can_manage = True

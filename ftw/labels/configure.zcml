@@ -14,5 +14,6 @@
     <include file="profiles.zcml" />
     <include package=".browser" />
     <include package=".portlets" />
+    <include package=".viewlets" />
 
 </configure>
