@@ -34,7 +34,7 @@ class Renderer(Renderer):
         return [dict(
             normal=color,
             light='{0}-light'.format(color)
-            ) for color in COLORS]
+        ) for color in COLORS]
 
     @property
     def can_edit(self):
