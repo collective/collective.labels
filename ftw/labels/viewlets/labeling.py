@@ -33,7 +33,3 @@ class LabelingViewlet(ViewletBase):
     def can_edit(self):
         mtool = getToolByName(self.context, 'portal_membership')
         return mtool.checkPermission('ftw.labels.ChangeLabels', self.context)
-
-    # def update(self):
-        # super(LabelingViewlet, self).update()
-        # self.can_manage = True
