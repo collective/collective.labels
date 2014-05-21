@@ -47,7 +47,7 @@ $(document).ready(function(){
     tabbedview.reload_view();
   });
 
-  $('.labelListing .edit-label-link').prepOverlay({
+  $('.labelListing .editLabelLink').prepOverlay({
     subtype: 'ajax',
     width: '235px',
     noform: function(el) {return $.plonepopups.noformerrorshow(el, 'close');}

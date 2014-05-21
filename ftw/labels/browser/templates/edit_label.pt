@@ -23,7 +23,7 @@
   <div class="editLabel" tal:define="label view/get_label">
 
     <h2 i18n:translate="edit_label_heading">
-      Edit label «<span i18n:name="label" tal:content="label/title"/>»
+      Edit label &laquo;<span i18n:name="label" tal:content="label/title"/>&raquo;
     </h2>
 
     <form class="editLabelForm" method="POST"
@@ -49,14 +49,11 @@
       <input type="hidden" name="color" tal:attributes="value label/color" />
 
       <input type="hidden" name="label_id" tal:attributes="value label/label_id" />
-      <input type="submit" value="Update" class="button standalone"
+      <input type="submit" value="Update" class="standalone"
+             name="form.submit"
              i18n:attributes="value button_update_label" />
-    </form>
-
-    <form class="removeLabelForm" method="POST"
-          tal:attributes="action string:${here/absolute_url}/labels-jar/remove">
-      <input type="hidden" name="label_id" tal:attributes="value label/label_id" />
-      <input type="submit" value="Delete label" class="button destructive"
+      <input type="submit" value="Delete label" class="destructive"
+             name="form.delete"
              i18n:attributes="value button_delete_label" />
     </form>
 

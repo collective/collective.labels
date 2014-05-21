@@ -63,7 +63,7 @@ class LabelJarPortletFunctionalTest(TestCase):
         browser.login().visit(folder)
 
         self.assertTrue(browser.css('#create-label'))
-        self.assertTrue(browser.css('.editLabelIcon'))
+        self.assertTrue(browser.css('.editLabelLink'))
 
     @browsing
     def test_user_without_permission_cant_view_jar_edit_elements(self, browser):
@@ -72,4 +72,4 @@ class LabelJarPortletFunctionalTest(TestCase):
         browser.login(john).visit(folder)
 
         self.assertFalse(browser.css('#create-label'))
-        self.assertFalse(browser.css('.editLabelIcon'))
+        self.assertFalse(browser.css('.editLabelLink'))

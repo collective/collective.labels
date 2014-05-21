@@ -35,9 +35,22 @@
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
+  position: relative;
+  overflow: hidden;
 }
-.edit-label-link {
-  float: right;
+.editLabelLink {
+  text-indent: -4000em;
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: url(settings.png) no-repeat center center;
+  opacity: 0.7;
+}
+.editLabelLink:hover {
+  opacity: 1;
 }
 .labelListing .labelItem .labelColor:hover,
 .labelListing .labelItem.selected  .labelColor {
@@ -46,6 +59,9 @@
   box-shadow: 0 0 0.25em #aaa;
   -webkit-box-shadow: 0 0 0.25em #aaa;
   -moz-box-shadow: 0 0 0.25em #aaa;
+}
+.editLabelForm #label-title {
+  margin-left: 1em;
 }
 
 /* @end */
