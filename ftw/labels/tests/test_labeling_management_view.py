@@ -28,8 +28,7 @@ class TestLabelingView(TestCase):
 
         browser.login().open(page,
                              view='labeling/update',
-                             data={'question': 'yes',
-                                   'bug': 'yes'})
+                             data={'activate_labels': ['question', 'bug']})
 
         self.assertItemsEqual(
             [{'label_id': 'question',
@@ -72,8 +71,8 @@ class TestLabelingView(TestCase):
 
         browser.login().open(page,
                              view='labeling/update',
-                             data={'question': 'yes',
-                                   'feature': 'yes'})
+                             data={'activate_labels': ['question','feature']})
+
 
         self.assertItemsEqual(
             [{'label_id': 'question',

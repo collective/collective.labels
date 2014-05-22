@@ -31,6 +31,9 @@ class LabelsJar(BrowserView):
         """Update a label.
         """
 
+        if self.request.form.get('form.delete', None):
+            return self.remove()
+
         label_id = self.request.form.get('label_id', None)
         if not label_id:
             raise BadRequest('The "label_id" request argument is required.')

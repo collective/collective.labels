@@ -3,4 +3,5 @@
  <javascript cacheable="True" compression="safe" cookable="True"
     enabled="True" expression="" id="++resource++ftw.labels/ftw-labels.js"
     inline="False" />
+ <javascript id="++resource++ftw.labels/select2.min.js" />
 </object>

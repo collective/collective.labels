@@ -8,17 +8,18 @@ class Labeling(BrowserView):
         """Update activated labels.
         """
         labeling = ILabeling(self.context)
-        form = self.request.form
+
+        activate_labels = self.request.form.get('activate_labels', [])
 
         deactivate = []
         activate = []
 
         for label in labeling.available_labels():
             label_id = label['label_id']
-            should_be_active = form.get(label_id, False)
-            if should_be_active and not label['active']:
+
+            if label_id in activate_labels and not label['active']:
                 activate.append(label_id)
-            if not should_be_active and label['active']:
+            if label_id not in activate_labels and label['active']:
                 deactivate.append(label_id)
 
         labeling.deactivate(*deactivate)
