@@ -46,7 +46,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  background: url(settings.png) no-repeat center center;
+  background: url(++resource++ftw.labels/settings.png) no-repeat center center;
   opacity: 0.7;
 }
 .editLabelLink:hover {
@@ -70,7 +70,7 @@
 
 #content #labeling-viewlet ul li #toggle-label-form {
   text-indent: -4000em;
-  background: url(edit_labels.png) no-repeat center center;
+  background: url(++resource++ftw.labels/edit_labels.png) no-repeat center center;
   width: 24px;
   height: 18px;
   padding: 0 0.25em;
