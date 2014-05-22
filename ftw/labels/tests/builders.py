@@ -49,7 +49,7 @@ class LabelledPageBuilder(ArchetypesBuilder):
     def after_create(self, obj):
         super(LabelledPageBuilder, self).after_create(obj)
 
-        ILabeling(obj).activate(*self.activated_label_ids)
+        ILabeling(obj).update(self.activated_label_ids)
         if self.session.auto_commit:
             transaction.commit()
 

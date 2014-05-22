@@ -31,7 +31,7 @@ class TestCatalogIndex(TestCase):
 
         self.assertFalse(self.index_data_for(page).get('labels'))
 
-        ILabeling(page).activate('question')
+        ILabeling(page).update(['bugs', 'question'])
         page.reindexObject(idxs=['labels'])
 
         self.assertItemsEqual(

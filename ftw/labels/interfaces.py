@@ -83,17 +83,6 @@ class ILabeling(Interface):
         are purged.
         """
 
-    def activate(*label_ids):
-        """Activates all labels in ``label_ids`` on the current object.
-        If there is no ``label_id`` in the label jar of the current ecosystem,
-        a ``LookupError`` is raised.
-        """
-
-    def deactivate(*label_ids):
-        """Deactivates all labels in ``label_ids`` on the current object.
-        If there is no such label active, The label will be skipped.
-        """
-
     def active_labels():
         """Returns all active labels on the current object as list of dicts.
 

@@ -47,7 +47,7 @@ class TestLabeling(MockTestCase):
         self.jar.add('Question', '#00FF00')
         labeling = ILabeling(self.document)
 
-        labeling.activate('question')
+        labeling.update(['question'])
         self.assertEqual(
             [{'label_id': 'question',
               'title': 'Question',
@@ -97,64 +97,13 @@ class TestLabeling(MockTestCase):
             'Following labels ids are available: question',
             str(cm.exception))
 
-    def test_activate_multiple_labels(self):
-        self.jar.add('Question', '')
-        self.jar.add('Bug', '')
-        self.jar.add('Duplicate', '')
-        labeling = ILabeling(self.document)
-
-        labeling.activate('question', 'duplicate')
-        self.assertItemsEqual(
-            [{'label_id': 'question',
-              'title': 'Question',
-              'color': ''},
-             {'label_id': 'duplicate',
-              'title': 'Duplicate',
-              'color': ''}],
-            list(labeling.active_labels()))
-
-    def test_activate_raises_LookupError_when_label_not_in_jar(self):
-        self.assertEqual(0, len(self.jar.list()))
-        self.jar.add('Question', '')
-        labeling = ILabeling(self.document)
-        with self.assertRaises(LookupError) as cm:
-            labeling.activate('something')
-
-        self.assertEqual(
-            'Cannot activate label: the label'
-            ' "something" is not in the label jar. '
-            'Following labels ids are available: question',
-            str(cm.exception))
-
-    def test_deactivate_label(self):
-        self.jar.add('Question', '')
-        labeling = ILabeling(self.document)
-
-        labeling.activate('question')
-        self.assertEqual(1, len(labeling.active_labels()))
-
-        labeling.deactivate('question')
-        self.assertEqual(0, len(labeling.active_labels()))
-
-    def test_deactivate_multiple_labels(self):
-        self.jar.add('Question', '')
-        self.jar.add('Bug', '')
-        self.jar.add('Duplicate', '')
-        labeling = ILabeling(self.document)
-
-        labeling.activate('question', 'bug', 'duplicate')
-        self.assertEqual(3, len(labeling.active_labels()))
-
-        labeling.deactivate('question', 'bug')
-        self.assertEqual(1, len(labeling.active_labels()))
-
     def test_active_labels(self):
         self.jar.add('Question', '')
         self.jar.add('Bug', '')
         self.jar.add('Duplicate', '')
 
         labeling = ILabeling(self.document)
-        labeling.activate('bug')
+        labeling.update(['bug'])
         self.assertEqual(
             [{'label_id': 'bug',
               'title': 'Bug',
@@ -169,13 +118,13 @@ class TestLabeling(MockTestCase):
         self.jar.add('Alpha-2', '')
 
         labeling = ILabeling(self.document)
-        labeling.activate(
-            'zeta-0',
-            'zeta-1',
-            'alpha-0',
-            'alpha-1',
-            'alpha-2',
-            )
+        labeling.update([
+                'zeta-0',
+                'zeta-1',
+                'alpha-0',
+                'alpha-1',
+                'alpha-2',
+                ])
 
         self.assertEqual(
             ['alpha-0', '\xc3\x84lpha-1', 'Alpha-2', 'Zeta-0', 'zeta-1'],
@@ -186,7 +135,7 @@ class TestLabeling(MockTestCase):
         self.jar.add('Bug', 'red')
 
         labeling = ILabeling(self.document)
-        labeling.activate('question', 'bug')
+        labeling.update(['question', 'bug'])
 
         self.jar.remove('bug')
 
