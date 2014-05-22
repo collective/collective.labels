@@ -11,10 +11,8 @@
 
     <ul class="activeLabels">
       <li tal:repeat="label view/active_labels">
-        <a href="#"
-           tal:attributes="class string:labelItem labelColor labelcolor-${label/color}"
-           tal:content="label/title"
-           />
+        <span tal:attributes="class string:labelItem labelColor labelcolor-${label/color}"
+              tal:content="label/title" />
       </li>
       <li class="toggleLabelForm" tal:condition="can_edit">
         <a href="#" id="toggle-label-form">

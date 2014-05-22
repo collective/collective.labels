@@ -91,7 +91,8 @@
 #content #labeling-viewlet > ul > li {
   margin: 0;
 }
-#content #labeling-viewlet > ul > li > a {
+#content #labeling-viewlet > ul > li > .labelItem,
+#content #toggle-label-form {
   display: block;
   float: left;
   padding: 0.25em;
@@ -100,16 +101,10 @@
   white-space: nowrap;
   margin: 0 0.25em 0.25em 0;
 }
-#content #labeling-viewlet ul li a.labelItem {
+#content #labeling-viewlet ul li .labelItem {
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
-}
-#content #labeling-viewlet ul li a.labelItem:hover {
-  border-color: #000;
-  box-shadow: 0 0 0.25em #000;
-  -webkit-box-shadow: 0 0 0.25em #000;
-  -moz-box-shadow: 0 0 0.25em #000;
 }
 
 /* @end */
