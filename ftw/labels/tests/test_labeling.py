@@ -8,6 +8,10 @@ from zope.annotation import IAttributeAnnotatable
 from zope.component import queryAdapter
 
 
+def label_titles(labels):
+    return [label['title'] for label in labels]
+
+
 class TestLabeling(MockTestCase):
     layer = ADAPTERS_ZCML_LAYER
 
@@ -39,7 +43,7 @@ class TestLabeling(MockTestCase):
         labeling = ILabeling(self.document)
         self.assertEqual([], list(labeling.available_labels()))
 
-    def test_activate_label(self):
+    def test_available_label(self):
         self.jar.add('Question', '#00FF00')
         labeling = ILabeling(self.document)
 
@@ -50,6 +54,48 @@ class TestLabeling(MockTestCase):
               'color': '#00FF00',
               'active': True}],
             list(labeling.available_labels()))
+
+    def test_update__enable_labels(self):
+        self.jar.add('Bug', 'red')
+        self.jar.add('Question', 'green')
+        self.jar.add('Feature', 'purple')
+
+        labeling = ILabeling(self.document)
+        self.assertEqual([], labeling.active_labels())
+
+        labeling.update(['bug', 'feature'])
+        self.assertItemsEqual(['Bug', 'Feature'],
+                              label_titles(labeling.active_labels()))
+
+    def test_update__disable_labels(self):
+        self.jar.add('Bug', 'red')
+        self.jar.add('Question', 'green')
+        self.jar.add('Feature', 'purple')
+
+        labeling = ILabeling(self.document)
+        labeling.update(['bug', 'question', 'feature'])
+        self.assertItemsEqual(['Bug', 'Feature', 'Question'],
+                              label_titles(labeling.active_labels()))
+
+        labeling.update(['bug'])
+        self.assertItemsEqual(['Bug'],
+                              label_titles(labeling.active_labels()))
+
+        labeling.update([])
+        self.assertEqual([], labeling.active_labels())
+
+    def test_update_raises_LookupError_when_label_not_in_jar(self):
+        self.assertEqual(0, len(self.jar.list()))
+        self.jar.add('Question', '')
+        labeling = ILabeling(self.document)
+        with self.assertRaises(LookupError) as cm:
+            labeling.update(['something'])
+
+        self.assertEqual(
+            'Cannot activate label: the label'
+            ' "something" is not in the label jar. '
+            'Following labels ids are available: question',
+            str(cm.exception))
 
     def test_activate_multiple_labels(self):
         self.jar.add('Question', '')

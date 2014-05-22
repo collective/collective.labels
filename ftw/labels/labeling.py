@@ -19,6 +19,20 @@ class Labeling(object):
         self.context = context
         self.jar = ILabelJar(self.context)
 
+    def update(self, label_ids):
+        available_labels = self.jar.storage.keys()
+
+        for label_id in label_ids:
+            if label_id not in available_labels:
+                raise LookupError(
+                    'Cannot activate label: '
+                    'the label "{0}" is not in the label jar. '
+                    'Following labels ids are available: {1}'.format(
+                        label_id, ', '.join(available_labels)))
+
+        # Do not replace self.storage, since it is a PersistentList!
+        self.storage[:] = label_ids
+
     def activate(self, *label_ids):
         available_labels = self.jar.storage.keys()
 

@@ -76,6 +76,13 @@ class ILabeling(Interface):
         """Adapts any object with ``ILabelSupport``.
         """
 
+    def update(label_ids):
+        """Set the active labels for the current context by passing in a list
+        of label IDs.
+        Labels which where activated before but are not in the ``label_ids``
+        are purged.
+        """
+
     def activate(*label_ids):
         """Activates all labels in ``label_ids`` on the current object.
         If there is no ``label_id`` in the label jar of the current ecosystem,
