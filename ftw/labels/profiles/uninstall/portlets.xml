@@ -13,16 +13,4 @@
         type="ftw.labels.labeljar"
         remove="True">
     </assignment>
-
-
-    <portlet addview="ftw.labels.labeling" remove="True" />
-
-    <assignment
-        name="ftw-labels-labeling"
-        category="context"
-        key="/"
-        manager="plone.rightcolumn"
-        type="ftw.labels.labeling"
-        remove="True" />
-
 </portlets>
