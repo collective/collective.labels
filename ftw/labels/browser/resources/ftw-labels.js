@@ -39,7 +39,10 @@ $(document).ready(function(){
     if($(this).hasClass('selected')) {
       labels_prop.push($(this).data('label-id'));
     } else {
-      labels_prop.remove($(this).data('label-id'));
+      var index = labels_prop.indexOf($(this).data('label-id'));
+      if(index !== -1) {
+        labels_prop.splice(index, 1);
+      }
     }
 
     tabbedview.prop('labels', labels_prop.join(','));
