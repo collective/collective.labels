@@ -6,6 +6,9 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
+- Fix edit label link permission check in labels jar portlet.
+  [jone]
+
 - Fix edit link permission check in labeling viewlet.
   [jone]
 

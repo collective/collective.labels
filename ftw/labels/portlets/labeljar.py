@@ -37,4 +37,4 @@ class Renderer(Renderer):
     def can_edit(self):
         mtool = getToolByName(self.context, 'portal_membership')
         return mtool.checkPermission(
-            'ftw.labels.ManageLabelsJar', self.context)
+            'ftw.labels: Manage Labels Jar', self.context)

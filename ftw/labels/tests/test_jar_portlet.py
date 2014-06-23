@@ -60,7 +60,8 @@ class LabelJarPortletFunctionalTest(TestCase):
     @browsing
     def test_user_with_permission_can_view_jar_edit_elements(self, browser):
         folder = create(Builder('label root').with_labels(('James', 'red')))
-        browser.login().visit(folder)
+        editor = create(Builder('user').with_roles('Editor'))
+        browser.login(editor).visit(folder)
 
         self.assertTrue(browser.css('#create-label'))
         self.assertTrue(browser.css('.editLabelLink'))
@@ -68,8 +69,8 @@ class LabelJarPortletFunctionalTest(TestCase):
     @browsing
     def test_user_without_permission_cant_view_jar_edit_elements(self, browser):
         folder = create(Builder('label root'))
-        john = create(Builder('user').with_roles('Reader'))
-        browser.login(john).visit(folder)
+        reader = create(Builder('user').with_roles('Reader'))
+        browser.login(reader).visit(folder)
 
         self.assertFalse(browser.css('#create-label'))
         self.assertFalse(browser.css('.editLabelLink'))
