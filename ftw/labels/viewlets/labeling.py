@@ -32,4 +32,4 @@ class LabelingViewlet(ViewletBase):
     @property
     def can_edit(self):
         mtool = getToolByName(self.context, 'portal_membership')
-        return mtool.checkPermission('ftw.labels.ChangeLabels', self.context)
+        return mtool.checkPermission('ftw.labels: Change Labels', self.context)
