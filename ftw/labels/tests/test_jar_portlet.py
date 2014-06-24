@@ -27,8 +27,16 @@ class LabelJarPortletFunctionalTest(TestCase):
     @browsing
     def test_protlet_is_enabled_if_ILabelRoot_is_provided(self, browser):
         folder = create(Builder('label root'))
-        browser.visit(folder)
+        browser.login().visit(folder)
         self.assertTrue(jarportlet.portlet())
+
+    @browsing
+    def test_invisible_for_unprivileged_users_when_empty(self, browser):
+        folder = create(Builder('label root'))
+        browser.visit(folder)
+        self.assertFalse(
+            jarportlet.portlet(),
+            'Anonymous users should not see labels portlet when it is empty.')
 
     @browsing
     def test_list_all_labels_in_the_jar(self, browser):

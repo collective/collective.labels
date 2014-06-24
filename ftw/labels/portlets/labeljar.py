@@ -23,6 +23,8 @@ class Renderer(Renderer):
             return False
         if not ILabelRoot.providedBy(self.context):
             return False
+        if not self.can_edit and not self.labels:
+            return False
         return True
 
     @property
