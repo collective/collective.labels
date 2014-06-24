@@ -3,7 +3,7 @@ Changelog
 
 
 
-1.0.2 (unreleased)
+1.0.2 (2014-06-24)
 ------------------
 
 - Hide portlet for unprivileged users when there are no labels.
