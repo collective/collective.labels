@@ -83,11 +83,7 @@ class LabelsJar(BrowserView):
 
     def _redirect(self):
         response = self.request.RESPONSE
-        referer = self.request.get('HTTP_REFERER')
-        if referer and referer is not 'localhost':
-            response.redirect(referer)
-        else:
-            response.redirect(self.context.absolute_url())
+        return response.redirect(self.context.absolute_url())
 
     def _get_random_color(self):
         all_colors = list(COLORS)

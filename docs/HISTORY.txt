@@ -6,7 +6,9 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not redirect to referer when updating the labels jar.
+  The referer is usually the form submitting the change.
+  [jone]
 
 
 1.0.2 (2014-06-24)
