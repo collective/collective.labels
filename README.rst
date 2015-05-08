@@ -77,9 +77,9 @@ the package.
 Links
 -----
 
-- Main github project repository: https://github.com/4teamwork/ftw.labels
-- Issue tracker: https://github.com/4teamwork/ftw.labels/issues
-- Package on pypi: http://pypi.python.org/pypi/ftw.labels
+- Github: https://github.com/4teamwork/ftw.labels
+- Issues: https://github.com/4teamwork/ftw.labels/issues
+- Pypi: http://pypi.python.org/pypi/ftw.labels
 - Continuous integration: https://jenkins.4teamwork.ch/search?q=ftw.labels
 
 
