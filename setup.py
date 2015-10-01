@@ -45,6 +45,7 @@ setup(name='ftw.labels',
 
       install_requires=[
         'Acquisition',
+        'Plone',
         'Products.CMFCore',
         'Products.GenericSetup',
         'ZODB3',
