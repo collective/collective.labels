@@ -31,6 +31,35 @@ class LabelJarPortletFunctionalTest(TestCase):
         self.assertTrue(jarportlet.portlet())
 
     @browsing
+    def test_protlet_is_enabled_if_ILabelJarChild_and_parent_is_ILabelRoot(self, browser):
+        folder = create(Builder('label root'))
+        subfolder = create(Builder('label display').within(folder))
+
+        browser.login().visit(subfolder)
+        self.assertTrue(jarportlet.portlet())
+
+    @browsing
+    def test_invisible_ILabelJarChild_without_parent_ILabelRoot(self, browser):
+        folder = create(Builder('label display'))
+
+        browser.login().visit(folder)
+        self.assertFalse(
+            jarportlet.portlet(),
+            "The folder can't show the portlet because "
+            "it has no parent label root folder")
+
+    @browsing
+    def test_invisible_if_no_ILabelJarChild_but_parent_with_ILabelRoot(self, browser):
+        folder = create(Builder('label root'))
+        subfolder = create(Builder('folder').within(folder))
+
+        browser.login().visit(subfolder)
+        self.assertFalse(
+            jarportlet.portlet(),
+            "The folder shouldn't show the portlet because "
+            "it has no ILabelJarChild marker interface")
+
+    @browsing
     def test_invisible_for_unprivileged_users_when_empty(self, browser):
         folder = create(Builder('label root'))
         browser.visit(folder)
@@ -43,6 +72,18 @@ class LabelJarPortletFunctionalTest(TestCase):
         folder = create(Builder('label root')
                         .with_labels(('Label 1', ''), ('Label 2', '')))
         browser.visit(folder)
+        self.assertItemsEqual(
+            ['Label 1', 'Label 2'],
+            jarportlet.labels().keys())
+
+    @browsing
+    def test_list_same_labels_in_the_labeldisplay_folder(self, browser):
+        folder = create(Builder('label root')
+                        .with_labels(('Label 1', ''), ('Label 2', '')))
+
+        subfolder = create(Builder('label display').within(folder))
+
+        browser.visit(subfolder)
         self.assertItemsEqual(
             ['Label 1', 'Label 2'],
             jarportlet.labels().keys())
