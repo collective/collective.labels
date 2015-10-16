@@ -76,7 +76,7 @@ class LabelJarPortletFunctionalTest(TestCase):
 
     @browsing
     def test_user_without_permission_cant_view_jar_edit_elements(self, browser):
-        folder = create(Builder('label root'))
+        folder = create(Builder('label root').with_labels(('James', 'red')))
         reader = create(Builder('user').with_roles('Reader'))
         browser.login(reader).visit(folder)
 
