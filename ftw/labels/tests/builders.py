@@ -1,9 +1,10 @@
 from ftw.builder import builder_registry
 from ftw.builder.archetypes import ArchetypesBuilder
+from ftw.labels.interfaces import ILabelJarChild
+from ftw.labels.interfaces import ILabeling
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
 from ftw.labels.interfaces import ILabelSupport
-from ftw.labels.interfaces import ILabeling
 import transaction
 
 
@@ -31,6 +32,18 @@ class LabelRootBuilder(ArchetypesBuilder):
 
 
 builder_registry.register('label root', LabelRootBuilder)
+
+
+class LabelDisplayBuilder(ArchetypesBuilder):
+
+    portal_type = 'Folder'
+
+    def __init__(self, *args, **kwargs):
+        super(LabelDisplayBuilder, self).__init__(*args, **kwargs)
+        self.providing(ILabelJarChild)
+
+
+builder_registry.register('label display', LabelDisplayBuilder)
 
 
 class LabelledPageBuilder(ArchetypesBuilder):

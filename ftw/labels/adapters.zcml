@@ -13,4 +13,5 @@
 
     <adapter factory=".indexer.labels" name="labels" />
 
+    <interface interface="ftw.labels.interfaces.ILabelJarChild" />
 </configure>

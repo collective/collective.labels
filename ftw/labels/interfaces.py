@@ -14,6 +14,12 @@ class ILabelSupport(Interface):
     """
 
 
+class ILabelJarChild(Interface):
+    """Marker interface for objects which should display the labelsjar
+    portlet of a parents ``ILabelRoot``
+    """
+
+
 class ILabelJar(Interface):
     """Adapter interface for label roots (``ILabelRoot``), providing
     an interface for managing available labels for this label ecosystem.

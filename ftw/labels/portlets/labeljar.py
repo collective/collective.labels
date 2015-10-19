@@ -1,4 +1,5 @@
 from ftw.labels.config import COLORS
+from ftw.labels.interfaces import ILabelJarChild
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
 from ftw.labels.portlets.assignments import LabelJarAssignment
@@ -21,7 +22,10 @@ class Renderer(Renderer):
     def available(self):
         if 'portal_factory' in self.context.absolute_url():
             return False
-        if not ILabelRoot.providedBy(self.context):
+        if ILabelJarChild.providedBy(self.context):
+            if not self.label_root_obj:
+                return False
+        elif not ILabelRoot.providedBy(self.context):
             return False
         if not self.can_edit and not self.labels:
             return False
@@ -29,7 +33,7 @@ class Renderer(Renderer):
 
     @property
     def labels(self):
-        return ILabelJar(self.context).list()
+        return ILabelJar(self.label_root_obj).list()
 
     @property
     def colors(self):
@@ -40,3 +44,10 @@ class Renderer(Renderer):
         mtool = getToolByName(self.context, 'portal_membership')
         return mtool.checkPermission(
             'ftw.labels: Manage Labels Jar', self.context)
+
+    @property
+    def label_root_obj(self):
+        try:
+            return ILabelJar(self.context)
+        except LookupError:
+            return None

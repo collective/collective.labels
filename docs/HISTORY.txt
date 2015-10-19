@@ -6,6 +6,10 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
+- Add ILabelJarChild interface to inherit labels of a parents ILabelJar
+  https://github.com/4teamwork/ftw.labels/issues/41
+  [elioschmutz]
+
 - Do not show label configuration button for not permitted users.
   https://github.com/4teamwork/ftw.labels/issues/39
   [elioschmutz]

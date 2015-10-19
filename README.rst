@@ -65,6 +65,20 @@ For objects providing ``ILabelSupport`` a right-column-portlet is added
 on the root of the Plone site which allows to manage labels.
 
 
+Add the ``ILabelJarChild`` marker interface to any container class to
+display the labels stored in a parents ``ILabelJar``
+
+.. code:: xml
+
+    <class class="Products.ATContentTypes.content.folder.ATFolder">
+        <implements interface="ftw.labels.interfaces.ILabelJarChild" />
+    </class>
+
+For objects providing ``ILabelJarChild`` you can manage and store the
+same labels as defined in the ``ILabelJar`` content without defining
+a new ``ILabelRoot``
+
+
 Uninstall
 ---------
 
