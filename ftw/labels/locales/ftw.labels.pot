@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-05-21 05:47+0000\n"
+"POT-Creation-Date: 2015-12-11 14:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,23 +12,20 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: ftw.labels\n"
 
 #. Default: "Create label"
-#: ./ftw/labels/portlets/labeljar.pt:49
+#: ./ftw/labels/portlets/labeljar.pt:53
 msgid "button_create_label"
 msgstr ""
 
 #. Default: "Delete label"
-#: ./ftw/labels/browser/templates/edit_label.pt:59
+#: ./ftw/labels/browser/templates/edit_label.pt:55
 msgid "button_delete_label"
 msgstr ""
 
 #. Default: "Update"
-#: ./ftw/labels/viewlets/labeling.pt:39
+#: ./ftw/labels/viewlets/labeling.pt:37
 msgid "button_labeling_update"
 msgstr ""
 
@@ -42,8 +39,13 @@ msgstr ""
 msgid "edit_label_heading"
 msgstr ""
 
+#. Default: "edit labels"
+#: ./ftw/labels/viewlets/labeling.pt:18
+msgid "edit_labels"
+msgstr ""
+
 #. Default: "edit label"
-#: ./ftw/labels/portlets/labeljar.pt:16
+#: ./ftw/labels/portlets/labeljar.pt:19
 msgid "label_editlabel"
 msgstr ""
 
@@ -53,17 +55,18 @@ msgid "label_label_title"
 msgstr ""
 
 #. Default: "Labels"
-#: ./ftw/labels/portlets/labeljar.pt:7
+#: ./ftw/labels/portlets/labeljar.pt:9
 msgid "labeljar_portlet_heading"
 msgstr ""
 
 #. Default: "New Label"
-#: ./ftw/labels/portlets/labeljar.pt:29
+#: ./ftw/labels/portlets/labeljar.pt:33
 msgid "new-label-label"
 msgstr ""
 
 #. Default: "Title"
-#: ./ftw/labels/portlets/labeljar.pt:32
+#: ./ftw/labels/portlets/labeljar.pt:36
 msgid "new_label_title_placeholder"
 msgstr ""
+
 
