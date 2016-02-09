@@ -4,8 +4,9 @@ from ftw.labels.config import COLORS
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.testing import LABELS_FUNCTIONAL_TESTING
 from ftw.testbrowser import browsing
-from plone.app.testing import setRoles
+from ftw.testbrowser.pages import statusmessages
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from unittest2 import TestCase
 from zExceptions import BadRequest
 from zExceptions import Unauthorized
@@ -48,11 +49,9 @@ class TestLabelsJar(TestCase):
     def test_create_label_requires_label_arguments(self, browser):
         root = create(Builder('label root'))
 
-        with self.assertRaises(BadRequest) as cm:
-            browser.login().open(root, view='labels-jar/create')
+        browser.login().open(root, view='labels-jar/create')
 
-        self.assertEquals('"title" request argument is required.',
-                          str(cm.exception))
+        statusmessages.assert_message(u"Please choose a title.")
 
     @browsing
     def test_create_label_without_color_add_random_existing_color(self, browser):

@@ -6,6 +6,10 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
+- Add statusmessage instead of raising an error if the user
+  does not choose a title for a new lable.
+  [elioschmutz]
+
 - Fix portelt structure.
   Adjust it to plone default structure.
   https://github.com/4teamwork/ftw.labels/issues/43

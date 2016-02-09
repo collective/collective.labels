@@ -1,5 +1,7 @@
+from ftw.labels import _
 from ftw.labels.config import COLORS
 from ftw.labels.interfaces import ILabelJar
+from plone import api
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zExceptions import BadRequest
@@ -16,8 +18,12 @@ class LabelsJar(BrowserView):
 
         title = self.request.form.get('title', None)
         if not title:
-            raise BadRequest(
-                '"title" request argument is required.')
+            api.portal.show_message(
+                _(u'lable_title_is_missing',
+                  default=u'Please choose a title.'),
+                self.request, 'error')
+
+            return self._redirect()
 
         color = self.request.form.get('color', None)
         if not color:
