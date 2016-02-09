@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-12-11 14:41+0000\n"
+"POT-Creation-Date: 2016-02-09 10:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,6 +56,11 @@ msgstr "Label Titel"
 msgid "labeljar_portlet_heading"
 msgstr "Labels"
 
+#. Default: "Please choose a title."
+#: ./ftw/labels/browser/labelsjar.py:22
+msgid "lable_title_is_missing"
+msgstr "Bitte wählen Sie einen Titel für das Label"
+
 #. Default: "New Label"
 #: ./ftw/labels/portlets/labeljar.pt:33
 msgid "new-label-label"
@@ -65,5 +70,4 @@ msgstr "Neues Label"
 #: ./ftw/labels/portlets/labeljar.pt:36
 msgid "new_label_title_placeholder"
 msgstr "Titel"
-
 
