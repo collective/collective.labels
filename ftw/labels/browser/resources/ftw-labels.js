@@ -21,13 +21,13 @@ $(document).ready(function(){
   });
 
   $('.labelItem').click(function() {
-    if(typeof(tabbedview) == undefined) {
-      return;
-    }
-
     $(this).toggleClass('selected');
     $(this).toggleClass(
       'labelcolor-' + $(this).find('.labelColor').data('color'));
+
+    if( window.tabbedview === undefined ) {
+      return;
+    }
 
     var labels_prop;
     if (tabbedview.prop('labels')) {

@@ -6,7 +6,10 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix labeljar portlet if you use it without ftw.table.
+  The javascript for the ftw.table-integration was executed
+  even if you don't have an ftw.table.
+  [elioschmutz]
 
 
 1.1.0 (2016-03-21)
