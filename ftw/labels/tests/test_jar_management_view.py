@@ -8,8 +8,6 @@ from ftw.testbrowser.pages import statusmessages
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 from unittest2 import TestCase
-from zExceptions import BadRequest
-from zExceptions import Unauthorized
 
 
 class TestLabelsJar(TestCase):
@@ -39,7 +37,7 @@ class TestLabelsJar(TestCase):
         root = create(Builder('label root'))
         browser.login(create(Builder('user').with_roles('Reader')))
 
-        with self.assertRaises(Unauthorized):
+        with browser.expect_unauthorized():
             browser.open(root,
                          view='labels-jar/create',
                          data={'title': 'Question',
@@ -92,11 +90,8 @@ class TestLabelsJar(TestCase):
     def test_update_label_requires_label_id(self, browser):
         root = create(Builder('label root'))
 
-        with self.assertRaises(BadRequest) as cm:
+        with browser.expect_http_error(reason='Bad Request'):
             browser.login().open(root, view='labels-jar/update')
-
-        self.assertEquals('The "label_id" request argument is required.',
-                          str(cm.exception))
 
     @browsing
     def test_partial_update_label(self, browser):
@@ -139,11 +134,8 @@ class TestLabelsJar(TestCase):
     def test_remove_label_requires_label_id(self, browser):
         root = create(Builder('label root'))
 
-        with self.assertRaises(BadRequest) as cm:
+        with browser.expect_http_error(reason='Bad Request'):
             browser.login().open(root, view='labels-jar/remove')
-
-        self.assertEquals('The "label_id" request argument is required.',
-                          str(cm.exception))
 
     @browsing
     def test_edit_label_form_change_title(self, browser):

@@ -7,7 +7,6 @@ from ftw.testbrowser import browsing
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 from unittest2 import TestCase
-from zExceptions import Unauthorized
 
 
 class TestLabelingView(TestCase):
@@ -89,7 +88,7 @@ class TestLabelingView(TestCase):
         page = create(Builder('labelled page').within(root))
         browser.login(create(Builder('user').with_roles('Reader')))
 
-        with self.assertRaises(Unauthorized):
+        with browser.expect_unauthorized():
             browser.open(page,
                          view='labeling/update',
                          data={'question': 'yes',
