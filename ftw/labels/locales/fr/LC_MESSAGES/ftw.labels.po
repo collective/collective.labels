@@ -22,7 +22,7 @@ msgstr "Créer une étiquette"
 #. Default: "Delete label"
 #: ./ftw/labels/browser/templates/edit_label.pt:55
 msgid "button_delete_label"
-msgstr "Supprimer"
+msgstr "Supprimer l'étiquette"
 
 #. Default: "Update"
 #: ./ftw/labels/viewlets/labeling.pt:37
@@ -62,7 +62,7 @@ msgstr "Étiquettes"
 #. Default: "Please choose a title."
 #: ./ftw/labels/browser/labelsjar.py:22
 msgid "lable_title_is_missing"
-msgstr "Encodez un titre."
+msgstr "Veuillez choisir un titre pour l'étiquette."
 
 #. Default: "New Label"
 #: ./ftw/labels/portlets/labeljar.pt:33
