@@ -7,7 +7,8 @@ Changelog
 
 - Added French translations.
   [gbastien]
-
+- Display 'Edit labels' title when hovering edit labels icon.
+  [gbastien]
 
 1.1.1 (2017-02-09)
 ------------------
