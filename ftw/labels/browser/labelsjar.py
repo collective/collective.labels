@@ -89,7 +89,8 @@ class LabelsJar(BrowserView):
 
     def _redirect(self):
         response = self.request.RESPONSE
-        return response.redirect(self.context.absolute_url())
+        referer = self.request.get('HTTP_REFERER')
+        return response.redirect(referer)
 
     def _get_random_color(self):
         all_colors = list(COLORS)
