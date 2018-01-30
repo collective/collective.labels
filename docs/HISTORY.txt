@@ -7,6 +7,9 @@ Changelog
 
 - Added French translations.
   [gbastien]
+- Redirect to HTTP_REFERER instead context.absolute_url after a label is
+  added using the labejar portlet.
+  [gbastien]
 - Display 'Edit labels' title when hovering edit labels icon.
   [gbastien]
 
