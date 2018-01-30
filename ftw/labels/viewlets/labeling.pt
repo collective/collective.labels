@@ -15,7 +15,7 @@
               tal:content="label/title" />
       </li>
       <li class="toggleLabelForm" tal:condition="can_edit">
-        <a href="#" id="toggle-label-form" i18n:translate="edit_labels">
+        <a href="#" id="toggle-label-form" title="edit_labels" i18n:translate="edit_labels" i18n:attributes="title">
           edit labels
         </a>
       </li>

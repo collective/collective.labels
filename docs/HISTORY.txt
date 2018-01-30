@@ -10,6 +10,8 @@ Changelog
 - Redirect to HTTP_REFERER instead context.absolute_url after a label is
   added using the labejar portlet.
   [gbastien]
+- Display 'Edit labels' title when hovering edit labels icon.
+  [gbastien]
 
 1.1.1 (2017-02-09)
 ------------------
