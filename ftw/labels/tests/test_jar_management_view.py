@@ -143,8 +143,7 @@ class TestLabelsJar(TestCase):
                       .with_labels(('Feature', 'blue')))
 
         browser.login().open(root,
-                             view='labels-jar/edit_label',
-                             data={'label_id': 'feature'})
+                             view='labels-jar/edit_label?label_id=feature')
 
         browser.fill({'title': 'Features and inquiries'}).submit()
 
@@ -160,8 +159,7 @@ class TestLabelsJar(TestCase):
                       .with_labels(('Feature', 'blue')))
 
         browser.login().open(root,
-                             view='labels-jar/edit_label',
-                             data={'label_id': 'feature'})
+                             view='labels-jar/edit_label?label_id=feature')
 
         browser.fill({'color': 'green'}).submit()
 
@@ -177,8 +175,7 @@ class TestLabelsJar(TestCase):
                       .with_labels(('Feature', 'blue')))
 
         browser.login().open(root,
-                             view='labels-jar/edit_label',
-                             data={'label_id': 'feature'})
+                             view='labels-jar/edit_label?label_id=feature')
 
         browser.find('Delete label').click()
 
