@@ -67,7 +67,7 @@ class LabelsJar(BrowserView):
             raise BadRequest('The "label_id" request argument is required.')
 
         ILabelJar(self.context).remove(label_id)
-        return self._redirect()
+        return self._redirect(consider_referer=False)
 
     def edit_label(self):
         """Form for editing a label.
@@ -87,10 +87,13 @@ class LabelsJar(BrowserView):
             light='{0}-light'.format(color)
             ) for color in COLORS]
 
-    def _redirect(self):
-        response = self.request.RESPONSE
-        referer = self.request.get('HTTP_REFERER', self.context.absolute_url())
-        return response.redirect(referer)
+    def _redirect(self, consider_referer=True):
+        target_url = None
+        if consider_referer:
+            target_url = self.request.get('HTTP_REFERER')
+        if not target_url:
+            target_url = self.context.absolute_url()
+        return self.request.RESPONSE.redirect(target_url)
 
     def _get_random_color(self):
         all_colors = list(COLORS)
