@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.1 (unreleased)
+1.2.1 (2018-02-12)
 ------------------
 
 - Set applyPrefix="True" for "++resource++ftw.labels/select2.css"
