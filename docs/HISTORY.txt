@@ -5,8 +5,9 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Set applyPrefix="True" for "++resource++ftw.labels/select2.css"
+  in cssregistry.xml.
+  [gbastien]
 
 1.2.0 (2018-02-02)
 ------------------

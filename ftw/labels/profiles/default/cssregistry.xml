@@ -5,5 +5,5 @@
     cookable="True" enabled="on" expression="" id="++resource++ftw.labels/ftw-labels.css" media="screen"
     rel="stylesheet" rendering="link"/>
 
- <stylesheet id="++resource++ftw.labels/select2.css" />
+ <stylesheet applyPrefix="True" id="++resource++ftw.labels/select2.css" />
 </object>
