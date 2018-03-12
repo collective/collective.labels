@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-02-09 10:29+0000\n"
+"POT-Creation-Date: 2018-03-09 14:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,61 +15,67 @@ msgstr ""
 "Domain: DOMAIN\n"
 
 #. Default: "Create label"
-#: ./ftw/labels/portlets/labeljar.pt:53
+#: ../portlets/labeljar.pt:55
 msgid "button_create_label"
 msgstr "Créer une étiquette"
 
 #. Default: "Delete label"
-#: ./ftw/labels/browser/templates/edit_label.pt:55
+#: ../browser/templates/edit_label.pt:57
 msgid "button_delete_label"
 msgstr "Supprimer l'étiquette"
 
 #. Default: "Update"
-#: ./ftw/labels/viewlets/labeling.pt:37
+#: ../viewlets/labeling.pt:37
 msgid "button_labeling_update"
 msgstr "Mettre à jour"
 
 #. Default: "Update"
-#: ./ftw/labels/browser/templates/edit_label.pt:52
+#: ../browser/templates/edit_label.pt:54
 msgid "button_update_label"
 msgstr "Mettre à jour"
 
+#. Default: "Registered by user"
+#: ../browser/templates/edit_label.pt:36
+#: ../portlets/labeljar.pt:39
+msgid "by_user_checkbox"
+msgstr "(*) Par utilisateur"
+
 #. Default: "Edit label &laquo;${label}&raquo;"
-#: ./ftw/labels/browser/templates/edit_label.pt:26
+#: ../browser/templates/edit_label.pt:26
 msgid "edit_label_heading"
 msgstr "Éditer l'étiquette &laquo;${label}&raquo;"
 
 #. Default: "edit labels"
-#: ./ftw/labels/viewlets/labeling.pt:18
+#: ../viewlets/labeling.pt:18
 msgid "edit_labels"
 msgstr "Éditer les étiquettes"
 
 #. Default: "edit label"
-#: ./ftw/labels/portlets/labeljar.pt:19
+#: ../portlets/labeljar.pt:19
 msgid "label_editlabel"
 msgstr "Éditer l'étiquette"
 
 #. Default: "Label Title"
-#: ./ftw/labels/browser/templates/edit_label.pt:31
+#: ../browser/templates/edit_label.pt:31
 msgid "label_label_title"
 msgstr "Titre de l'étiquette"
 
 #. Default: "Labels"
-#: ./ftw/labels/portlets/labeljar.pt:9
+#: ../portlets/labeljar.pt:9
 msgid "labeljar_portlet_heading"
 msgstr "Étiquettes"
 
 #. Default: "Please choose a title."
-#: ./ftw/labels/browser/labelsjar.py:22
+#: ../browser/labelsjar.py:22
 msgid "lable_title_is_missing"
 msgstr "Veuillez choisir un titre pour l'étiquette."
 
 #. Default: "New Label"
-#: ./ftw/labels/portlets/labeljar.pt:33
+#: ../portlets/labeljar.pt:33
 msgid "new-label-label"
 msgstr "Nouvelle étiquette"
 
 #. Default: "Title"
-#: ./ftw/labels/portlets/labeljar.pt:36
+#: ../portlets/labeljar.pt:36
 msgid "new_label_title_placeholder"
 msgstr "Titre"

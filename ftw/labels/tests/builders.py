@@ -24,8 +24,8 @@ class LabelRootBuilder(ArchetypesBuilder):
     def after_create(self, obj):
         super(LabelRootBuilder, self).after_create(obj)
         jar = ILabelJar(obj)
-        for title, color in self.labels:
-            jar.add(title, color)
+        for title, color, by_user in self.labels:
+            jar.add(title, color, by_user)
 
         if self.session.auto_commit:
             transaction.commit()

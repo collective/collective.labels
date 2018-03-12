@@ -3,6 +3,7 @@ from ftw.labels.interfaces import ILabelJarChild
 from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
 from ftw.labels.portlets.assignments import LabelJarAssignment
+from ftw.labels.utils import title_by_user
 from plone.app.portlets.portlets.base import NullAddForm
 from plone.app.portlets.portlets.base import Renderer
 from Products.CMFCore.utils import getToolByName
@@ -51,3 +52,6 @@ class Renderer(Renderer):
             return ILabelJar(self.context)
         except LookupError:
             return None
+
+    def label_title(self, title, by_user):
+        return title_by_user(title, by_user)

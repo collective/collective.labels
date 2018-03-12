@@ -18,7 +18,7 @@ class TestLabelingViewlet(TestCase):
         login(self.portal, TEST_USER_NAME)
 
         self.root = create(Builder('label root')
-                           .with_labels(('Label 1', ''), ('Label 2', '')))
+                           .with_labels(('Label 1', '', False), ('Label 2', '', True)))
         self.document = create(Builder('labelled page').within(self.root))
 
     @browsing

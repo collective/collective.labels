@@ -21,9 +21,9 @@ class TestCatalogIndex(TestCase):
 
     def test_updating_index(self):
         root = create(Builder('label root')
-                      .with_labels(('Question', 'blue'),
-                                   ('Bugs', 'red'),
-                                   ('Enhancements', 'green')))
+                      .with_labels(('Question', 'blue', False),
+                                   ('Bugs', 'red', True),
+                                   ('Enhancements', 'green', True)))
 
         page = create(Builder('labelled page')
                       .within(root)
@@ -35,7 +35,7 @@ class TestCatalogIndex(TestCase):
         page.reindexObject(idxs=['labels'])
 
         self.assertItemsEqual(
-            ['bugs', 'question'],
+            ['bugs', 'test_user_1_:bugs', 'question'],
             self.index_data_for(page).get('labels'))
 
     def index_data_for(self, obj):

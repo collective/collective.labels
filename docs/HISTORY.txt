@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-1.2.2 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Labels can also be set user by user, not only globally.
+  [sgeulette]
 
 1.2.1 (2018-02-12)
 ------------------

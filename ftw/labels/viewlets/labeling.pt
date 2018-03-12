@@ -12,10 +12,10 @@
     <ul class="activeLabels">
       <li tal:repeat="label view/active_labels">
         <span tal:attributes="class string:labelItem labelColor labelcolor-${label/color}"
-              tal:content="label/title" />
+              tal:content="python: view.label_title(label['title'], label['by_user'])" />
       </li>
       <li class="toggleLabelForm" tal:condition="can_edit">
-        <a href="#" id="toggle-label-form" title="edit_labels" i18n:translate="edit_labels" i18n:attributes="title">
+        <a href="#" id="toggle-label-form" title="edit labels" i18n:translate="edit_labels" i18n:attributes="title edit_labels">
           edit labels
         </a>
       </li>
@@ -29,7 +29,7 @@
           <option tal:attributes="name label/label_id;
                                   value label/label_id;
                                   selected label/active"
-                  tal:content="label/title"
+                  tal:content="python: view.label_title(label['title'], label['by_user'])"
                   />
         </tal:options>
         <!-- class string:labelcolor-${label/color}; -->
@@ -39,7 +39,7 @@
              i18n:attributes="value button_labeling_update"
              />
       <input type="button" class="closeForm standalone"
-             value="Cancel"  i18n:domain="plone"
+             value="Cancel" i18n:domain="plone"
              i18n:attributes="value label_cancel"
              />
     </form>

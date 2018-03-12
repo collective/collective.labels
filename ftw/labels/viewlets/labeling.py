@@ -2,6 +2,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import ViewletBase
 from ftw.labels.interfaces import ILabeling
 from ftw.labels.interfaces import ILabelSupport
+from ftw.labels.utils import title_by_user
 from Products.CMFCore.utils import getToolByName
 
 
@@ -33,3 +34,6 @@ class LabelingViewlet(ViewletBase):
     def can_edit(self):
         mtool = getToolByName(self.context, 'portal_membership')
         return mtool.checkPermission('ftw.labels: Change Labels', self.context)
+
+    def label_title(self, title, by_user):
+        return title_by_user(title, by_user)

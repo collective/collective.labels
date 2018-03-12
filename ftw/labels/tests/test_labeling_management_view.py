@@ -19,9 +19,9 @@ class TestLabelingView(TestCase):
     @browsing
     def test_activate_labels(self, browser):
         root = create(Builder('label root')
-                      .with_labels(('Question', 'purple'),
-                                   ('Bug', 'red'),
-                                   ('Feature', 'blue')))
+                      .with_labels(('Question', 'purple', False),
+                                   ('Bug', 'red', True),
+                                   ('Feature', 'blue', True)))
         page = create(Builder('labelled page').within(root))
         self.assertFalse(self.indexed_labels_for(page))
 
@@ -32,20 +32,22 @@ class TestLabelingView(TestCase):
         self.assertItemsEqual(
             [{'label_id': 'question',
               'title': 'Question',
-              'color': 'purple'},
+              'color': 'purple',
+              'by_user': False},
              {'label_id': 'bug',
               'title': 'Bug',
-              'color': 'red'}],
+              'color': 'red',
+              'by_user': True}],
             ILabeling(page).active_labels())
 
-        self.assertItemsEqual(['question', 'bug'], self.indexed_labels_for(page))
+        self.assertItemsEqual(['bug', 'question', 'test_user_1_:bug'], self.indexed_labels_for(page))
 
     @browsing
     def test_deactivate_labels(self, browser):
         root = create(Builder('label root')
-                      .with_labels(('Question', 'purple'),
-                                   ('Bug', 'red'),
-                                   ('Feature', 'blue')))
+                      .with_labels(('Question', 'purple', False),
+                                   ('Bug', 'red', True),
+                                   ('Feature', 'blue', True)))
         page = create(Builder('labelled page')
                       .within(root)
                       .with_labels('question', 'bug'))
@@ -61,25 +63,27 @@ class TestLabelingView(TestCase):
     @browsing
     def test_mixed_updating_labels(self, browser):
         root = create(Builder('label root')
-                      .with_labels(('Question', 'purple'),
-                                   ('Bug', 'red'),
-                                   ('Feature', 'blue')))
+                      .with_labels(('Question', 'purple', False),
+                                   ('Bug', 'red', True),
+                                   ('Feature', 'blue', True)))
         page = create(Builder('labelled page')
                       .within(root)
                       .with_labels('question', 'bug'))
 
         browser.login().open(page,
                              view='labeling/update',
-                             data={'activate_labels': ['question','feature']})
+                             data={'activate_labels': ['question', 'feature']})
 
 
         self.assertItemsEqual(
             [{'label_id': 'question',
               'title': 'Question',
-              'color': 'purple'},
+              'color': 'purple',
+              'by_user': False},
              {'label_id': 'feature',
               'title': 'Feature',
-              'color': 'blue'}],
+              'color': 'blue',
+              'by_user': True}],
             ILabeling(page).active_labels())
 
     @browsing

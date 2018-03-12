@@ -3,6 +3,8 @@ from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelSupport
 from ftw.labels.utils import make_sortable
 from persistent.list import PersistentList
+from persistent.mapping import PersistentMapping
+from plone import api
 from zope.annotation.interfaces import IAnnotations
 from zope.component import adapts
 from zope.interface import implements
@@ -20,38 +22,73 @@ class Labeling(object):
         self.jar = ILabelJar(self.context)
 
     def update(self, label_ids):
-        available_labels = self.jar.storage.keys()
+        jar_keys = self.jar.storage.keys()
+        user_id = self.user_id()
+        # removes deselected labels
+        for label_id in self.storage.keys():  # use keys to avoid RuntimeError: dictionary changed size during iteration
+            if label_id not in jar_keys:
+                continue  # do we remove key ??
+            label = self.jar.get(label_id)
+            if label_id not in label_ids:
+                if label['by_user']:
+                    if user_id in self.storage[label_id]:
+                        self.storage[label_id].remove(user_id)
+                else:
+                    self.storage.pop(label_id)
 
+        # adds selected labels
         for label_id in label_ids:
-            if label_id not in available_labels:
+            if label_id not in jar_keys:
                 raise LookupError(
                     'Cannot activate label: '
                     'the label "{0}" is not in the label jar. '
                     'Following labels ids are available: {1}'.format(
-                        label_id, ', '.join(available_labels)))
-
-        # Do not replace self.storage, since it is a PersistentList!
-        self.storage[:] = label_ids
+                        label_id, ', '.join(jar_keys)))
+            if label_id not in self.storage:
+                self.storage[label_id] = PersistentList()
+            label = self.jar.get(label_id)
+            if label['by_user'] and user_id is not None and user_id not in self.storage[label_id]:
+                self.storage[label_id].append(user_id)
 
     def active_labels(self):
+        # selected labels
         labels = []
         for label_id in self.storage:
             try:
-                labels.append(self.jar.get(label_id))
+                label = self.jar.get(label_id)
+                if label['by_user']:
+                    if self.user_id() in self.storage[label_id]:
+                        labels.append(label)
+                else:
+                    labels.append(label)
             except KeyError:
                 pass
         return sorted(labels, key=lambda cls: make_sortable(cls['title']))
 
     def available_labels(self):
+        # possible labels, marking active ones
+        labels = []
         for label in self.jar.list():
-            label['active'] = (label.get('label_id') in self.storage)
-            yield label
+            if label['by_user']:
+                label['active'] = (label['label_id'] in self.storage and
+                                   self.user_id() in self.storage[label['label_id']])
+            else:
+                label['active'] = (label.get('label_id') in self.storage)
+            labels.append(label)
+        return labels
+
+    def user_id(default=None):
+        """ Return current userid """
+        cur_user = api.user.get_current()
+        if not cur_user:
+            return default
+        return cur_user.getId()
 
     @property
     def storage(self):
         if getattr(self, '_storage', None) is None:
             annotation = IAnnotations(self.context)
             if ANNOTATION_KEY not in annotation:
-                annotation[ANNOTATION_KEY] = PersistentList()
+                annotation[ANNOTATION_KEY] = PersistentMapping()
             self._storage = annotation[ANNOTATION_KEY]
         return self._storage

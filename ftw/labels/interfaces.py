@@ -29,7 +29,7 @@ class ILabelJar(Interface):
         """Adapts a label root.
         """
 
-    def add(title, color):
+    def add(title, color, by_user):
         """Adds a new label with ``title`` and ``color``.
         Returns the id of the new label as string.
         """
@@ -40,7 +40,7 @@ class ILabelJar(Interface):
         If there is no such label, ``False`` is returned.
         """
 
-    def update(label_id, title, color):
+    def update(label_id, title, color, by_user):
         """Updates the label with ID ``label_id``.
         Raises a ``KeyError`` when there is no such label.
         """

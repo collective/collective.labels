@@ -2,8 +2,10 @@ from ftw.labels.interfaces import ILabelJar
 from ftw.labels.interfaces import ILabelRoot
 from ftw.labels.interfaces import ILabelSupport
 from ftw.labels.interfaces import ILabeling
+from ftw.labels.labeling import Labeling
 from ftw.labels.testing import ADAPTERS_ZCML_LAYER
 from ftw.testing import MockTestCase
+from plone.app.testing import TEST_USER_ID
 from zope.annotation import IAttributeAnnotatable
 from zope.component import queryAdapter
 
@@ -17,6 +19,7 @@ class TestLabeling(MockTestCase):
 
     def setUp(self):
         super(TestLabeling, self).setUp()
+        Labeling.user_id = lambda x: TEST_USER_ID  # needed to avoid plone.api.portal.get error
         self.root = self.providing_stub([ILabelRoot, IAttributeAnnotatable])
         self.document = self.providing_stub([ILabelSupport,
                                              IAttributeAnnotatable])
@@ -30,13 +33,14 @@ class TestLabeling(MockTestCase):
             'The labeling adapter is not registered for ILabeling')
 
     def test_available_labels(self):
-        self.jar.add('Question', '#00FF00')
+        self.jar.add('Question', '#00FF00', False)
         labeling = ILabeling(self.document)
         self.assertEqual(
             [{'label_id': 'question',
              'title': 'Question',
              'color': '#00FF00',
-             'active': False}],
+             'active': False,
+             'by_user': False}],
             list(labeling.available_labels()))
 
     def test_available_labels_empty(self):
@@ -44,7 +48,7 @@ class TestLabeling(MockTestCase):
         self.assertEqual([], list(labeling.available_labels()))
 
     def test_available_label(self):
-        self.jar.add('Question', '#00FF00')
+        self.jar.add('Question', '#00FF00', True)
         labeling = ILabeling(self.document)
 
         labeling.update(['question'])
@@ -52,13 +56,14 @@ class TestLabeling(MockTestCase):
             [{'label_id': 'question',
               'title': 'Question',
               'color': '#00FF00',
-              'active': True}],
+              'active': True,
+              'by_user': True}],
             list(labeling.available_labels()))
 
     def test_update__enable_labels(self):
-        self.jar.add('Bug', 'red')
-        self.jar.add('Question', 'green')
-        self.jar.add('Feature', 'purple')
+        self.jar.add('Bug', 'red', False)
+        self.jar.add('Question', 'green', True)
+        self.jar.add('Feature', 'purple', True)
 
         labeling = ILabeling(self.document)
         self.assertEqual([], labeling.active_labels())
@@ -68,9 +73,9 @@ class TestLabeling(MockTestCase):
                               label_titles(labeling.active_labels()))
 
     def test_update__disable_labels(self):
-        self.jar.add('Bug', 'red')
-        self.jar.add('Question', 'green')
-        self.jar.add('Feature', 'purple')
+        self.jar.add('Bug', 'red', False)
+        self.jar.add('Question', 'green', True)
+        self.jar.add('Feature', 'purple', True)
 
         labeling = ILabeling(self.document)
         labeling.update(['bug', 'question', 'feature'])
@@ -86,7 +91,7 @@ class TestLabeling(MockTestCase):
 
     def test_update_raises_LookupError_when_label_not_in_jar(self):
         self.assertEqual(0, len(self.jar.list()))
-        self.jar.add('Question', '')
+        self.jar.add('Question', '', False)
         labeling = ILabeling(self.document)
         with self.assertRaises(LookupError) as cm:
             labeling.update(['something'])
@@ -98,24 +103,25 @@ class TestLabeling(MockTestCase):
             str(cm.exception))
 
     def test_active_labels(self):
-        self.jar.add('Question', '')
-        self.jar.add('Bug', '')
-        self.jar.add('Duplicate', '')
+        self.jar.add('Question', '', False)
+        self.jar.add('Bug', '', True)
+        self.jar.add('Duplicate', '', True)
 
         labeling = ILabeling(self.document)
         labeling.update(['bug'])
         self.assertEqual(
             [{'label_id': 'bug',
               'title': 'Bug',
-              'color': ''}],
+              'color': '',
+              'by_user': True}],
             labeling.active_labels())
 
     def test_active_labels_is_sorted(self):
-        self.jar.add('Zeta-0', '')
-        self.jar.add('zeta-1', '')
-        self.jar.add('alpha-0', '')
-        self.jar.add('\xc3\x84lpha-1', '')
-        self.jar.add('Alpha-2', '')
+        self.jar.add('Zeta-0', '', False)
+        self.jar.add('zeta-1', '', False)
+        self.jar.add('alpha-0', '', True)
+        self.jar.add('\xc3\x84lpha-1', '', True)
+        self.jar.add('Alpha-2', '', True)
 
         labeling = ILabeling(self.document)
         labeling.update([
@@ -131,8 +137,8 @@ class TestLabeling(MockTestCase):
             [label.get('title') for label in labeling.active_labels()])
 
     def test_active_labels_filters_deleted_labels(self):
-        self.jar.add('Question', 'blue')
-        self.jar.add('Bug', 'red')
+        self.jar.add('Question', 'blue', False)
+        self.jar.add('Bug', 'red', True)
 
         labeling = ILabeling(self.document)
         labeling.update(['question', 'bug'])
@@ -142,5 +148,6 @@ class TestLabeling(MockTestCase):
         self.assertEqual(
             [{'label_id': 'question',
              'title': 'Question',
-             'color': 'blue'}],
+             'color': 'blue',
+             'by_user': False}],
             list(labeling.active_labels()))

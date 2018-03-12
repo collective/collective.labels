@@ -25,13 +25,14 @@ class LabelJar(object):
     def __init__(self, context):
         self.context = context
 
-    def add(self, title, color):
+    def add(self, title, color, by_user):
         label_id = self._make_id(title)
         self.storage[label_id] = PersistentMapping(
             dict(
                 label_id=label_id,
                 title=title,
-                color=color
+                color=color,
+                by_user=by_user
             )
         )
         return label_id
@@ -43,11 +44,12 @@ class LabelJar(object):
         del self.storage[label_id]
         return True
 
-    def update(self, label_id, title, color):
+    def update(self, label_id, title, color, by_user):
         self.storage[label_id].update(
             dict(
                 title=title,
-                color=color
+                color=color,
+                by_user=by_user
             )
         )
 

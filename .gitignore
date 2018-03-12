@@ -11,6 +11,8 @@ coverage/
 develop-eggs/
 dist/
 eggs/
+include/
+lib/
 parts/
 src/
 var/
