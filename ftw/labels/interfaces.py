@@ -89,6 +89,9 @@ class ILabeling(Interface):
         are purged.
         """
 
+    def pers_update(label_id, activate):
+        """Activate or deactivate a personal label_id (by user) on the current context."""
+
     def active_labels():
         """Returns all active labels on the current object as list of dicts.
 

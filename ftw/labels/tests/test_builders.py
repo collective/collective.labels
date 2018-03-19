@@ -36,10 +36,10 @@ class TestTestingBuidlers(TestCase):
                       .with_labels(('Questions', 'blue', False),
                                    ('Bugs', 'red', True),
                                    ('Enhancements', 'green', True)))
-
         page = create(Builder('labelled page')
                       .within(root)
-                      .with_labels('questions', 'bugs'))
+                      .with_labels('questions')
+                      .with_pers_labels('bugs'))
 
         self.assertItemsEqual(
             [{'label_id': 'questions',

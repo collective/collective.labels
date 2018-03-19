@@ -38,9 +38,11 @@ class TestLabelingViewlet(TestCase):
         editor = create(Builder('user').with_roles('Editor'))
         browser.login(editor).open(self.document)
         self.assertTrue(browser.css('#labeling-viewlet #toggle-label-form'))
+        self.assertTrue(browser.css('#labeling-viewlet .labelItem.pers-edit-1'))
 
     @browsing
     def test_users_without_permission_cant_view_manage_link(self, browser):
         reader = create(Builder('user').with_roles('Reader'))
         browser.login(reader).open(self.document)
         self.assertFalse(browser.css('#labeling-viewlet #toggle-label-form'))
+        self.assertFalse(browser.css('#labeling-viewlet .labelItem.pers-edit-1'))

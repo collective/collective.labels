@@ -1,7 +1,6 @@
 from Products.CMFCore.utils import getToolByName
 from ftw.builder import Builder
 from ftw.builder import create
-from ftw.labels.interfaces import ILabeling
 from ftw.labels.testing import LABELS_FUNCTIONAL_TESTING
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
@@ -27,11 +26,11 @@ class TestCatalogIndex(TestCase):
 
         page = create(Builder('labelled page')
                       .within(root)
-                      .with_labels('question', 'bugs'))
+                      .with_labels('question')
+                      .with_pers_labels('bugs'))
 
         self.assertFalse(self.index_data_for(page).get('labels'))
 
-        ILabeling(page).update(['bugs', 'question'])
         page.reindexObject(idxs=['labels'])
 
         self.assertItemsEqual(

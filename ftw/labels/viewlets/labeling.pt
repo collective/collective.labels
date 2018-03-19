@@ -6,13 +6,25 @@
       tal:omit-tag="python: True">
 
   <div id="labeling-viewlet"
-       tal:define="can_edit view/can_edit"
+       tal:define="can_edit view/can_edit;
+                   can_pers_edit view/can_personal_edit"
        tal:condition="view/available">
+    <tal:define define="labels view/available_labels">
 
-    <ul class="activeLabels">
-      <li tal:repeat="label view/active_labels">
-        <span tal:attributes="class string:labelItem labelColor labelcolor-${label/color}"
-              tal:content="python: view.label_title(label['title'], label['by_user'])" />
+    <ul class="activeLabels" id="active_url" tal:attributes="data-obj_url view/context/absolute_url;">
+      <li tal:repeat="label python:labels[0]">
+        <span tal:define="color python:label['active'] and label['color'] or 'inactive'"
+              tal:attributes="class string:labelItem persLabel labelColor labelcolor-${color} pers-edit-${can_pers_edit};
+                              data-label_id label/label_id;
+                              data-o_color label/color;
+                              data-active label/active;"
+              tal:content="label/title" />
+      </li>
+      <li id="label-type-separator"><span class="labelItem"></span></li>
+      <li tal:repeat="label python:labels[1]">
+        <span tal:attributes="class string:labelItem globLabel labelColor labelcolor-${label/color}"
+              tal:content="label/title"
+              tal:condition="label/active"/>
       </li>
       <li class="toggleLabelForm" tal:condition="can_edit">
         <a href="#" id="toggle-label-form" title="edit labels" i18n:translate="edit_labels" i18n:attributes="title edit_labels">
@@ -25,11 +37,11 @@
           tal:condition="can_edit"
           tal:attributes="action string:${here/absolute_url}/labeling/update">
       <select type="select" multiple="multiple" name="activate_labels:list" id="activate_labels">
-        <tal:options repeat="label view/available_labels">
+        <tal:options repeat="label python:labels[1]">
           <option tal:attributes="name label/label_id;
                                   value label/label_id;
                                   selected label/active"
-                  tal:content="python: view.label_title(label['title'], label['by_user'])"
+                  tal:content="label/title"
                   />
         </tal:options>
         <!-- class string:labelcolor-${label/color}; -->
@@ -44,6 +56,7 @@
              />
     </form>
 
+    </tal:define>
     <div class="visualClear"><!-- --></div>
 
   </div>

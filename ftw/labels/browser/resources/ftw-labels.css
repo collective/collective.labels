@@ -143,6 +143,19 @@
   display: block;
 }
 
+.labelColor.labelcolor-inactive {
+  background: white;
+  border-color: black;
+  color: black;
+}
+
+.labelItem.pers-edit-1 {
+  cursor: pointer;
+}
+
+#label-type-separator .labelItem {
+  padding-left: 1em !important;
+}
 
 /* generated with scss */
 

@@ -23,17 +23,13 @@ class Labeling(object):
 
     def update(self, label_ids):
         jar_keys = self.jar.storage.keys()
-        user_id = self.user_id()
         # removes deselected labels
         for label_id in self.storage.keys():  # use keys to avoid RuntimeError: dictionary changed size during iteration
             if label_id not in jar_keys:
                 continue  # do we remove key ??
             label = self.jar.get(label_id)
             if label_id not in label_ids:
-                if label['by_user']:
-                    if user_id in self.storage[label_id]:
-                        self.storage[label_id].remove(user_id)
-                else:
+                if not label['by_user']:
                     self.storage.pop(label_id)
 
         # adds selected labels
@@ -46,9 +42,22 @@ class Labeling(object):
                         label_id, ', '.join(jar_keys)))
             if label_id not in self.storage:
                 self.storage[label_id] = PersistentList()
-            label = self.jar.get(label_id)
-            if label['by_user'] and user_id is not None and user_id not in self.storage[label_id]:
+
+    def pers_update(self, label_id, activate):
+        user_id = self.user_id()
+        if not user_id:
+            return False
+        if activate:
+            if label_id not in self.storage:
+                self.storage[label_id] = PersistentList()
+            if user_id not in self.storage[label_id]:
                 self.storage[label_id].append(user_id)
+        else:
+            if user_id in self.storage[label_id]:
+                self.storage[label_id].remove(user_id)
+            if not self.storage[label_id]:
+                self.storage.pop(label_id)
+        return True
 
     def active_labels(self):
         # selected labels
@@ -67,14 +76,17 @@ class Labeling(object):
 
     def available_labels(self):
         # possible labels, marking active ones
-        labels = []
+        labels = [[], []]
         for label in self.jar.list():
             if label['by_user']:
                 label['active'] = (label['label_id'] in self.storage and
                                    self.user_id() in self.storage[label['label_id']])
+                labels[0].append(label)
             else:
                 label['active'] = (label.get('label_id') in self.storage)
-            labels.append(label)
+                labels[1].append(label)
+        labels[0].sort(key=lambda cls: make_sortable(cls['title']))
+        labels[1].sort(key=lambda cls: make_sortable(cls['title']))
         return labels
 
     def user_id(default=None):

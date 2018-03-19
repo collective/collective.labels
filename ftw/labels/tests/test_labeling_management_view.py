@@ -20,7 +20,7 @@ class TestLabelingView(TestCase):
     def test_activate_labels(self, browser):
         root = create(Builder('label root')
                       .with_labels(('Question', 'purple', False),
-                                   ('Bug', 'red', True),
+                                   ('Bug', 'red', False),
                                    ('Feature', 'blue', True)))
         page = create(Builder('labelled page').within(root))
         self.assertFalse(self.indexed_labels_for(page))
@@ -37,24 +37,57 @@ class TestLabelingView(TestCase):
              {'label_id': 'bug',
               'title': 'Bug',
               'color': 'red',
+              'by_user': False}],
+            ILabeling(page).active_labels())
+
+        self.assertItemsEqual(['bug', 'question'], self.indexed_labels_for(page))
+
+        browser.login().open(page,
+                             view='pers-labeling/pers_update',
+                             data={'label_id': 'feature', 'active': 'False'})
+
+        self.assertItemsEqual(
+            [{'label_id': 'question',
+              'title': 'Question',
+              'color': 'purple',
+              'by_user': False},
+             {'label_id': 'bug',
+              'title': 'Bug',
+              'color': 'red',
+              'by_user': False},
+             {'label_id': 'feature',
+              'title': 'Feature',
+              'color': 'blue',
               'by_user': True}],
             ILabeling(page).active_labels())
 
-        self.assertItemsEqual(['bug', 'question', 'test_user_1_:bug'], self.indexed_labels_for(page))
+        self.assertItemsEqual(['bug', 'question', 'feature', 'test_user_1_:feature'], self.indexed_labels_for(page))
 
     @browsing
     def test_deactivate_labels(self, browser):
         root = create(Builder('label root')
                       .with_labels(('Question', 'purple', False),
-                                   ('Bug', 'red', True),
+                                   ('Bug', 'red', False),
                                    ('Feature', 'blue', True)))
         page = create(Builder('labelled page')
                       .within(root)
-                      .with_labels('question', 'bug'))
+                      .with_labels('question', 'bug')
+                      .with_pers_labels('feature'))
 
         browser.login().open(page,
                              view='labeling/update',
                              data={})
+
+        self.assertItemsEqual(
+            [{'label_id': 'feature',
+              'title': 'Feature',
+              'color': 'blue',
+              'by_user': True}],
+            ILabeling(page).active_labels())
+
+        browser.login().open(page,
+                             view='pers-labeling/pers_update',
+                             data={'label_id': 'feature', 'active': 'True'})
 
         self.assertItemsEqual(
             [],
@@ -64,8 +97,8 @@ class TestLabelingView(TestCase):
     def test_mixed_updating_labels(self, browser):
         root = create(Builder('label root')
                       .with_labels(('Question', 'purple', False),
-                                   ('Bug', 'red', True),
-                                   ('Feature', 'blue', True)))
+                                   ('Bug', 'red', False),
+                                   ('Feature', 'blue', False)))
         page = create(Builder('labelled page')
                       .within(root)
                       .with_labels('question', 'bug'))
@@ -73,7 +106,6 @@ class TestLabelingView(TestCase):
         browser.login().open(page,
                              view='labeling/update',
                              data={'activate_labels': ['question', 'feature']})
-
 
         self.assertItemsEqual(
             [{'label_id': 'question',
@@ -83,7 +115,7 @@ class TestLabelingView(TestCase):
              {'label_id': 'feature',
               'title': 'Feature',
               'color': 'blue',
-              'by_user': True}],
+              'by_user': False}],
             ILabeling(page).active_labels())
 
     @browsing
@@ -97,6 +129,11 @@ class TestLabelingView(TestCase):
                          view='labeling/update',
                          data={'question': 'yes',
                                'feature': 'yes'})
+
+        with browser.expect_unauthorized():
+            browser.open(page,
+                         view='pers-labeling/pers_update',
+                         data={})
 
     def indexed_labels_for(self, obj):
         catalog = getToolByName(self.portal, 'portal_catalog')
