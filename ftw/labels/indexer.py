@@ -21,4 +21,7 @@ def labels(obj):
                 labels.append(label_id)
         except KeyError:
             pass
+    # store something when no label. Query with 'not' in ZCatalog>=3 will retrieve it.
+    if not labels:
+        return ['_']
     return labels
