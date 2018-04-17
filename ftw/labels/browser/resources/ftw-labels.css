@@ -155,8 +155,8 @@
   cursor: pointer;
 }
 
-#label-type-separator .labelItem {
-  padding-left: 1em !important;
+#content #labeling-viewlet > ul > li#label-type-separator > .labelItem {
+  padding-left: 1em;
 }
 
 /* generated with scss */

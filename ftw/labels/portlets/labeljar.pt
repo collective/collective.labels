@@ -15,7 +15,7 @@
              tal:attributes="data-label-id label/label_id">
           <div tal:attributes="class string:labelColor labelcolor-${label/color};
                                data-color label/color">
-            <span class="labelTitle" tal:content="python: view.label_title(label['title'], label['by_user'])" />
+            <span class="labelTitle" tal:content="python: view.label_title(label['title'], label.get('by_user', False))" />
             <a class="editLabelLink"
                tal:condition="can_edit"
                tal:attributes="href string:${here/absolute_url}/labels-jar/edit_label?label_id=${label/label_id}"

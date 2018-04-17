@@ -20,7 +20,7 @@
                               data-active label/active;"
               tal:content="label/title" />
       </li>
-      <li id="label-type-separator"><span class="labelItem"></span></li>
+      <li id="label-type-separator" tal:condition="python:labels[0]"><span class="labelItem"></span></li>
       <li tal:repeat="label python:labels[1]">
         <span tal:attributes="class string:labelItem globLabel labelColor labelcolor-${label/color}"
               tal:content="label/title"
