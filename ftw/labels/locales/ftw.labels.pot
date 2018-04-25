@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-02-09 10:29+0000\n"
+"POT-Creation-Date: 2018-04-25 09:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,23 +15,29 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 
 #. Default: "Create label"
-#: ./ftw/labels/portlets/labeljar.pt:53
+#: ./ftw/labels/portlets/labeljar.pt:55
 msgid "button_create_label"
 msgstr ""
 
 #. Default: "Delete label"
-#: ./ftw/labels/browser/templates/edit_label.pt:55
+#: ./ftw/labels/browser/templates/edit_label.pt:57
 msgid "button_delete_label"
 msgstr ""
 
 #. Default: "Update"
-#: ./ftw/labels/viewlets/labeling.pt:37
+#: ./ftw/labels/viewlets/labeling.pt:49
 msgid "button_labeling_update"
 msgstr ""
 
 #. Default: "Update"
-#: ./ftw/labels/browser/templates/edit_label.pt:52
+#: ./ftw/labels/browser/templates/edit_label.pt:54
 msgid "button_update_label"
+msgstr ""
+
+#. Default: "Registered by user"
+#: ./ftw/labels/browser/templates/edit_label.pt:36
+#: ./ftw/labels/portlets/labeljar.pt:39
+msgid "by_user_checkbox"
 msgstr ""
 
 #. Default: "Edit label &laquo;${label}&raquo;"
@@ -40,7 +46,7 @@ msgid "edit_label_heading"
 msgstr ""
 
 #. Default: "edit labels"
-#: ./ftw/labels/viewlets/labeling.pt:18
+#: ./ftw/labels/viewlets/labeling.pt:30
 msgid "edit_labels"
 msgstr ""
 

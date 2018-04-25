@@ -20,6 +20,14 @@
         allowed_attributes="update"
         />
 
+    <browser:page
+        for="ftw.labels.interfaces.ILabelSupport"
+        name="pers-labeling"
+        class=".labeling.Labeling"
+        permission="ftw.labels.ChangePersonalLabels"
+        allowed_attributes="pers_update"
+        />
+
     <browser:resourceDirectory
         name="ftw.labels"
         directory="resources"

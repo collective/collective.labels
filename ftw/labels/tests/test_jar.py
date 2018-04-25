@@ -29,18 +29,19 @@ class TestLabelJar(TestCase):
 
     def test_adding_new_label(self):
         jar = LabelJar(self.root)
-        label_id = jar.add('Question', '#FF0000')
+        label_id = jar.add('Question', '#FF0000', False)
 
         self.assertDictEqual({'label_id': label_id,
                               'title': 'Question',
-                              'color': '#FF0000'},
+                              'color': '#FF0000',
+                              'by_user': False},
                              jar.get(label_id))
 
     def test_label_ids_are_unique(self):
         jar = LabelJar(self.root)
 
-        first_label_id = jar.add('Question', '#FF0000')
-        second_label_id = jar.add('Question', '#FF0000')
+        first_label_id = jar.add('Question', '#FF0000', False)
+        second_label_id = jar.add('Question', '#FF0000', True)
 
         self.assertNotEquals(second_label_id, first_label_id,
                              'Labels ID should be unique.')
@@ -48,26 +49,28 @@ class TestLabelJar(TestCase):
     def test_listing_labels(self):
         jar = LabelJar(self.root)
 
-        first_label_id = jar.add('First', '#FF0000')
-        second_label_id = jar.add('Second', '#0000FF')
+        first_label_id = jar.add('First', '#FF0000', False)
+        second_label_id = jar.add('Second', '#0000FF', True)
 
         self.assertItemsEqual(
             [{'label_id': first_label_id,
               'title': 'First',
-              'color': '#FF0000'},
+              'color': '#FF0000',
+              'by_user': False},
              {'label_id': second_label_id,
               'title': 'Second',
-              'color': '#0000FF'}],
+              'color': '#0000FF',
+              'by_user': True}],
             jar.list())
 
     def test_listing_labels_is_sorted(self):
         jar = LabelJar(self.root)
 
-        jar.add('Zeta-0', '')
-        jar.add('zeta-1', '')
-        jar.add('alpha-0', '')
-        jar.add('\xc3\x84lpha-1', '')
-        jar.add('Alpha-2', '')
+        jar.add('Zeta-0', '', False)
+        jar.add('zeta-1', '', False)
+        jar.add('alpha-0', '', True)
+        jar.add('\xc3\x84lpha-1', '', False)
+        jar.add('Alpha-2', '', True)
 
         self.assertEqual(
             ['alpha-0', '\xc3\x84lpha-1', 'Alpha-2', 'Zeta-0', 'zeta-1'],
@@ -76,26 +79,29 @@ class TestLabelJar(TestCase):
     def test_updating_labels(self):
         jar = LabelJar(self.root)
 
-        label_id = jar.add('Question', '#FF0000')
+        label_id = jar.add('Question', '#FF0000', False)
         self.assertDictEqual({'label_id': label_id,
                               'title': 'Question',
-                              'color': '#FF0000'},
+                              'color': '#FF0000',
+                              'by_user': False},
                              jar.get(label_id))
 
-        jar.update(label_id, 'New Question', '#0000FF')
+        jar.update(label_id, 'New Question', '#0000FF', True)
         self.assertDictEqual({'label_id': label_id,
                               'title': 'New Question',
-                              'color': '#0000FF'},
+                              'color': '#0000FF',
+                              'by_user': True},
                              jar.get(label_id))
 
     def test_remove_labels(self):
         jar = LabelJar(self.root)
 
-        label_id = jar.add('Question', '#FF0000')
+        label_id = jar.add('Question', '#FF0000', False)
         self.assertEqual(
             [{'label_id': label_id,
               'title': 'Question',
-              'color': '#FF0000'}],
+              'color': '#FF0000',
+              'by_user': False}],
             jar.list())
 
         jar.remove(label_id)
@@ -103,47 +109,52 @@ class TestLabelJar(TestCase):
 
     def test_label_dict_mutations_are_not_stored(self):
         jar = LabelJar(self.root)
-        label_id = jar.add('Question', '#FF0000')
+        label_id = jar.add('Question', '#FF0000', False)
 
         label = jar.get(label_id)
         label['title'] = 'HACK THE TITLE'
 
         self.assertDictEqual({'label_id': label_id,
                               'title': 'Question',
-                              'color': '#FF0000'},
+                              'color': '#FF0000',
+                              'by_user': False},
                              jar.get(label_id))
 
     def test_list_mutations_are_not_stored(self):
         jar = LabelJar(self.root)
-        label_id = jar.add('Question', '#FF0000')
+        label_id = jar.add('Question', '#FF0000', False)
 
         labels = jar.list()
         self.assertEqual(
             [{'label_id': label_id,
               'title': 'Question',
-              'color': '#FF0000'}],
+              'color': '#FF0000',
+              'by_user': False}],
             labels)
 
         del labels[0]
         self.assertEqual(
             [{'label_id': label_id,
               'title': 'Question',
-              'color': '#FF0000'}],
+              'color': '#FF0000',
+              'by_user': False}],
             jar.list())
 
     def test_data_is_stored_persistently(self):
         jar = LabelJar(self.root)
 
-        label_id = jar.add('Question', '#FF0000')
+        label_id = jar.add('Question', '#FF0000', False)
         self.assertEqual(
             [{'label_id': label_id,
               'title': 'Question',
-              'color': '#FF0000'}],
+              'color': '#FF0000',
+              'by_user': False}],
             jar.list())
 
         jar = LabelJar(self.root)
         self.assertEqual(
             [{'label_id': label_id,
               'title': 'Question',
-              'color': '#FF0000'}],
+              'color': '#FF0000',
+              'by_user': False}],
             jar.list())

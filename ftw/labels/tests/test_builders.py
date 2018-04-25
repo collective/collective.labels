@@ -17,33 +17,37 @@ class TestTestingBuidlers(TestCase):
 
     def test_label_root_builder(self):
         root = create(Builder('label root')
-                      .with_labels(('Questions', 'blue'),
-                                   ('Bugs', 'red')))
+                      .with_labels(('Questions', 'blue', False),
+                                   ('Bugs', 'red', True)))
 
         self.assertItemsEqual(
             [{'label_id': 'questions',
               'title': 'Questions',
-              'color': 'blue'},
+              'color': 'blue',
+              'by_user': False},
              {'label_id': 'bugs',
               'title': 'Bugs',
-              'color': 'red'}],
+              'color': 'red',
+              'by_user': True}],
             ILabelJar(root).list())
 
     def test_labelled_page_builder(self):
         root = create(Builder('label root')
-                      .with_labels(('Questions', 'blue'),
-                                   ('Bugs', 'red'),
-                                   ('Enhancements', 'green')))
-
+                      .with_labels(('Questions', 'blue', False),
+                                   ('Bugs', 'red', True),
+                                   ('Enhancements', 'green', True)))
         page = create(Builder('labelled page')
                       .within(root)
-                      .with_labels('questions', 'bugs'))
+                      .with_labels('questions')
+                      .with_pers_labels('bugs'))
 
         self.assertItemsEqual(
             [{'label_id': 'questions',
               'title': 'Questions',
-              'color': 'blue'},
+              'color': 'blue',
+              'by_user': False},
              {'label_id': 'bugs',
               'title': 'Bugs',
-              'color': 'red'}],
+              'color': 'red',
+              'by_user': True}],
             ILabeling(page).active_labels())

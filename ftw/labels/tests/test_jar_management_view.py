@@ -24,12 +24,14 @@ class TestLabelsJar(TestCase):
         browser.login().open(root,
                              view='labels-jar/create',
                              data={'title': 'Question',
-                                   'color': 'purple'})
+                                   'color': 'purple',
+                                   'by_user': 'on'})
 
         self.assertEqual(
             [{'label_id': 'question',
               'title': 'Question',
-              'color': 'purple'}],
+              'color': 'purple',
+              'by_user': True}],
             ILabelJar(root).list())
 
     @browsing
@@ -67,8 +69,8 @@ class TestLabelsJar(TestCase):
     @browsing
     def test_update_label(self, browser):
         root = create(Builder('label root')
-                      .with_labels(('Question', 'purple'),
-                                   ('Bug', 'red')))
+                      .with_labels(('Question', 'purple', False),
+                                   ('Bug', 'red', True)))
 
         browser.login().open(root,
                              view='labels-jar/update',
@@ -79,11 +81,13 @@ class TestLabelsJar(TestCase):
         self.assertItemsEqual(
             [{'label_id': 'question',
               'title': 'Questions and inquiries',
-              'color': 'green'},
+              'color': 'green',
+              'by_user': False},
 
              {'label_id': 'bug',
               'title': 'Bug',
-              'color': 'red'}],
+              'color': 'red',
+              'by_user': True}],
             ILabelJar(root).list())
 
     @browsing
@@ -96,8 +100,8 @@ class TestLabelsJar(TestCase):
     @browsing
     def test_partial_update_label(self, browser):
         root = create(Builder('label root')
-                      .with_labels(('Question', 'purple'),
-                                   ('Bug', 'red')))
+                      .with_labels(('Question', 'purple', False),
+                                   ('Bug', 'red', True)))
 
         browser.login().open(root,
                              view='labels-jar/update',
@@ -107,18 +111,20 @@ class TestLabelsJar(TestCase):
         self.assertItemsEqual(
             [{'label_id': 'question',
               'title': 'Questions and inquiries',
-              'color': 'purple'},
+              'color': 'purple',
+              'by_user': False},
 
              {'label_id': 'bug',
               'title': 'Bug',
-              'color': 'red'}],
+              'color': 'red',
+              'by_user': True}],
             ILabelJar(root).list())
 
     @browsing
     def test_remove_label(self, browser):
         root = create(Builder('label root')
-                      .with_labels(('Question', 'purple'),
-                                   ('Bug', 'red')))
+                      .with_labels(('Question', 'purple', False),
+                                   ('Bug', 'red', True)))
 
         browser.login().open(root,
                              view='labels-jar/remove',
@@ -127,7 +133,8 @@ class TestLabelsJar(TestCase):
         self.assertEqual(
             [{'label_id': 'bug',
               'title': 'Bug',
-              'color': 'red'}],
+              'color': 'red',
+              'by_user': True}],
             ILabelJar(root).list())
 
     @browsing
@@ -140,7 +147,7 @@ class TestLabelsJar(TestCase):
     @browsing
     def test_edit_label_form_change_title(self, browser):
         root = create(Builder('label root')
-                      .with_labels(('Feature', 'blue')))
+                      .with_labels(('Feature', 'blue', True)))
 
         browser.login().open(root,
                              view='labels-jar/edit_label?label_id=feature')
@@ -150,13 +157,14 @@ class TestLabelsJar(TestCase):
         self.assertEqual(
             [{'label_id': 'feature',
               'title': 'Features and inquiries',
-              'color': 'blue'}],
+              'color': 'blue',
+              'by_user': True}],
             ILabelJar(root).list())
 
     @browsing
     def test_edit_label_form_change_color(self, browser):
         root = create(Builder('label root')
-                      .with_labels(('Feature', 'blue')))
+                      .with_labels(('Feature', 'blue', True)))
 
         browser.login().open(root,
                              view='labels-jar/edit_label?label_id=feature')
@@ -166,13 +174,32 @@ class TestLabelsJar(TestCase):
         self.assertEqual(
             [{'label_id': 'feature',
               'title': 'Feature',
-              'color': 'green'}],
+              'color': 'green',
+              'by_user': True}],
+            ILabelJar(root).list())
+
+    @browsing
+    def test_edit_label_form_change_by_user(self, browser):
+        root = create(Builder('label root')
+                      .with_labels(('Feature', 'blue', False)))
+
+        browser.login().open(root,
+                             view='labels-jar/edit_label?label_id=feature')
+
+        browser.find('by_user').value = 'on'
+        browser.forms.get('form-0').submit()
+
+        self.assertEqual(
+            [{'label_id': 'feature',
+              'title': 'Feature',
+              'color': 'blue',
+              'by_user': True}],
             ILabelJar(root).list())
 
     @browsing
     def test_edit_label_form_delete_label(self, browser):
         root = create(Builder('label root')
-                      .with_labels(('Feature', 'blue')))
+                      .with_labels(('Feature', 'blue', True)))
 
         browser.login().open(root,
                              view='labels-jar/edit_label?label_id=feature')

@@ -15,7 +15,7 @@
              tal:attributes="data-label-id label/label_id">
           <div tal:attributes="class string:labelColor labelcolor-${label/color};
                                data-color label/color">
-            <span class="labelTitle" tal:content="label/title" />
+            <span class="labelTitle" tal:content="python: view.label_title(label['title'], label.get('by_user', False))" />
             <a class="editLabelLink"
                tal:condition="can_edit"
                tal:attributes="href string:${here/absolute_url}/labels-jar/edit_label?label_id=${label/label_id}"
@@ -35,6 +35,8 @@
         </div>
         <input type="text" name="title" placeholder="Title"
                i18n:attributes="placeholder new_label_title_placeholder"/>
+        <input type="checkbox" name="by_user" id="by_user_id"/>
+        <label for="by_user_id" i18n:translate="by_user_checkbox">Registered by user</label>
         <div class="colorChooser">
           <tal:colors repeat="color view/colors">
             <div class="colorSet">

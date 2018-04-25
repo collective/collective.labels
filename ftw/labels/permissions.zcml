@@ -12,4 +12,9 @@
         title="ftw.labels: Change Labels"
         />
 
+    <permission
+        id="ftw.labels.ChangePersonalLabels"
+        title="ftw.labels: Change Personal Labels"
+        />
+
 </configure>

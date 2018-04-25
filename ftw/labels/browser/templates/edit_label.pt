@@ -32,6 +32,8 @@
         Label Title
       </label>
       <input type="text" name="title" tal:attributes="value label/title" />
+      <input type="checkbox" name="by_user" id="by_user_id" tal:attributes="checked python:label.get('by_user', '') or None"/>
+      <label for="by_user_id" i18n:translate="by_user_checkbox">Registered by user</label>
 
       <div class="colorChooser">
         <tal:colors repeat="color view/colors">

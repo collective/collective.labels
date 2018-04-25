@@ -20,7 +20,7 @@ $(document).ready(function(){
     $(this).closest('form').find('input[name=color]').val($(this).data("color"));
   });
 
-  $('.labelItem').click(function() {
+  $('.labelItem.globLabel').click(function() {
     $(this).toggleClass('selected');
     $(this).toggleClass(
       'labelcolor-' + $(this).find('.labelColor').data('color'));
@@ -54,6 +54,26 @@ $(document).ready(function(){
     subtype: 'ajax',
     width: '235px',
     noform: function(el) {return $.plonepopups.noformerrorshow(el, 'close');}
+  });
+
+  $('.pers-edit-1').click(function(){
+    var $label = $(this)
+    var $container = $label.closest('#active_url');
+    var data = {'label_id': $label.data('label_id'), 'active': $label.data('active')}
+    $.ajax({
+      type: "POST",
+      url: $container.data('obj_url') + "/pers-labeling/pers_update",
+      data: data,
+      cache: false,
+      dataType: "json",
+      success: function(result){
+       if(result.ret=='ok'){
+        $label.toggleClass('labelcolor-inactive labelcolor-' + $label.data('o_color'));
+        $label.attr('data-active', result.new_status)
+        $label.data('active', result.new_status)
+       }
+      }
+    });
   });
 
 });

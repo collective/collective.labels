@@ -29,8 +29,10 @@ class LabelsJar(BrowserView):
         if not color:
             color = self._get_random_color()
 
+        by_user = bool(self.request.form.get('by_user', False))  # received value is 'on' when checked
+
         jar = ILabelJar(self.context)
-        jar.get(jar.add(title, color))
+        jar.get(jar.add(title, color, by_user))
         return self._redirect()
 
     def update(self):
@@ -54,6 +56,9 @@ class LabelsJar(BrowserView):
         color = self.request.form.get('color', None)
         if color:
             label['color'] = color
+
+        by_user = bool(self.request.form.get('by_user', False))
+        label['by_user'] = by_user
 
         jar.update(**label)
         return self._redirect()

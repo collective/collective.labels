@@ -100,6 +100,8 @@
   line-height: 1em;
   white-space: nowrap;
   margin: 0 0.25em 0.25em 0;
+  min-width: 2em;
+  text-align: center;
 }
 #content #labeling-viewlet ul li .labelItem {
   border-radius: 4px;
@@ -143,6 +145,19 @@
   display: block;
 }
 
+.labelColor.labelcolor-inactive {
+  background: white;
+  border-color: black;
+  color: black;
+}
+
+.labelItem.pers-edit-1 {
+  cursor: pointer;
+}
+
+#content #labeling-viewlet > ul > li#label-type-separator > .labelItem {
+  padding-left: 1em;
+}
 
 /* generated with scss */
 

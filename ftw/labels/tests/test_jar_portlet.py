@@ -70,27 +70,27 @@ class LabelJarPortletFunctionalTest(TestCase):
     @browsing
     def test_list_all_labels_in_the_jar(self, browser):
         folder = create(Builder('label root')
-                        .with_labels(('Label 1', ''), ('Label 2', '')))
+                        .with_labels(('Label 1', '', False), ('Label 2', '', True)))
         browser.visit(folder)
         self.assertItemsEqual(
-            ['Label 1', 'Label 2'],
+            ['Label 1', 'Label 2 (*)'],
             jarportlet.labels().keys())
 
     @browsing
     def test_list_same_labels_in_the_labeldisplay_folder(self, browser):
         folder = create(Builder('label root')
-                        .with_labels(('Label 1', ''), ('Label 2', '')))
+                        .with_labels(('Label 1', '', False), ('Label 2', '', True)))
 
         subfolder = create(Builder('label display').within(folder))
 
         browser.visit(subfolder)
         self.assertItemsEqual(
-            ['Label 1', 'Label 2'],
+            ['Label 1', 'Label 2 (*)'],
             jarportlet.labels().keys())
 
     @browsing
     def test_add_color_to_each_listing_item(self, browser):
-        folder = create(Builder('label root').with_labels(('James', 'red')))
+        folder = create(Builder('label root').with_labels(('James', 'red', False)))
         browser.visit(folder)
         self.assertEquals({'James': 'red'}, jarportlet.labels())
 
@@ -108,7 +108,7 @@ class LabelJarPortletFunctionalTest(TestCase):
 
     @browsing
     def test_user_with_permission_can_view_jar_edit_elements(self, browser):
-        folder = create(Builder('label root').with_labels(('James', 'red')))
+        folder = create(Builder('label root').with_labels(('James', 'red', False)))
         editor = create(Builder('user').with_roles('Editor'))
         browser.login(editor).visit(folder)
 
@@ -117,7 +117,7 @@ class LabelJarPortletFunctionalTest(TestCase):
 
     @browsing
     def test_user_without_permission_cant_view_jar_edit_elements(self, browser):
-        folder = create(Builder('label root').with_labels(('James', 'red')))
+        folder = create(Builder('label root').with_labels(('James', 'red', False)))
         reader = create(Builder('user').with_roles('Reader'))
         browser.login(reader).visit(folder)
 

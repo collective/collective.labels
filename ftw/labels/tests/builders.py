@@ -24,8 +24,8 @@ class LabelRootBuilder(ArchetypesBuilder):
     def after_create(self, obj):
         super(LabelRootBuilder, self).after_create(obj)
         jar = ILabelJar(obj)
-        for title, color in self.labels:
-            jar.add(title, color)
+        for title, color, by_user in self.labels:
+            jar.add(title, color, by_user)
 
         if self.session.auto_commit:
             transaction.commit()
@@ -54,15 +54,22 @@ class LabelledPageBuilder(ArchetypesBuilder):
         super(LabelledPageBuilder, self).__init__(*args, **kwargs)
         self.providing(ILabelSupport)
         self.activated_label_ids = []
+        self.personal_label_ids = []
 
     def with_labels(self, *label_ids):
         self.activated_label_ids = label_ids
+        return self
+
+    def with_pers_labels(self, *label_ids):
+        self.personal_label_ids = label_ids
         return self
 
     def after_create(self, obj):
         super(LabelledPageBuilder, self).after_create(obj)
 
         ILabeling(obj).update(self.activated_label_ids)
+        for label_id in self.personal_label_ids:
+            ILabeling(obj).pers_update(label_id, True)
         if self.session.auto_commit:
             transaction.commit()
 
