@@ -10,7 +10,7 @@ def labels(obj):
     for label_id in labeling.storage:
         try:
             label = labeling.jar.get(label_id)
-            if label.get('by_user', False):
+            if label['by_user']:
                 if len(labeling.storage[label_id]):
                     # if at least one user has selected the label, we add it
                     labels.append(label_id)

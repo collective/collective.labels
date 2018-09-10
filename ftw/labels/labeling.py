@@ -29,9 +29,8 @@ class Labeling(object):
                 continue  # do we remove key ??
             label = self.jar.get(label_id)
             if label_id not in label_ids:
-                if not label.get('by_user', False):
+                if not label['by_user']:
                     self.storage.pop(label_id)
-
         # adds selected labels
         for label_id in label_ids:
             if label_id not in jar_keys:
@@ -65,7 +64,7 @@ class Labeling(object):
         for label_id in self.storage:
             try:
                 label = self.jar.get(label_id)
-                if label.get('by_user', False):
+                if label['by_user']:
                     if self.user_id() in self.storage[label_id]:
                         labels.append(label)
                 else:
@@ -78,7 +77,7 @@ class Labeling(object):
         # possible labels, marking active ones
         labels = [[], []]
         for label in self.jar.list():
-            if label.get('by_user', False):
+            if label['by_user']:
                 label['active'] = (label['label_id'] in self.storage and
                                    self.user_id() in self.storage[label['label_id']])
                 labels[0].append(label)
