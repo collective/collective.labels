@@ -31,6 +31,7 @@ class Labeling(object):
             if label_id not in label_ids:
                 if not label['by_user']:
                     self.storage.pop(label_id)
+
         # adds selected labels
         for label_id in label_ids:
             if label_id not in jar_keys:

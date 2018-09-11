@@ -7,17 +7,18 @@ from ftw.labels.labeling import ILabeling
 from plone import api
 from zope.annotation.interfaces import IAnnotations
 
+
 # The migration function -------------------------------------------------------
-def migrate(context):
-    """This migration function:
+def migrate_to_2001(context):
+    """
+        Add 'by_user' key to False in jar.
+        Migrate annotation content on ILabelSupport to replace PersistentList by PersistentMapping.
     """
     # take all elements who provides ftw.labels.interfaces.ILabelRoot or ILabelJarChild
     portal_catalog = api.portal.get_tool('portal_catalog')
-    brains = set(portal_catalog(object_provides=ILabelRoot.__identifier__) +
-                 portal_catalog(object_provides=ILabelJarChild.__identifier__))
+    brains = portal_catalog(object_provides=(ILabelRoot.__identifier__, ILabelJarChild.__identifier__))
     for brain in brains:
-        object = brain.getObject()
-        jar = ILabelJar(object)
+        jar = ILabelJar(brain.getObject())
         for key in jar.storage.keys():
             if 'by_user' not in jar.storage[key].keys():
                 # give default value if not exist
@@ -34,6 +35,4 @@ def migrate(context):
         del annotation['ftw.labels:labeling']
         labeling._storage = None
         labeling.update(old_values)
-
-    print(brains)
 # ------------------------------------------------------------------------------
