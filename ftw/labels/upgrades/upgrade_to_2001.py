@@ -8,8 +8,7 @@ from plone import api
 from zope.annotation.interfaces import IAnnotations
 
 
-# The migration function -------------------------------------------------------
-def migrate_to_2001(context):
+def upgrade_to_2001(context):
     """
         Add 'by_user' key to False in jar.
         Migrate annotation content on ILabelSupport to replace PersistentList by PersistentMapping.
@@ -28,11 +27,10 @@ def migrate_to_2001(context):
     brains = portal_catalog(object_provides=ILabelSupport.__identifier__)
     # Transform PersistentList in PersistentMapping
     for brain in brains:
-        object = brain.getObject()
-        labeling = ILabeling(object)
+        obj = brain.getObject()
+        labeling = ILabeling(obj)
         old_values = [label for label in labeling.storage]
-        annotation = IAnnotations(object)
+        annotation = IAnnotations(obj)
         del annotation['ftw.labels:labeling']
         labeling._storage = None
         labeling.update(old_values)
-# ------------------------------------------------------------------------------
