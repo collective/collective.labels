@@ -24,7 +24,7 @@ class Labeling(BrowserView):
         if not label_id or activate not in ['True', 'False']:
             return self._redirect()
         activate = not eval(activate)
-        ret = labeling.pers_update(label_id, activate)
+        ret = labeling.pers_update([label_id], activate)
         self.context.reindexObject(idxs=['labels'])
         writer = getUtility(IJSONWriter)
         self.request.response.setHeader('content-type', 'application/json')

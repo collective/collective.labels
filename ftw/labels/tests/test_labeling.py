@@ -59,7 +59,7 @@ class TestLabeling(MockTestCase):
         labeling = ILabeling(self.document)
 
         labeling.update(['question'])
-        labeling.pers_update('read', True)
+        labeling.pers_update(['read'], True)
         self.assertEqual(
             [[{'label_id': 'read',
              'title': 'Read',
@@ -82,7 +82,7 @@ class TestLabeling(MockTestCase):
         self.assertEqual([], labeling.active_labels())
 
         labeling.update(['bug'])
-        labeling.pers_update('feature', True)
+        labeling.pers_update(['feature'], True)
         self.assertItemsEqual(['Bug', 'Feature'],
                               label_titles(labeling.active_labels()))
 
@@ -93,12 +93,12 @@ class TestLabeling(MockTestCase):
 
         labeling = ILabeling(self.document)
         labeling.update(['bug', 'question'])
-        labeling.pers_update('feature', True)
+        labeling.pers_update(['feature'], True)
         self.assertItemsEqual(['Bug', 'Feature', 'Question'],
                               label_titles(labeling.active_labels()))
 
         labeling.update(['bug'])
-        labeling.pers_update('feature', False)
+        labeling.pers_update(['feature'], False)
         self.assertItemsEqual(['Bug'],
                               label_titles(labeling.active_labels()))
 
@@ -125,7 +125,7 @@ class TestLabeling(MockTestCase):
 
         labeling = ILabeling(self.document)
         labeling.update(['bug'])
-        labeling.pers_update('duplicate', True)
+        labeling.pers_update(['duplicate'], True)
         self.assertListEqual(
             [{'label_id': 'bug',
               'title': 'Bug',
