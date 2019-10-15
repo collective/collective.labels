@@ -68,8 +68,7 @@ class LabelledPageBuilder(ArchetypesBuilder):
         super(LabelledPageBuilder, self).after_create(obj)
 
         ILabeling(obj).update(self.activated_label_ids)
-        for label_id in self.personal_label_ids:
-            ILabeling(obj).pers_update(label_id, True)
+        ILabeling(obj).pers_update(self.personal_label_ids, True)
         if self.session.auto_commit:
             transaction.commit()
 

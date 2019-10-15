@@ -43,20 +43,22 @@ class Labeling(object):
             if label_id not in self.storage:
                 self.storage[label_id] = PersistentList()
 
-    def pers_update(self, label_id, activate):
+    def pers_update(self, label_ids, activate):
         user_id = self.user_id()
         if not user_id:
             return False
         if activate:
-            if label_id not in self.storage:
-                self.storage[label_id] = PersistentList()
-            if user_id not in self.storage[label_id]:
-                self.storage[label_id].append(user_id)
+            for label_id in label_ids:
+                if label_id not in self.storage:
+                    self.storage[label_id] = PersistentList()
+                if user_id not in self.storage[label_id]:
+                    self.storage[label_id].append(user_id)
         else:
-            if user_id in self.storage[label_id]:
-                self.storage[label_id].remove(user_id)
-            if not self.storage[label_id]:
-                self.storage.pop(label_id)
+            for label_id in label_ids:
+                if user_id in self.storage[label_id]:
+                    self.storage[label_id].remove(user_id)
+                if not self.storage[label_id]:
+                    self.storage.pop(label_id)
         return True
 
     def active_labels(self):
