@@ -24,7 +24,6 @@ class TestLabeling(MockTestCase):
         self.document = self.providing_stub([ILabelSupport,
                                              IAttributeAnnotatable])
         self.set_parent(self.document, self.root)
-        self.replay()
         self.jar = ILabelJar(self.root)
 
     def test_adapter(self):

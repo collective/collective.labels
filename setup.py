@@ -9,7 +9,7 @@ tests_require = [
     'asserts',
     'ftw.builder',
     'ftw.testbrowser',
-    'ftw.testing',
+    'ftw.testing>=2',
     'plone.app.testing',
     'plone.mocktestcase',
     'transaction',
