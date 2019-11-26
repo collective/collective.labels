@@ -7,7 +7,7 @@ from ftw.testbrowser import browsing
 from ftw.testbrowser.pages import statusmessages
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
-from unittest2 import TestCase
+from unittest import TestCase
 
 
 class TestLabelsJar(TestCase):

@@ -6,7 +6,7 @@ from zope.annotation import IAttributeAnnotatable
 from zope.component import queryAdapter
 from plone.mocktestcase.dummy import Dummy
 from zope.interface.verify import verifyClass
-from unittest2 import TestCase
+from unittest import TestCase
 from zope.interface import alsoProvides
 
 
