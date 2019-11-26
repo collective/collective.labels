@@ -5,8 +5,8 @@ Changelog
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Corrected bug when removing multiple personal labels, if one is not assigned.
+  [sgeulette]
 
 2.0.0 (2019-10-15)
 ------------------

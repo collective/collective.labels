@@ -55,6 +55,8 @@ class Labeling(object):
                     self.storage[label_id].append(user_id)
         else:
             for label_id in label_ids:
+                if label_id not in self.storage:
+                    continue
                 if user_id in self.storage[label_id]:
                     self.storage[label_id].remove(user_id)
                 if not self.storage[label_id]:
