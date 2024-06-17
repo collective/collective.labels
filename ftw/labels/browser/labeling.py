@@ -1,6 +1,6 @@
 from Products.Five.browser import BrowserView
 from ftw.labels.interfaces import ILabeling
-from z3c.json.interfaces import IJSONWriter
+# from z3c.json.interfaces import IJSONWriter  # MIGRATION-PLONE6
 from zope.component import getUtility
 
 
@@ -26,7 +26,8 @@ class Labeling(BrowserView):
         activate = not eval(activate)
         ret = labeling.pers_update([label_id], activate)
         self.context.reindexObject(idxs=['labels'])
-        writer = getUtility(IJSONWriter)
+        # writer = getUtility(IJSONWriter)  # MIGRATION-PLONE6
+        writer = {}
         self.request.response.setHeader('content-type', 'application/json')
         return writer.write({'ret': (ret and 'ok' or 'nok'), 'new_status': str(activate)})
 

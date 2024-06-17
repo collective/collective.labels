@@ -55,7 +55,7 @@ setup(name='ftw.labels',
         'plone.indexer',
         'plone.portlets',
         'setuptools',
-        'z3c.json',
+        # 'z3c.json',  # MIGRATION-PLONE6
         'zExceptions',
         'zope.annotation',
         'zope.component',
