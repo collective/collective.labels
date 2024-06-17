@@ -11,15 +11,15 @@ from zope.component import adapter
 from zope.component import adapts
 from zope.component import getUtility
 from zope.interface import implementer
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 
 
 ANNOTATION_KEY = 'ftw.labels:jar'
 
 
+@implementer(ILabelJar)
 class LabelJar(object):
-    implements(ILabelJar)
     adapts(ILabelRoot)
 
     def __init__(self, context):

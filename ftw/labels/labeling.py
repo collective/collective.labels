@@ -7,14 +7,14 @@ from persistent.mapping import PersistentMapping
 from plone import api
 from zope.annotation.interfaces import IAnnotations
 from zope.component import adapts
-from zope.interface import implements
+from zope.interface import implementer
 
 
 ANNOTATION_KEY = 'ftw.labels:labeling'
 
 
+@implementer(ILabeling)
 class Labeling(object):
-    implements(ILabeling)
     adapts(ILabelSupport)
 
     def __init__(self, context):
