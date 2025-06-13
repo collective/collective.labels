@@ -78,7 +78,7 @@ class TestLabelsJar(TestCase):
                                    'title': 'Questions and inquiries',
                                    'color': 'green'})
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [{'label_id': 'question',
               'title': 'Questions and inquiries',
               'color': 'green',
@@ -108,7 +108,7 @@ class TestLabelsJar(TestCase):
                              data={'label_id': 'question',
                                    'title': 'Questions and inquiries'})
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [{'label_id': 'question',
               'title': 'Questions and inquiries',
               'color': 'purple',

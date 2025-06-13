@@ -72,7 +72,7 @@ class LabelJarPortletFunctionalTest(TestCase):
         folder = create(Builder('label root')
                         .with_labels(('Label 1', '', False), ('Label 2', '', True)))
         browser.visit(folder)
-        self.assertItemsEqual(
+        self.assertCountEqual(
             ['Label 1', 'Label 2 (*)'],
             jarportlet.labels().keys())
 
@@ -84,7 +84,7 @@ class LabelJarPortletFunctionalTest(TestCase):
         subfolder = create(Builder('label display').within(folder))
 
         browser.visit(subfolder)
-        self.assertItemsEqual(
+        self.assertCountEqual(
             ['Label 1', 'Label 2 (*)'],
             jarportlet.labels().keys())
 
@@ -92,19 +92,19 @@ class LabelJarPortletFunctionalTest(TestCase):
     def test_add_color_to_each_listing_item(self, browser):
         folder = create(Builder('label root').with_labels(('James', 'red', False)))
         browser.visit(folder)
-        self.assertEquals({'James': 'red'}, jarportlet.labels())
+        self.assertEqual({'James': 'red'}, jarportlet.labels())
 
     @browsing
     def test_create_label(self, browser):
         folder = create(Builder('label root'))
         browser.login().visit(folder)
-        self.assertEquals({}, jarportlet.labels())
+        self.assertEqual({}, jarportlet.labels())
 
         browser.forms['create-label'].fill({
                 'title': 'Question',
                 'color': 'purple'}).submit()
 
-        self.assertEquals({'Question': 'purple'}, jarportlet.labels())
+        self.assertEqual({'Question': 'purple'}, jarportlet.labels())
 
     @browsing
     def test_user_with_permission_can_view_jar_edit_elements(self, browser):

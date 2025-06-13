@@ -24,7 +24,7 @@ class Labeling(object):
     def update(self, label_ids):
         jar_keys = self.jar.storage.keys()
         # removes deselected labels
-        for label_id in self.storage.keys():  # use keys to avoid RuntimeError: dictionary changed size during iteration
+        for label_id in self.storage.copy().keys():
             if label_id not in jar_keys:
                 continue  # do we remove key ??
             label = self.jar.get(label_id)

@@ -33,9 +33,9 @@ class TestCatalogIndex(TestCase):
 
         page.reindexObject(idxs=['labels'])
 
-        self.assertItemsEqual(
-            ['bugs', 'test_user_1_:bugs', 'question'],
-            self.index_data_for(page).get('labels'))
+        labels = self.index_data_for(page).get('labels')
+        self.assertTrue(labels)
+        self.assertCountEqual(['bugs', 'test_user_1_:bugs', 'question'], labels)
 
     def index_data_for(self, obj):
         rid = self.catalog.getrid('/'.join(obj.getPhysicalPath()))

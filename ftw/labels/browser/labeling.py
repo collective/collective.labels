@@ -1,7 +1,6 @@
 from Products.Five.browser import BrowserView
 from ftw.labels.interfaces import ILabeling
 # from z3c.json.interfaces import IJSONWriter  # MIGRATION-PLONE6
-from zope.component import getUtility
 
 
 class Labeling(BrowserView):
@@ -34,7 +33,7 @@ class Labeling(BrowserView):
     def _redirect(self):
         response = self.request.RESPONSE
         referer = self.request.get('HTTP_REFERER')
-        if referer and referer is not 'localhost':
+        if referer and referer != 'localhost':
             response.redirect(referer)
         else:
             response.redirect(self.context.absolute_url())

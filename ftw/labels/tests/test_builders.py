@@ -20,7 +20,7 @@ class TestTestingBuidlers(TestCase):
                       .with_labels(('Questions', 'blue', False),
                                    ('Bugs', 'red', True)))
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [{'label_id': 'questions',
               'title': 'Questions',
               'color': 'blue',
@@ -41,7 +41,7 @@ class TestTestingBuidlers(TestCase):
                       .with_labels('questions')
                       .with_pers_labels('bugs'))
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [{'label_id': 'questions',
               'title': 'Questions',
               'color': 'blue',

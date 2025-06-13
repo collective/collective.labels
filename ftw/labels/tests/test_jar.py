@@ -4,11 +4,17 @@ from ftw.labels.jar import LabelJar
 from ftw.labels.testing import ADAPTERS_ZCML_LAYER
 from zope.annotation import IAttributeAnnotatable
 from zope.component import queryAdapter
-from plone.mocktestcase.dummy import Dummy
 from zope.interface.verify import verifyClass
 from unittest import TestCase
 from zope.interface import alsoProvides
 
+
+class Dummy(object):
+    """Dummy object with arbitrary attributes
+    """
+
+    def __init__(self, **kw):
+        self.__dict__.update(kw)
 
 class TestLabelJar(TestCase):
     layer = ADAPTERS_ZCML_LAYER
@@ -43,7 +49,7 @@ class TestLabelJar(TestCase):
         first_label_id = jar.add('Question', '#FF0000', False)
         second_label_id = jar.add('Question', '#FF0000', True)
 
-        self.assertNotEquals(second_label_id, first_label_id,
+        self.assertNotEqual(second_label_id, first_label_id,
                              'Labels ID should be unique.')
 
     def test_listing_labels(self):
@@ -52,7 +58,7 @@ class TestLabelJar(TestCase):
         first_label_id = jar.add('First', '#FF0000', False)
         second_label_id = jar.add('Second', '#0000FF', True)
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [{'label_id': first_label_id,
               'title': 'First',
               'color': '#FF0000',

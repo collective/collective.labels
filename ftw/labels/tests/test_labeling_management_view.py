@@ -29,7 +29,7 @@ class TestLabelingView(TestCase):
                              view='labeling/update',
                              data={'activate_labels': ['question', 'bug']})
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [{'label_id': 'question',
               'title': 'Question',
               'color': 'purple',
@@ -40,13 +40,13 @@ class TestLabelingView(TestCase):
               'by_user': False}],
             ILabeling(page).active_labels())
 
-        self.assertItemsEqual(['bug', 'question'], self.indexed_labels_for(page))
+        self.assertCountEqual(['bug', 'question'], self.indexed_labels_for(page))
 
         browser.login().open(page,
                              view='pers-labeling/pers_update',
                              data={'label_id': 'feature', 'active': 'False'})
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [{'label_id': 'question',
               'title': 'Question',
               'color': 'purple',
@@ -61,7 +61,7 @@ class TestLabelingView(TestCase):
               'by_user': True}],
             ILabeling(page).active_labels())
 
-        self.assertItemsEqual(['bug', 'question', 'feature', 'test_user_1_:feature'], self.indexed_labels_for(page))
+        self.assertCountEqual(['bug', 'question', 'feature', 'test_user_1_:feature'], self.indexed_labels_for(page))
 
     @browsing
     def test_deactivate_labels(self, browser):
@@ -78,7 +78,7 @@ class TestLabelingView(TestCase):
                              view='labeling/update',
                              data={})
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [{'label_id': 'feature',
               'title': 'Feature',
               'color': 'blue',
@@ -89,7 +89,7 @@ class TestLabelingView(TestCase):
                              view='pers-labeling/pers_update',
                              data={'label_id': 'feature', 'active': 'True'})
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [],
             ILabeling(page).active_labels())
 
@@ -107,7 +107,7 @@ class TestLabelingView(TestCase):
                              view='labeling/update',
                              data={'activate_labels': ['question', 'feature']})
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             [{'label_id': 'question',
               'title': 'Question',
               'color': 'purple',

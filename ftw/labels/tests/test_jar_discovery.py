@@ -21,7 +21,7 @@ class TestJarDiscovery(MockTestCase):
 
         jar = ILabelJar(document)
         self.assertIsInstance(jar, LabelJar)
-        self.assertEquals(root, jar.context)
+        self.assertEqual(root, jar.context)
 
     def test_raise_when_app_is_reached(self):
         app = self.providing_stub(IApplication)
@@ -29,7 +29,7 @@ class TestJarDiscovery(MockTestCase):
         with self.assertRaises(LookupError) as cm:
             ILabelJar(document)
 
-        self.assertEquals(
+        self.assertEqual(
             'Could not find ILabelJar on any parents.'
             ' No parent seems to provide ILabelRoot.',
             str(cm.exception))

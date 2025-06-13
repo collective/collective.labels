@@ -82,7 +82,7 @@ class TestLabeling(MockTestCase):
 
         labeling.update(['bug'])
         labeling.pers_update(['feature'], True)
-        self.assertItemsEqual(['Bug', 'Feature'],
+        self.assertCountEqual(['Bug', 'Feature'],
                               label_titles(labeling.active_labels()))
 
     def test_update__disable_labels(self):
@@ -93,12 +93,12 @@ class TestLabeling(MockTestCase):
         labeling = ILabeling(self.document)
         labeling.update(['bug', 'question'])
         labeling.pers_update(['feature'], True)
-        self.assertItemsEqual(['Bug', 'Feature', 'Question'],
+        self.assertCountEqual(['Bug', 'Feature', 'Question'],
                               label_titles(labeling.active_labels()))
 
         labeling.update(['bug'])
         labeling.pers_update(['feature'], False)
-        self.assertItemsEqual(['Bug'],
+        self.assertCountEqual(['Bug'],
                               label_titles(labeling.active_labels()))
 
         labeling.update([])

@@ -11,7 +11,6 @@ from zope.component import adapter
 from zope.component import adapts
 from zope.component import getUtility
 from zope.interface import implementer
-from zope.interface import implementer
 from zope.interface import Interface
 
 
