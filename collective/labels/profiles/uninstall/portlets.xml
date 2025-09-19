@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<portlets>
+    <portlet
+        addview="collective.labels.labeljar"
+        title="collective.labels: jar portlet"
+        remove="True"
+    />
+    <assignment
+        name="collective-labels-labeljar"
+        category="context"
+        key="/"
+        manager="plone.leftcolumn"
+        type="collective.labels.labeljar"
+        remove="True">
+    </assignment>
+</portlets>

@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:lawgiver="http://namespaces.zope.org/lawgiver"
+    i18n_domain="collective.labels">
+
+    <include package="collective.lawgiver" file="meta.zcml" />
+
+    <lawgiver:map_permissions
+        action_group="edit"
+        permissions="
+                     collective.labels: Manage Labels Jar,
+                     collective.labels: Change Labels,
+                     "
+        />
+
+</configure>

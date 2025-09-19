@@ -36,7 +36,7 @@ Changelog
 1.2.1 (2018-02-12)
 ------------------
 
-- Set applyPrefix="True" for "++resource++ftw.labels/select2.css"
+- Set applyPrefix="True" for "++resource++collective.labels/select2.css"
   in cssregistry.xml.
   [gbastien]
 
@@ -54,9 +54,9 @@ Changelog
 1.1.1 (2017-02-09)
 ------------------
 
-- Fix labeljar portlet if you use it without ftw.table.
-  The javascript for the ftw.table-integration was executed
-  even if you don't have an ftw.table.
+- Fix labeljar portlet if you use it without collective.table.
+  The javascript for the collective.table-integration was executed
+  even if you don't have an collective.table.
   [elioschmutz]
 
 
@@ -69,15 +69,15 @@ Changelog
 
 - Fix portelt structure.
   Adjust it to plone default structure.
-  https://github.com/4teamwork/ftw.labels/issues/43
+  https://github.com/4teamwork/collective.labels/issues/43
   [elioschmutz]
 
 - Add ILabelJarChild interface to inherit labels of a parents ILabelJar
-  https://github.com/4teamwork/ftw.labels/issues/41
+  https://github.com/4teamwork/collective.labels/issues/41
   [elioschmutz]
 
 - Do not show label configuration button for not permitted users.
-  https://github.com/4teamwork/ftw.labels/issues/39
+  https://github.com/4teamwork/collective.labels/issues/39
   [elioschmutz]
 
 - Do not redirect to referer when updating the labels jar.

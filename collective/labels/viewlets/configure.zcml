@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:viewlet
+      name="collective.labels.labeling"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+      class=".labeling.LabelingViewlet"
+      permission="zope2.View"
+      for="collective.labels.interfaces.ILabelSupport"
+      />
+
+</configure>

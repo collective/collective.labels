@@ -16,7 +16,7 @@ tests_require = [
     ]
 
 
-setup(name='ftw.labels',
+setup(name='collective.labels',
       version=version,
       description='A Plone addon for labels.',
 
@@ -27,17 +27,17 @@ setup(name='ftw.labels',
         'Framework :: Plone',
         'Framework :: Plone :: 4.3',
         'Intended Audience :: Developers',
-        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Socollectiveare Development :: Libraries :: Python Modules',
         ],
 
-      keywords='ftw labels',
+      keywords='collective labels',
       author='4teamwork AG',
       author_email='mailto:info@4teamwork.ch',
-      url='https://github.com/4teamwork/ftw.labels',
+      url='https://github.com/collective/collective.labels',
 
       license='GPL2',
       packages=find_packages(exclude=['ez_setup']),
-      namespace_packages=['ftw', ],
+      namespace_packages=['collective', ],
       include_package_data=True,
       zip_safe=False,
 
