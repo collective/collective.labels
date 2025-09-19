@@ -25,11 +25,11 @@ setup(name='collective.labels',
 
       classifiers=[
         'Framework :: Plone',
-        'Framework :: Plone :: 4.3',
+        'Framework :: Plone :: 6.1',
+        'Programming Language :: Python :: 3',
         'Intended Audience :: Developers',
-        'Topic :: Socollectiveare Development :: Libraries :: Python Modules',
+        'Topic :: Software Development :: Libraries :: Python Modules',
         ],
-
       keywords='collective labels',
       author='4teamwork AG',
       author_email='mailto:info@4teamwork.ch',
