@@ -18,8 +18,8 @@ def upgrade_to_2001(context):
     brains = portal_catalog(object_provides=(ILabelRoot.__identifier__, ILabelJarChild.__identifier__))
     for brain in brains:
         jar = ILabelJar(brain.getObject())
-        for key in jar.storage.keys():
-            if 'by_user' not in jar.storage[key].keys():
+        for key in list(jar.storage.keys()):
+            if 'by_user' not in list(jar.storage[key].keys()):
                 # give default value if not exist
                 jar.storage[key]['by_user'] = False
 

@@ -5,8 +5,8 @@ Changelog
 3.0.0a2 (unreleased)
 --------------------
 
-- Nothing changed yet.
-
+- Applied lib2to3 on code
+  [sgeulette]
 
 3.0.0a1 (2025-09-19)
 --------------------

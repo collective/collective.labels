@@ -74,7 +74,7 @@ class LabelJarPortletFunctionalTest(TestCase):
         browser.visit(folder)
         self.assertCountEqual(
             ['Label 1', 'Label 2 (*)'],
-            jarportlet.labels().keys())
+            list(jarportlet.labels().keys()))
 
     @browsing
     def test_list_same_labels_in_the_labeldisplay_folder(self, browser):
@@ -86,7 +86,7 @@ class LabelJarPortletFunctionalTest(TestCase):
         browser.visit(subfolder)
         self.assertCountEqual(
             ['Label 1', 'Label 2 (*)'],
-            jarportlet.labels().keys())
+            list(jarportlet.labels().keys()))
 
     @browsing
     def test_add_color_to_each_listing_item(self, browser):

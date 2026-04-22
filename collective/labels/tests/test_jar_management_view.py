@@ -51,7 +51,7 @@ class TestLabelsJar(TestCase):
 
         browser.login().open(root, view='labels-jar/create')
 
-        statusmessages.assert_message(u"Please choose a title.")
+        statusmessages.assert_message("Please choose a title.")
 
     @browsing
     def test_create_label_without_color_add_random_existing_color(self, browser):
@@ -64,7 +64,7 @@ class TestLabelsJar(TestCase):
 
         selected_colors = [
             label.get('color') for label in ILabelJar(root).list()]
-        self.assertEquals(len(COLORS), len(list(set(selected_colors))))
+        self.assertEqual(len(COLORS), len(list(set(selected_colors))))
 
     @browsing
     def test_update_label(self, browser):

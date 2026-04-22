@@ -7,7 +7,7 @@ def make_sortable(text):
     """
     text = text.lower()
     normalized = unicodedata.normalize('NFKD', text)
-    text = u''.join([c for c in normalized if not unicodedata.combining(c)])
+    text = ''.join([c for c in normalized if not unicodedata.combining(c)])
     return text
 
 

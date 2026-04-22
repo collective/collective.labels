@@ -19,8 +19,8 @@ class LabelsJar(BrowserView):
         title = self.request.form.get('title', None)
         if not title:
             api.portal.show_message(
-                _(u'lable_title_is_missing',
-                  default=u'Please choose a title.'),
+                _('lable_title_is_missing',
+                  default='Please choose a title.'),
                 self.request, 'error')
 
             return self._redirect()

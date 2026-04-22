@@ -22,9 +22,9 @@ class Labeling(object):
         self.jar = ILabelJar(self.context)
 
     def update(self, label_ids):
-        jar_keys = self.jar.storage.keys()
+        jar_keys = list(self.jar.storage.keys())
         # removes deselected labels
-        for label_id in self.storage.copy().keys():
+        for label_id in list(self.storage.copy().keys()):
             if label_id not in jar_keys:
                 continue  # do we remove key ??
             label = self.jar.get(label_id)

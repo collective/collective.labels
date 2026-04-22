@@ -56,7 +56,7 @@ class LabelJar(object):
         return dict(self.storage[label_id])
 
     def list(self):
-        labels = map(dict, self.storage.values())
+        labels = list(map(dict, list(self.storage.values())))
         return sorted(labels, key=lambda cls: make_sortable(cls['title']))
 
     @property
