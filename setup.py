@@ -6,13 +6,9 @@ version = '3.0.0a2.dev0'
 
 
 tests_require = [
-    'asserts',
-    'ftw.builder',
-    'ftw.testbrowser',
-    'ftw.testing>=2',
     'plone.app.testing',
     'transaction',
-    'zope.configuration'
+    'zope.configuration',
     ]
 
 

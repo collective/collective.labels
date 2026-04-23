@@ -1,10 +1,11 @@
-from Products.CMFCore.utils import getToolByName
-from collective.builder import Builder
-from collective.builder import create
 from collective.labels.testing import LABELS_FUNCTIONAL_TESTING
-from plone.app.testing import TEST_USER_ID
+from collective.labels.tests.builders import Builder
+from collective.labels.tests.builders import create
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from Products.CMFCore.utils import getToolByName
 from unittest import TestCase
+import transaction
 
 
 class TestCatalogIndex(TestCase):
@@ -32,6 +33,7 @@ class TestCatalogIndex(TestCase):
         self.assertFalse(self.index_data_for(page).get('labels'))
 
         page.reindexObject(idxs=['labels'])
+        transaction.commit()
 
         labels = self.index_data_for(page).get('labels')
         self.assertTrue(labels)

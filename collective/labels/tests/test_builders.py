@@ -1,10 +1,10 @@
-from collective.builder import Builder
-from collective.builder import create
-from collective.labels.interfaces import ILabelJar
 from collective.labels.interfaces import ILabeling
+from collective.labels.interfaces import ILabelJar
 from collective.labels.testing import LABELS_FUNCTIONAL_TESTING
-from plone.app.testing import TEST_USER_ID
+from collective.labels.tests.builders import Builder
+from collective.labels.tests.builders import create
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from unittest import TestCase
 
 

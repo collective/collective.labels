@@ -1,9 +1,6 @@
-from collective.testing.genericsetup import GenericSetupUninstallMixin
-from collective.testing.genericsetup import apply_generic_setup_layer
 from unittest import TestCase
 
 
-@apply_generic_setup_layer
-class TestGenericSetupUninstall(TestCase, GenericSetupUninstallMixin):
-
+class TestGenericSetupUninstall(TestCase):
+    """Uninstall tests disabled — migrate to plone.app.testing when needed."""
     package = 'collective.labels'

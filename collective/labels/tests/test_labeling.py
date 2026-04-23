@@ -1,10 +1,10 @@
+from collective.labels.interfaces import ILabeling
 from collective.labels.interfaces import ILabelJar
 from collective.labels.interfaces import ILabelRoot
 from collective.labels.interfaces import ILabelSupport
-from collective.labels.interfaces import ILabeling
 from collective.labels.labeling import Labeling
 from collective.labels.testing import ADAPTERS_ZCML_LAYER
-from collective.testing import MockTestCase
+from collective.labels.tests.mock import MockTestCase
 from plone.app.testing import TEST_USER_ID
 from zope.annotation import IAttributeAnnotatable
 from zope.component import queryAdapter
@@ -140,7 +140,7 @@ class TestLabeling(MockTestCase):
         self.jar.add('Zeta-0', '', False)
         self.jar.add('zeta-1', '', False)
         self.jar.add('alpha-0', '', False)
-        self.jar.add('\xc3\x84lpha-1', '', False)
+        self.jar.add('Älpha-1', '', False)
         self.jar.add('Alpha-2', '', False)
 
         labeling = ILabeling(self.document)
@@ -153,7 +153,7 @@ class TestLabeling(MockTestCase):
         ])
 
         self.assertEqual(
-            ['alpha-0', '\xc3\x84lpha-1', 'Alpha-2', 'Zeta-0', 'zeta-1'],
+            ['alpha-0', 'Älpha-1', 'Alpha-2', 'Zeta-0', 'zeta-1'],
             [label.get('title') for label in labeling.active_labels()])
 
     def test_active_labels_filters_deleted_labels(self):

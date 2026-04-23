@@ -1,9 +1,9 @@
-from OFS.interfaces import IApplication
 from collective.labels.interfaces import ILabelJar
 from collective.labels.interfaces import ILabelRoot
 from collective.labels.jar import LabelJar
 from collective.labels.testing import ADAPTERS_ZCML_LAYER
-from collective.testing import MockTestCase
+from collective.labels.tests.mock import MockTestCase
+from OFS.interfaces import IApplication
 
 
 class TestJarDiscovery(MockTestCase):

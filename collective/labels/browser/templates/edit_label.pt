@@ -28,6 +28,9 @@
 
     <form class="editLabelForm" method="POST"
           tal:attributes="action string:${here/absolute_url}/labels-jar/update">
+      <input type="hidden" name="_authenticator"
+             tal:define="auth context/@@authenticator"
+             tal:attributes="value auth/token" />
       <label id="label-title" i18n:translate="label_label_title">
         Label Title
       </label>
@@ -35,18 +38,16 @@
       <input type="checkbox" name="by_user" id="by_user_id" tal:attributes="checked python:label.get('by_user', '') or None"/>
       <label for="by_user_id" i18n:translate="by_user_checkbox">Registered by user</label>
 
-      <div class="colorChooser">
+      <div class="colorChooser clearfix">
         <tal:colors repeat="color view/colors">
-          <div class="colorSet">
+          <div class="colorSet clearfix">
             <div tal:attributes="class string:colorBox; data-color color/normal">
               <div tal:attributes="class string:labelColor labelcolor-${color/normal}">
                 &nbsp;
               </div>
             </div>
-            <div class="visualClear"><!-- --></div>
           </div>
         </tal:colors>
-        <div class="visualClear"><!-- --></div>
       </div>
       <input type="hidden" name="color" tal:attributes="value label/color" />
 

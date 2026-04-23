@@ -1,12 +1,12 @@
-from collective.builder import Builder
-from collective.builder import create
 from collective.labels.config import COLORS
 from collective.labels.interfaces import ILabelJar
 from collective.labels.testing import LABELS_FUNCTIONAL_TESTING
-from collective.testbrowser import browsing
-from collective.testbrowser.pages import statusmessages
-from plone.app.testing import TEST_USER_ID
+from collective.labels.tests.builders import Builder
+from collective.labels.tests.builders import create
+from collective.labels.tests.browser import browsing
+from collective.labels.tests import browser as statusmessages
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from unittest import TestCase
 
 
@@ -64,7 +64,7 @@ class TestLabelsJar(TestCase):
 
         selected_colors = [
             label.get('color') for label in ILabelJar(root).list()]
-        self.assertEquals(len(COLORS), len(list(set(selected_colors))))
+        self.assertEqual(len(COLORS), len(list(set(selected_colors))))
 
     @browsing
     def test_update_label(self, browser):
