@@ -6,20 +6,6 @@
       tal:omit-tag="python: True">
 
 
-  <script type="text/javascript">
-    $('.editLabel .colorBox').click(function() {
-    // reset all selected
-    $(this).closest('form').find('.colorBox').removeClass('selected');
-    $(this).toggleClass('selected');
-    $(this).closest('form').find('input[name=color]').val($(this).attr("data-color"));
-    });
-
-    <!-- preselect color -->
-    $form = $('form.editLabelForm');
-    var color = $form.find('input[name=color]').val();
-    $form.find('div[data-color="' + color + '"]').addClass('selected');
-
-  </script>
   <div class="editLabel" tal:define="label view/get_label">
 
     <h2 i18n:translate="edit_label_heading">
@@ -41,7 +27,8 @@
       <div class="colorChooser clearfix">
         <tal:colors repeat="color view/colors">
           <div class="colorSet clearfix">
-            <div tal:attributes="class string:colorBox; data-color color/normal">
+            <div tal:attributes="class python: 'colorBox selected' if color['normal'] == label.get('color') else 'colorBox';
+                                 data-color color/normal">
               <div tal:attributes="class string:labelColor labelcolor-${color/normal}">
                 &nbsp;
               </div>

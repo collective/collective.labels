@@ -39,7 +39,7 @@
       <input type="hidden" name="_authenticator"
              tal:define="auth context/@@authenticator"
              tal:attributes="value auth/token" />
-      <select type="select" multiple="multiple" name="activate_labels:list" id="activate_labels">
+      <select class="pat-select2" multiple="multiple" name="activate_labels:list" id="activate_labels">
         <tal:options repeat="label python:labels[1]">
           <option tal:attributes="name label/label_id;
                                   value label/label_id;

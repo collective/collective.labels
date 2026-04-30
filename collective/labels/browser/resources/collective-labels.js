@@ -1,8 +1,5 @@
 $(document).ready(function(){
 
-
-  $('#activate_labels').select2();
-
   $('#toggle-label-form').click(function(e){
     e.preventDefault();
     $('#labeling-viewlet ul.activeLabels, #labeling-viewlet form').toggle();

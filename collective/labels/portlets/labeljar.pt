@@ -19,6 +19,7 @@
             <a class="editLabelLink plone-btn plone-btn-large plone-btn-primary pat-plone-modal"
                tal:condition="can_edit"
                tal:attributes="href string:${here/absolute_url}/labels-jar/edit_label?label_id=${label/label_id}"
+               data-pat-plone-modal="content: .editLabel"
                i18n:translate="label_editlabel">
               edit label
             </a>
