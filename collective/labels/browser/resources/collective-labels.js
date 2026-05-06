@@ -1,8 +1,5 @@
 $(document).ready(function(){
 
-
-  $('#activate_labels').select2();
-
   $('#toggle-label-form').click(function(e){
     e.preventDefault();
     $('#labeling-viewlet ul.activeLabels, #labeling-viewlet form').toggle();
@@ -50,11 +47,6 @@ $(document).ready(function(){
     tabbedview.reload_view();
   });
 
-  $('.labelListing .editLabelLink').prepOverlay({
-    subtype: 'ajax',
-    width: '235px',
-    noform: function(el) {return $.plonepopups.noformerrorshow(el, 'close');}
-  });
 
   $('.pers-edit-1').click(function(){
     var $label = $(this)

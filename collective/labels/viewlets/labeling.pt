@@ -5,7 +5,7 @@
       i18n:domain="collective.labels"
       tal:omit-tag="python: True">
 
-  <div id="labeling-viewlet"
+  <div id="labeling-viewlet" class="clearfix"
        tal:define="can_edit view/can_edit;
                    can_pers_edit view/can_personal_edit"
        tal:condition="view/available">
@@ -36,7 +36,10 @@
     <form method="post"
           tal:condition="python:can_edit and labels[1]"
           tal:attributes="action string:${here/absolute_url}/labeling/update">
-      <select type="select" multiple="multiple" name="activate_labels:list" id="activate_labels">
+      <input type="hidden" name="_authenticator"
+             tal:define="auth context/@@authenticator"
+             tal:attributes="value auth/token" />
+      <select class="pat-select2" multiple="multiple" name="activate_labels:list" id="activate_labels">
         <tal:options repeat="label python:labels[1]">
           <option tal:attributes="name label/label_id;
                                   value label/label_id;
@@ -57,7 +60,6 @@
     </form>
 
     </tal:define>
-    <div class="visualClear"><!-- --></div>
 
   </div>
 

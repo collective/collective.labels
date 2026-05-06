@@ -6,20 +6,6 @@
       tal:omit-tag="python: True">
 
 
-  <script type="text/javascript">
-    $('.editLabel .colorBox').click(function() {
-    // reset all selected
-    $(this).closest('form').find('.colorBox').removeClass('selected');
-    $(this).toggleClass('selected');
-    $(this).closest('form').find('input[name=color]').val($(this).attr("data-color"));
-    });
-
-    <!-- preselect color -->
-    $form = $('form.editLabelForm');
-    var color = $form.find('input[name=color]').val();
-    $form.find('div[data-color="' + color + '"]').addClass('selected');
-
-  </script>
   <div class="editLabel" tal:define="label view/get_label">
 
     <h2 i18n:translate="edit_label_heading">
@@ -28,6 +14,9 @@
 
     <form class="editLabelForm" method="POST"
           tal:attributes="action string:${here/absolute_url}/labels-jar/update">
+      <input type="hidden" name="_authenticator"
+             tal:define="auth context/@@authenticator"
+             tal:attributes="value auth/token" />
       <label id="label-title" i18n:translate="label_label_title">
         Label Title
       </label>
@@ -35,18 +24,17 @@
       <input type="checkbox" name="by_user" id="by_user_id" tal:attributes="checked python:label.get('by_user', '') or None"/>
       <label for="by_user_id" i18n:translate="by_user_checkbox">Registered by user</label>
 
-      <div class="colorChooser">
+      <div class="colorChooser clearfix">
         <tal:colors repeat="color view/colors">
-          <div class="colorSet">
-            <div tal:attributes="class string:colorBox; data-color color/normal">
+          <div class="colorSet clearfix">
+            <div tal:attributes="class python: 'colorBox selected' if color['normal'] == label.get('color') else 'colorBox';
+                                 data-color color/normal">
               <div tal:attributes="class string:labelColor labelcolor-${color/normal}">
                 &nbsp;
               </div>
             </div>
-            <div class="visualClear"><!-- --></div>
           </div>
         </tal:colors>
-        <div class="visualClear"><!-- --></div>
       </div>
       <input type="hidden" name="color" tal:attributes="value label/color" />
 

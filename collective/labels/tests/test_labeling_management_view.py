@@ -1,11 +1,11 @@
-from Products.CMFCore.utils import getToolByName
-from collective.builder import Builder
-from collective.builder import create
 from collective.labels.interfaces import ILabeling
 from collective.labels.testing import LABELS_FUNCTIONAL_TESTING
-from collective.testbrowser import browsing
-from plone.app.testing import TEST_USER_ID
+from collective.labels.tests.builders import Builder
+from collective.labels.tests.builders import create
+from collective.labels.tests.browser import browsing
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from Products.CMFCore.utils import getToolByName
 from unittest import TestCase
 
 

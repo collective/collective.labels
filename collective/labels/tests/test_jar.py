@@ -75,11 +75,11 @@ class TestLabelJar(TestCase):
         jar.add('Zeta-0', '', False)
         jar.add('zeta-1', '', False)
         jar.add('alpha-0', '', True)
-        jar.add('\xc3\x84lpha-1', '', False)
+        jar.add('Älpha-1', '', False)
         jar.add('Alpha-2', '', True)
 
         self.assertEqual(
-            ['alpha-0', '\xc3\x84lpha-1', 'Alpha-2', 'Zeta-0', 'zeta-1'],
+            ['alpha-0', 'Älpha-1', 'Alpha-2', 'Zeta-0', 'zeta-1'],
             [label.get('title') for label in jar.list()])
 
     def test_updating_labels(self):

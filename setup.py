@@ -6,13 +6,9 @@ version = '3.0.0a2.dev0'
 
 
 tests_require = [
-    'asserts',
-    'ftw.builder',
-    'ftw.testbrowser',
-    'ftw.testing>=2',
     'plone.app.testing',
     'transaction',
-    'zope.configuration'
+    'zope.configuration',
     ]
 
 
@@ -46,15 +42,12 @@ setup(name='collective.labels',
         'Plone',
         'Products.CMFCore',
         'Products.GenericSetup',
-        'ZODB3',
-        'Zope2',
         'plone.api',
         'plone.app.portlets',
         'plone.i18n',
         'plone.indexer',
         'plone.portlets',
         'setuptools',
-        # 'z3c.json',  # MIGRATION-PLONE6
         'zExceptions',
         'zope.annotation',
         'zope.component',
